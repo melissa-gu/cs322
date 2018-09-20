@@ -42,8 +42,8 @@ Traffic Flow Simulator: Requirements Document
        etc.
    4.2 Traffic control devices
        4.2.1 Intersections controlled by rules rather than control devices
-                     Cars cannot occupy the same segments as any other car.
-             4.2.1.1 If cars approaching the intersection have paths that will
+             4.2.1.1 Cars cannot occupy the same segments as any other car.
+             4.2.1.2 If cars approaching the intersection have paths that will
                      intersect in the intersection, priority for the order of 
                      entering the intersection is given in the following order:
                      - Cars proceeding straight

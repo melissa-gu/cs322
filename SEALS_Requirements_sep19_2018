@@ -36,8 +36,9 @@ Traffic Flow Simulator: Requirements Document
    operating system that could be used, the version of compilers used, etc.)
 4. Simulation Characteristics
    4.1 Geographic layout
-       4.1.1 The city section is a grid of up to 20 north-south two-way streets 
-             and 20 east-west two-way streets.
+       4.1.1 The city section is a grid of north-south two-way streets and 
+             east-west two-way streets. The number of streets of each direction
+             is determined by input to the program.
        etc.
    4.2 Traffic control devices
        4.2.1 Intersections controlled by rules rather than control devices
@@ -63,13 +64,14 @@ Traffic Flow Simulator: Requirements Document
                      proceeding.
              4.2.1.5 In certain conditions, cars will have paths that don't 
                      intersect, and can proceed through intersection
-                     simultaneously. These conditions are as follows:
+                     simultaneously. These conditions are generally specified 
+                     as follows:
                      4.2.1.5.1 Cars are approaching from opposite directions 
                                and:
                                - Both cars are proceeding straight
                                - Both cars are turning right
                                - One car is proceeding straight, and one car is
-                                 turning
+                                 turning right
                      4.2.1.5.2 Cars are approaching perpendicular to one another 
                                (e.g. one car is coming from the north, one car 
                                is coming from the east) and:
@@ -124,22 +126,34 @@ Traffic Flow Simulator: Requirements Document
    ...
    6.??
 7. Glossary
-   7.1 A "direction" is exactly one of the following: N, W, S, E.
-       Those letters abbreviate North, West, South, East, respectively.
-   7.2 A "section" is the portion of a street between two adjacent 
-       intersections.  
-   7.3 Each section consists of exactly two segments that aim in opposite
-       directions from each other.
-   7.4 A "segment" is the portion of a section going in a single direction.
-   ... (clarify the above further, and insert additional terms into the
-        glossary)
-        Command line
-        A "GUI", or a graphic user interface, is a display that allows the user 
-       to view graphical icons and visual indicators rather than just text.
-       An "average", which in this software is used in the context of the 
+   7.1 A "simulation" is a model or imitation of a real world process or 
+       environment.
+   7.2 A "GUI", or a graphic user interface, is a display that allows the user 
+       to view graphical icons and visual indicators rather than just text.    
+   7.3 An "average", which in this software is used in the context of the 
        average time it takes a car to cross through the entire simulated city,
        is calculated by summing up the values for the time for each car in the 
-       simulation and dividing by the number of cars.   
+       simulation and dividing by the number of cars.
+   7.4 A "direction" is exactly one of the following: N, W, S, E.
+       Those letters abbreviate North, West, South, East, respectively.
+   7.5 A "section" is the portion of a street between two adjacent 
+       intersections.  
+   7.6 Each section consists of exactly two segments that aim in opposite
+       directions from each other.
+   7.7 A "segment" is the portion of a section going in a single direction.
+       It can also refer to one of the four portions of the intersection.
+   7.8 An "intersection" is where a N/S and an E/W facing road intersect.
+   7.9 A car that is "approaching the intersection" is a car that is in the 
+       section of road directly before the intersection.
+   7.10 An "entry point" refers to one of the segments at the edges of the 
+        simulated city where cars might enter
+   7.11 An "exit point" refers to one of the segments at the edges of the 
+        simulated city where cars might exit
+   7.12 The "position" of a vehicle is the (x,y) coordinate of the segment the
+        vehicle occupies.
+   7.13 The "command line" is an all text display mode on a computer monitor
+        that allows the user to enter commands and data.
+        
 
 8. Names of values.  (Below is at least a partial chart you can use.)
 

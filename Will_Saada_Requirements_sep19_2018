@@ -1,0 +1,123 @@
+
+
+Author: Will Saada
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Traffic Flow Simulator: Requirements Document
+1. Background
+  1.1 Self-Driving cars are quickly becoming more common and more proficient.
+      Some predict that in the coming years self-driving cars will be everywhere
+      transforming how people travel.  It's important that research is done to
+      determine both the efficiency and the safety of autonomous vehicles.
+  1.2 Hackers have found ways to control vehicles from outside of the car by
+      sending it signals, therefore they must be developed to use visual cues from
+      the other cars and not communicate with each other.
+  1.3 This piece of software will strive to test the efficiency and competency
+      of these vehicles having no way to communicate.
+  1.4 The goal is to evaluate the safety and efficiency of having the cars
+      act given a strict set of regulations that will be listen below in the
+      document
+2. Description of Software
+  2.1 This purpose of this software is to develop a simulation of autonomous
+      vehicles as they travel through the city, without communication.
+  2.2 The software will have different configurations in order to test different
+      circumstances such as having more cars and randomized locations.
+  2.3 There will be a way to manually generate each individual car.  This will
+      be done using a configuration file.  Many of the values noted in section
+      8 will be included.
+  2.4 The simulation will demonstrate the movement of cars in and out of a city
+      with 20 segments North to South and 20 segments East to West.
+  2.5 It will create a document containing a description of everything that
+      occurs during the simulation.
+  2.6 After the simulation runs it will create a report demonstrating the
+      results of the program, specifically the average time it took for a car
+      to exit the city.
+  2.7 The software will include a visual representation of the simulation as it
+      is occurring.  Giving the client the ability to see it in action.
+3. Environmental Characteristics
+   (You need put nothing in this section at this time, but have such a
+   section heading; the section might eventually describe such things as the
+   operating system that could be used, the version of compilers used, etc.)
+4. Simulation Characteristics
+   4.1 Geographic layout
+       4.1.1 The city section is a grid of up to 20 north-south two-way streets
+             and 20 east-west two-way streets.
+       etc.
+   4.2 Traffic control devices
+       4.2.1 Intersections controlled by rules rather than control devices
+             ... (subdivide 4.2.1 into as many rules as you think necessary)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+       4.2.2 Stop signs at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.3 Traffic lights at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.4 Sensors at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.5 Implicit control devices at entrance to city section
+             (don't put anything in this section for now, but have its heading)
+       ...
+       4.4.??
+   4.3 Traffic flow
+       4.3.1 Speed of traffic
+             4.3.1.1 All cars travel at the same speed.
+             That speed is given by timeToTraverseSegment.
+       4.3.2 Patterns of traffic flow
+             (don't try to do at all before the deadline on Fri Sep 21;
+             eventually don't say something vague like "six or seven traffic
+             patterns will define the traffic flow", instead describe --
+             using *separate* outline numbering for each such pattern
+             -- all the traffic flow patterns that exist in the simulation and
+             thus are available to the user; you need not mention the various
+             specific places where a car could actually make a turn)
+        etc.
+   4.4 Stochastic properties
+       (describe the role of random numbers in the simulation)
+   ...
+   4.?? Additional assumptions
+5. Input/Output
+   (specific description of input and output formats and how the
+   client will provide input and receive output; client has already indicated
+   whether he wants a graphical view and/or GUI input and output to the overall
+   software.)
+6. Life Cycle Considerations
+   6.1 Subsets
+       6.1.1 (describe the first deliverable)
+       6.1.2 (describe the second deliverable)
+       ...
+       6.1.5 (describe the deliverable on Wed, October 31, 2016)
+   6.2 Possible extensions
+       (number and list the ways the software can be extended after Oct 31, in
+       view of the client's longer-term needs)
+   ...
+   6.??
+7. Glossary
+   7.1 A "direction" is exactly one of the following: N, W, S, E.
+       Those letters abbreviate North, West, South, East, respectively.
+   7.2 A "section" is the portion of a street between two adjacent
+       intersections.
+   7.3 Each section consists of exactly two segments that aim in opposite
+       directions from each other.
+   7.4 A "segment" is the portion of a section going in a single direction.
+
+8. Names of values.  (Below is at least a partial chart you can use.)
+
+  name of value           intended meaning
+  ---------------------   -----------------------------------------------------
+  timeToTraverseSegment   time in time-units for one car to traverse one segment
+  maxSegmentCapacity      maximum num of cars in one segment
+  carEnterancePoint       the spot at which the car will enter the city
+  carExitPoint            the spot at which the car will leave the city
+  averageExitTime         the average time that it takes for all cars to leave
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+9. Questions to ask client.
+   9.1 Should the software contain configurations to the behavior of the cars in
+       order to test which ones are more efficient?
+   9.2

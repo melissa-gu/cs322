@@ -30,9 +30,6 @@ Traffic Flow Simulator: Requirements Document
    the simulation proceeds, and output the average amount of time it took a 
    car to enter and exit the city.
 
-
-  2.6 The simulation will output a report of the results of the program, specifically the average time it took for a car to exit the city.
-
 3. Environmental Characteristics
    (You need put nothing in this section at this time, but have such a
    section heading; the section might eventually describe such things as the 
@@ -44,7 +41,41 @@ Traffic Flow Simulator: Requirements Document
        etc.
    4.2 Traffic control devices
        4.2.1 Intersections controlled by rules rather than control devices
-             ... (subdivide 4.2.1 into as many rules as you think necessary)
+                     Cars cannot occupy the same segments as any other car.
+             4.2.1.1 If cars approaching the intersection have paths that will
+                     intersect in the intersection, priority for the order of 
+                     entering the intersection is given in the following order:
+                     - Cars proceeding straight
+                     - Cars turning right
+                     - Cars turning left
+                     4.2.1.1.1 If such cars with intersecting paths have the 
+                               same priority according to the above rules, 
+                               priority is given in a clockwise order:
+                               - Cars coming from N
+                               - Cars coming from E
+                               - Cars coming from S
+                               - Cars coming from W
+             4.2.1.3 Cars in the intersection have priority over cars that have
+                     not yet entered the intersection.
+             4.2.1.4 Cars following the path of another car must wait for the 
+                     car they are following to fully exit the intersection and 
+                     exit the spot right outside the intersection before 
+                     proceeding.
+             4.2.1.5 In certain conditions, cars will have paths that don't 
+                     intersect, and can proceed through intersection
+                     simultaneously. These conditions are as follows:
+                     4.2.1.5.1 Cars are approaching from opposite directions 
+                               and:
+                               - Both cars are proceeding straight
+                               - Both cars are turning right
+                               - One car is proceeding straight, and one car is
+                                 turning
+                     4.2.1.5.2 Cars are approaching perpendicular to one another 
+                               (e.g. one car is coming from the north, one car 
+                               is coming from the east) and:
+                               - Both cars are turning
+                               - The car from the east is turning right, and the 
+                                 car from the north is proceeding straight
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -116,7 +147,21 @@ Traffic Flow Simulator: Requirements Document
   ---------------------   -----------------------------------------------------
   timeToTraverseSegment   time in time-units for one car to traverse one segment
   maxSegmentCapacity      maximum num of cars in one segment 
-  ...
+  newVehicleProbability   the probability of a new car arriving at each entry 
+                          point
+  numberOfIntersections   the number of intersections in the simulated city
+  entryPoint              the segment through which a vehicle enters the 
+                          simulation
+  exitPoint               the segment through which a vehicle exits the 
+                          simulation
+  intendedDirection       direction the car will proceed in the intersection
+  goStraight              value for intendedDirection for a car traveling 
+                          straight
+  turnRight               value for intendedDirection for a car turning right
+  turnLeft                value for intendedDirection for a car turning left
+  timeTraveled            value associated with each vehicle that represents the
+                          amount of time the vehicle has traveled within the
+                          city
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890

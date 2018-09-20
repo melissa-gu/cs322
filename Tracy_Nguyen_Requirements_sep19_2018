@@ -1,0 +1,175 @@
+
+
+Author:  Tracy Nguyen
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Traffic Flow Simulator: Requirements Document
+1. Background
+   The software would simulate autonomous cars flowing in and out of a city. The
+   client wants to build a smart city, in which self-driving vehicles can safely
+   go from one point of the city to another, without any collision at street
+   intersections or on the streets themselves. This software is necessary to
+   ensure that a completely autonomous traffic system will work as smoothly and
+   safely as intended before implemented in the real world. The client wants to
+   have more statistics about the average time it takes each car to travel in
+   and out of the city, and how many cars the city's roads can support before
+   congestion occurs, etc. and to see how well the city functions with this
+   autonomous car system.
+2. Description of Software
+   The software models a simplified traffic system with autonomous cars
+   traveling in and out of the city without any collisions or accidents, and
+   each vehicle receive no external signal that could control its movements, to
+   minimize the risks of being hacked. Each car only communicates to each other
+   about its next course of action (go straight/turn right/turn left) via visual
+   signals at an intersection point to avoid collision. Two cars cannot occupy
+   the same street section at the same time, because that would be interpreted
+   as a collision. The software provides flexibility in user input, by allowing
+   the client to specify the number of cars, the probability of a car appearing
+   and going into the city, etc. However, the traffic rules regarding which car
+   gets priority at an intersection point are determined by the developer of
+   this software, instead of the client.
+3. Environmental Characteristics
+   (You need put nothing in this section at this time, but have such a
+   section heading; the section might eventually describe such things as the 
+   operating system that could be used, the version of compilers used, etc.)
+4. Simulation Characteristics
+   4.1 Geographic layout
+       4.1.1 The city section is a grid of up to 20 north-south two-way streets 
+             and 20 east-west two-way streets.
+   4.2 Traffic control devices
+       4.2.1 Intersections controlled by rules rather than control devices
+             ... (subdivide 4.2.1 into as many rules as you think necessary)
+             4.2.1.1 No two cars can occupy the same intersection block.
+             4.2.1.2 At intersection point, turning right (which takes up 1
+                     block of the 4 intersection blocks) has more priority than
+                     going straight (which takes 2 blocks).
+             4.2.1.3 At intersection point, going straight has more priority
+                     than turning left (which takes up 3 blocks of the 4
+                     intersection blocks).
+             4.2.1.4 If the intersection is not occupied by any vehicle, then
+                     at each iteration, we consider among the vehicles that were
+                     the first to finish traversing the relevant segments
+                     surrounding that intersection but have yet to enter the
+                     intersection (whether a vehicle has finished traversing the
+                     segment can be determined by some calculations with
+                     timeToTraverseSegment), to choose the one with highest
+                     priority.
+             4.2.1.5 If the intersection is currently occupied by vehicles, any
+                     vehicle that has finished traversing the relevant segments
+                     but have not entered the intersection waits until all the
+                     vehicles still in the intersection exit the intersection.
+             4.2.1.6 For a single segment, if a car called C finished traversing
+                     the segment and is waiting t time-units to enter the
+                     intersection, any car that finishes traversing the same
+                     segment after C needs to wait until after C enters the
+                     intersection before its turning left/turning right/going
+                     straight signal can be considered for the intersection. 
+                     It's a last-in, first-out system wherein the car that
+                     arrived the earliest at the intersection gets to enter the
+                     intersection and moves first.
+
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+       4.2.2 Stop signs at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.3 Traffic lights at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.4 Sensors at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.5 Implicit control devices at entrance to city section
+             (don't put anything in this section for now, but have its heading)
+       ...
+       4.4.??
+   4.3 Traffic flow 
+       4.3.1 Speed of traffic
+             4.3.1.1 All cars travel at the same speed.
+             That speed is given by timeToTraverseSegment.
+       4.3.2 Patterns of traffic flow
+             (don't try to do at all before the deadline on Fri Sep 21; 
+             eventually don't say something vague like "six or seven traffic 
+             patterns will define the traffic flow", instead describe -- 
+             using *separate* outline numbering for each such pattern
+             -- all the traffic flow patterns that exist in the simulation and 
+             thus are available to the user; you need not mention the various
+             specific places where a car could actually make a turn)
+        etc.
+   4.4 Stochastic properties
+       (describe the role of random numbers in the simulation)
+   ...
+   4.5 Additional assumptions
+       4.5.1 Car cannot change lane or make a U-turn (switching between two
+             segments of the same section) for now.
+       4.5.2 Car only moves forward, right or left, but not backwards.
+5. Input/Output
+   (specific description of input and output formats and how the
+   client will provide input and receive output; client has already indicated 
+   whether he wants a graphical view and/or GUI input and output to the overall 
+   software.)
+6. Life Cycle Considerations
+   6.1 Subsets
+       6.1.1 (describe the first deliverable)
+       6.1.2 (describe the second deliverable)
+       ...
+       6.1.5 (describe the deliverable on Wed, October 31, 2016)
+   6.2 Possible extensions
+       (number and list the ways the software can be extended after Oct 31, in 
+       view of the client's longer-term needs)
+   ...
+   6.??
+7. Glossary
+   7.1 A "direction" is exactly one of the following: N, W, S, E.
+       Those letters abbreviate North, West, South, East, respectively.
+   7.2 A "section" is the portion of a street between two adjacent 
+       intersections.  
+   7.3 Each section consists of exactly two segments that aim in opposite
+       directions from each other.
+   7.4 A "segment" is the portion of a section going in a single direction.
+   7.6 A "boundary segment" refers to the segments on the outer edges of the
+       grid, where a car can be spawned to be entering the city, or where a car
+       can be exiting the city.
+   7.5 An intersection "block" represents an intersection between two
+       segments. There can be only one car occupying one "block" at a time,
+       otherwise if two cars occupy the same block, it is interpreted as a
+       collision.
+   7.6 An "intersection" is where the two sections - or four segments - meet,
+       creating four intersection blocks total.
+   7.7 The "position" of the car is expressed as (i,j), with "i" as the index
+       of the EW row in the city grid, and "j" as the index of the NS column
+       in the city grid.
+   7.8 "average" is the result obtained by dividing the sum total of a set of
+       numbers by the size of that set.
+   ... (clarify the above further, and insert additional terms into the
+        glossary)
+
+8. Names of values.  (Below is at least a partial chart you can use.)
+
+  name of value           intended meaning
+  ---------------------   -----------------------------------------------------
+  timeToTraverseSegment   time in time-units for one car to traverse one segment
+  maxSegmentCapacity      maximum num of cars in one segment
+  avgTravelingTime        average time in time-units for one car to enter and
+                          exit city
+  carSpawnedProbability   the probability of a car spawning at each iteration at
+                          a particular boundary segment.
+  totalWaitTime           total time in time-units that a car has to wait at the
+                          intersections.
+  startPosition           the position where a car starts entering the city
+  endPosition             the position where a car exits the city
+  
+  ...
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+9. Questions to ask client.
+   9.1 How do we graphically visualize the simulation? Print out an array for
+       the grid at each iteration, or do we use fancy Java Swing or Java GUI?
+   9.2 Do we spawn cars randomly at each iteration with a user-specified
+       probability? If so, then the starting position and ending goal also need
+       to be randomly generated?
+
+

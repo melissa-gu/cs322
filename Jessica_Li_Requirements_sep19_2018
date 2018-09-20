@@ -1,0 +1,141 @@
+-
+
+Author:  Jessica Li (fill in as appropriate for the actual author)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Traffic Flow Simulator: Requirements Document
+1. Background
+   ... (one paragraph description of why the specific software is important, 
+   and how client plans to use the software)
+   
+   Nowadays security has become really important for all aspect of our life. 
+   The client wants a future traffic system that full of autonomous cars
+   that focuses on security and speed. 
+   After reading an article on wired magazine, the client realized that people
+   can hack into driving cars and disable the air bags, the anti-lock brakes,
+   or even the engine. Security is a huge problem with every system in the 
+   world today, so the client does not want people to hack into the cars in the
+   city and change their behaviors. The client wants this city traffic system 
+   to be completely secure, meaning the car is not connected to the Internet 
+   and no communication between the outside and the car is allowed. The client
+   plans to use this system in the future with virtual reality goggles for the
+   user of the car to see the whole system.
+   
+2. Description of Software
+   ... (one paragraph description of the purpose of this software)
+
+   The purpose of this software is to test the efficiency and security of
+   a future city traffic system. The software serves as a simulation that 
+   evaluates the average time it takes a car to go through a city full 
+   of other moving autonomous cars. This simulation also takes the number
+   of cars in the simulation as a input and calculates the amount of
+   cars for the city to have a grid lock. This simulation is also designed
+   to see what is the best algorithm for cars to take the minimum of 
+   time to get through the city.
+
+3. Environmental Characteristics
+   (You need put nothing in this section at this time, but have such a
+   section heading; the section might eventually describe such things as the 
+   operating system that could be used, the version of compilers used, etc.)
+4. Simulation Characteristics
+   4.1 Geographic layout
+       4.1.1 The city section is a grid of up to 20 north-south two-way streets 
+             and 20 east-west two-way streets.
+       etc.
+   4.2 Traffic control devices
+       4.2.1 Intersections controlled by rules rather than control devices
+             ... (subdivide 4.2.1 into as many rules as you think necessary)
+             If the cars are going into direction where there are contention,
+             The car going straight has priority over the car turning right.
+             The car turning right has priority over the car turning left.
+             If there are contention, the car with lower priority has to wait
+             for the intersection to be cleared before it can proceed. 
+             If more than one car have the same priority and are at the 
+             intersection at the same time, the car that is generated earlier 
+             will have priority. 
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+       4.2.2 Stop signs at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.3 Traffic lights at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.4 Sensors at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.5 Implicit control devices at entrance to city section
+             (don't put anything in this section for now, but have its heading)
+       ...
+       4.4.??
+   4.3 Traffic flow 
+       4.3.1 Speed of traffic
+             4.3.1.1 All cars travel at the same speed.
+             That speed is given by timeToTraverseSegment.
+       4.3.2 Patterns of traffic flow
+             (don't try to do at all before the deadline on Fri Sep 21; 
+             eventually don't say something vague like "six or seven traffic 
+             patterns will define the traffic flow", instead describe -- 
+             using *separate* outline numbering for each such pattern
+             -- all the traffic flow patterns that exist in the simulation and 
+             thus are available to the user; you need not mention the various
+             specific places where a car could actually make a turn)
+        etc.
+   4.4 Stochastic properties
+       (describe the role of random numbers in the simulation)
+   ...
+   4.?? Additional assumptions
+5. Input/Output
+   (specific description of input and output formats and how the
+   client will provide input and receive output; client has already indicated 
+   whether he wants a graphical view and/or GUI input and output to the overall 
+   software.)
+6. Life Cycle Considerations
+   6.1 Subsets
+       6.1.1 (describe the first deliverable)
+       6.1.2 (describe the second deliverable)
+       ...
+       6.1.5 (describe the deliverable on Wed, October 31, 2016)
+   6.2 Possible extensions
+       (number and list the ways the software can be extended after Oct 31, in 
+       view of the client's longer-term needs)
+   ...
+   6.??
+7. Glossary
+   7.1 A "direction" is exactly one of the following: N, W, S, E.
+       Those letters abbreviate North, West, South, East, respectively.
+   7.2 A "section" is the portion of a street between two adjacent 
+       intersections. The length of the section is a variable that can
+       be changed.
+   7.3 Each section consists of exactly two segments that aim in opposite
+       directions from each other. They have no contention between the two
+       segments and is either NW or SE.
+   7.4 A "segment" is the portion of a section going in a single direction.
+       There are two segments in one section. 
+   7.5 An "intersection" is the where two sections meet.
+       There are four directions at one intersection.
+   7.6 A "grid lock" means the city has too many cars for it to function
+       properly
+   7.7 "Get through the city" means entering at one point on the boundary of
+       the grid and exiting at the other boundary
+   7.8 "Generated earlier" means that the car entered the city grid earlier
+       than the other car.
+ 
+8. Names of values.  (Below is at least a partial chart you can use.)
+
+  name of value           intended meaning
+  ---------------------   -----------------------------------------------------
+  timeToTraverseSegment   time in time-units for one car to traverse one segment
+  maxSegmentCapacity      maximum num of cars in one segment 
+  averageTime             the average time for a car to go through the city
+  maxNumOfCars            the maximum number of cars in this whole simulation
+  timeGenerated           the time that the car entered the city
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+9. Questions to ask client.
+   Can the intersection know things other than which direction the cars are 
+   going, for example the time that the cars entered the city?
+

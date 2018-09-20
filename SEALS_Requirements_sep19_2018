@@ -18,7 +18,21 @@ Traffic Flow Simulator: Requirements Document
    efficiency and behavior of such vehicles according to the regulations listed 
    below.
 2. Description of Software
-   ... (one paragraph description of the purpose of this software)
+   This purpose of this software is to develop a simulation of autonomous 
+   vehicles as they travel through a city, where the city is represented as a 
+   grid of intersecting streets. The software will display the simulation 
+   visually to the user, through a GUI. The software will not include virtual 
+   reality goggles, as the time and monetary cost needed to implement such a
+   feature would not be feasible. The software will have the option to take in 
+   input that specifies how the simulation will be run (e.g. the size of the 
+   city or the number of cars). This input will be given either through the 
+   command line or a file. The software will continuously generate new cars as
+   the simulation proceeds, and output the average amount of time it took a 
+   car to enter and exit the city.
+
+
+  2.6 The simulation will output a report of the results of the program, specifically the average time it took for a car to exit the city.
+
 3. Environmental Characteristics
    (You need put nothing in this section at this time, but have such a
    section heading; the section might eventually describe such things as the 
@@ -88,6 +102,13 @@ Traffic Flow Simulator: Requirements Document
    7.4 A "segment" is the portion of a section going in a single direction.
    ... (clarify the above further, and insert additional terms into the
         glossary)
+        Command line
+        A "GUI", or a graphic user interface, is a display that allows the user 
+       to view graphical icons and visual indicators rather than just text.
+       An "average", which in this software is used in the context of the 
+       average time it takes a car to cross through the entire simulated city,
+       is calculated by summing up the values for the time for each car in the 
+       simulation and dividing by the number of cars.   
 
 8. Names of values.  (Below is at least a partial chart you can use.)
 

@@ -52,10 +52,10 @@ Traffic Flow Simulator: Requirements Document
                      4.2.1.1.1 If such cars with intersecting paths have the 
                                same priority according to the above rules, 
                                priority is given in the following order:
-                               - Cars going N (as they approach intersection)
-                               - Cars going W (as they approach intersection)
-                               - Cars going S (as they approach intersection)
-                               - Cars going E (as they approach intersection)
+                               - Cars coming from S
+                               - Cars coming from E
+                               - Cars coming from N
+                               - Cars coming from W
              4.2.1.3 Cars in the intersection have priority over cars that have
                      not yet entered the intersection.
              4.2.1.4 Cars following the path of another car must wait for the 
@@ -78,6 +78,12 @@ Traffic Flow Simulator: Requirements Document
                                - Both cars are turning
                                - The car from the east is turning right, and the 
                                  car from the north is proceeding straight
+                                 (or the equivalent for whatever directions the
+                                  cars are coming from)
+                     4.2.1.5.3 Three cars are approaching the intersection and:
+                               - All three cars are turning right
+                     4.2.1.5.4 Four cars are approaching the intersection and:
+                               - All four cars are turning right
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890

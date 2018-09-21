@@ -12,8 +12,8 @@ Traffic Flow Simulator: Requirements Document
       transforming how people travel.  It's important that research is done to
       determine both the efficiency and the safety of autonomous vehicles.
   1.2 Hackers have found ways to control vehicles from outside of the car by
-      sending it signals, therefore they must be developed to use visual cues from
-      the other cars and not communicate with each other.
+      sending it signals, therefore they must be developed to use visual cues
+      from the other cars and not communicate with each other.
   1.3 This piece of software will strive to test the efficiency and competency
       of these vehicles having no way to communicate.
   1.4 The goal is to evaluate the safety and efficiency of having the cars
@@ -120,4 +120,3 @@ Traffic Flow Simulator: Requirements Document
 9. Questions to ask client.
    9.1 Should the software contain configurations to the behavior of the cars in
        order to test which ones are more efficient?
-   9.2

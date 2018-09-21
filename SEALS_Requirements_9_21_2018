@@ -51,11 +51,11 @@ Traffic Flow Simulator: Requirements Document
                      - Cars turning left
                      4.2.1.1.1 If such cars with intersecting paths have the 
                                same priority according to the above rules, 
-                               priority is given in a clockwise order:
-                               - Cars coming from N
-                               - Cars coming from E
-                               - Cars coming from S
-                               - Cars coming from W
+                               priority is given in the following order:
+                               - Cars going N
+                               - Cars going W
+                               - Cars going S
+                               - Cars going E
              4.2.1.3 Cars in the intersection have priority over cars that have
                      not yet entered the intersection.
              4.2.1.4 Cars following the path of another car must wait for the 

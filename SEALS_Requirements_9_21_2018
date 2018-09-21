@@ -145,13 +145,7 @@ Traffic Flow Simulator: Requirements Document
    7.8 An "intersection" is where a N/S and an E/W facing road intersect.
    7.9 A car that is "approaching the intersection" is a car that is in the 
        section of road directly before the intersection.
-   7.10 An "entry point" refers to one of the segments at the edges of the 
-        simulated city where cars might enter
-   7.11 An "exit point" refers to one of the segments at the edges of the 
-        simulated city where cars might exit
-   7.12 The "position" of a vehicle is the (x,y) coordinate of the segment the
-        vehicle occupies.
-   7.13 The "command line" is an all text display mode on a computer monitor
+   7.10 The "command line" is an all text display mode on a computer monitor
         that allows the user to enter commands and data.
         
 

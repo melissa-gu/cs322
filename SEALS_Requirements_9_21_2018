@@ -75,13 +75,20 @@ Traffic Flow Simulator: Requirements Document
                      4.2.1.5.2 Cars are approaching perpendicular to one another 
                                (e.g. one car is coming from the north, one car 
                                is coming from the east) and:
-                               - Both cars are turning
+                               - Both cars are turning right
                                - The car from the east is turning right, and the 
                                  car from the north is proceeding straight
                                  (or the equivalent for whatever directions the
                                   cars are coming from)
+                               - The car from the east is turning right, and the
+                                 car from the north is turning left (or the 
+                                 equivalent for whatever directions the cars are 
+                                 coming from)
                      4.2.1.5.3 Three cars are approaching the intersection and:
                                - All three cars are turning right
+                               - One car is proceeding straight, and two cars
+                                 that are coming from perpendicular directions
+                                 are turning right
                      4.2.1.5.4 Four cars are approaching the intersection and:
                                - All four cars are turning right
 

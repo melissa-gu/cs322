@@ -201,8 +201,8 @@ Traffic Flow Simulator: Requirements Document
    7.3 An "average" time in this program refers to the mean time cars take to 
        cross through the entire simulated city. This average is calculated 
        by summing up the times each car takes to enter and exit the simulated 
-       city and dividing by the total number of cars that have fully exited the
-       simulated city. 
+       city and dividing that quantity by the total number of cars that have 
+       fully exited the simulated city. 
    7.4 A "direction" is exactly one of the following: N, W, S, E.
        Those letters abbreviate North, West, South, East, respectively.
    7.5 A "section" is the area of a street between two adjacent 

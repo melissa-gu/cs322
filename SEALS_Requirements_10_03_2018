@@ -11,9 +11,9 @@ Traffic Flow Simulator: Requirements Document
    the coming years self-driving cars will be common, transforming how people 
    travel. It's important for research to determine both the efficiency and the 
    safety of autonomous cars. Hackers have found ways to control cars from 
-   outside of a car by sending it signals. One possible solution is to program 
-   the cars to use visual cues from other cars and to eliminate the need for 
-   wireless communication, preventing such hacking. 
+   outside of a car by sending the car signals. One possible solution is to 
+   program the cars to use visual cues from other cars and to eliminate the need 
+   for wireless communication, preventing such hacking. 
 2. Description of Software
    This software will simulate autonomous cars as they travel through a city 
    represented as a grid of intersecting streets. The software will not include 
@@ -143,7 +143,7 @@ Traffic Flow Simulator: Requirements Document
                                already in the intersection or are also 
                                approaching the intersection. This allows cars
                                to determine whether there is contention for
-                               a slot in their intended path.
+                               a slot in the cars' intended path.
 
 
          1         2         3         4         5         6         7         8

@@ -9,22 +9,22 @@ Traffic Flow Simulator: Requirements Document
 1. Background
    Self-Driving cars are quickly becoming more common and more proficient. Some 
    predict that in the coming years self-driving cars will be common,
-   transforming how people travel.  It's important that research determines both 
-   the efficiency and the safety of autonomous cars. Hackers have found ways to 
-   control cars from outside of a car by sending it signals. One possible 
-   solution is to program the cars to use visual cues from other cars and to 
-   eliminate the need for wireless communication, preventing such hacking. 
+   transforming how people travel.  It's important for research to determine 
+   both the efficiency and the safety of autonomous cars. Hackers have found 
+   ways to control cars from outside of a car by sending it signals. One 
+   possible solution is to program the cars to use visual cues from other cars 
+   and to eliminate the need for wireless communication, preventing such 
+   hacking. 
 2. Description of Software
    This software will simulate autonomous cars as they travel through a city 
-   represented as a grid of intersecting streets. The software will display the 
-   simulation visually to the user. The software will not include a GUI or 
-   virtual reality goggles, as the time and monetary cost needed to implement 
-   would not be feasible. The software will have the option to take in input 
-   that specifies simulation parameters (the size of the grid of streets and 
-   approximate rate of entry and location of entry and exit of each car). This 
+   represented as a grid of intersecting streets. The software will not include 
+   a GUI or virtual reality goggles, as the time and monetary cost needed to 
+   implement would not be feasible. The software will take in input that 
+   specifies simulation parameters: the size of the grid of streets and 
+   approximate rate of entry and location of entry and exit of each car. This 
    input will be given either through the command line or a file. The software 
    will generate new cars as the simulation proceeds, and output the average 
-   amount of time it took an entering car to exit the city. 
+   amount of time a car takes to exit the city. 
 
 3. Environmental Characteristics
    (You need put nothing in this section at this time, but have such a
@@ -38,7 +38,7 @@ Traffic Flow Simulator: Requirements Document
        etc.
    4.2 Traffic control devices
        4.2.1 Intersections controlled by rules rather than control devices
-             4.2.1.1 No car can occupy the same portion as any other car.
+             4.2.1.1 No car can occupy the same slot as any other car.
              4.2.1.2 If cars approaching the intersection have paths that will
                      intersect in the intersection, priority for the order of 
                      entering the intersection is given in the following order:
@@ -56,10 +56,10 @@ Traffic Flow Simulator: Requirements Document
                      have not yet entered the intersection.
              4.2.1.4 A car (A) must wait for any other car (B), exiting in the 
                      direction through which A intends to exit, to fully exit 
-                     the intersection and exit the division right outside the 
-                     intersection before A can proceed. 
+                     the intersection and exit the slot right outside the 
+                     intersection before A will proceed. 
              4.2.1.5 In certain conditions, cars will have paths that don't 
-                     intersect, and can proceed through intersection
+                     intersect, and will proceed through intersection
                      simultaneously. These conditions are generally specified 
                      as follows:
                      4.2.1.5.1 Cars are approaching from opposite directions 
@@ -134,6 +134,18 @@ Traffic Flow Simulator: Requirements Document
 
                      4.2.1.5.4 Four cars are approaching the intersection and:
                                - All four cars are turning right
+             
+             4.2.1.6 Cars approaching the intersection will use signals to 
+                     indicate whether they want to proceed straight, turn right,
+                     or turn left. These signals will not be visible to the
+                     user.
+                     4.2.1.6.1 Cars approaching the intersection will be able to 
+                               access the signals of other cars that are either
+                               already in the intersection or are also 
+                               approaching the intersection. This allows cars
+                               to determine whether there is contention for
+                               a slot in their intended path.
+
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
@@ -186,30 +198,31 @@ Traffic Flow Simulator: Requirements Document
        environment.
    7.2 A "GUI", or a graphic user interface, is a display that allows the user 
        to view graphical icons and visual indicators rather than just text.    
-   7.3 An "average", which in this software is used in the context of the 
-       average time it takes a car to cross through the entire simulated city,
-       is calculated by summing up the values for the time for each car in the 
-       simulation and dividing by the number of cars.
+   7.3 An "average" time in this program refers to the mean time cars take to 
+       cross through the entire simulated city. This average is calculated 
+       by summing up the times each car takes to enter and exit the simulated 
+       city and dividing by the total number of cars that have fully exited the
+       simulated city. 
    7.4 A "direction" is exactly one of the following: N, W, S, E.
        Those letters abbreviate North, West, South, East, respectively.
-   7.5 A "section" is the portion of a street between two adjacent 
+   7.5 A "section" is the area of a street between two adjacent 
        intersections.  
    7.6 Each section consists of exactly two segments that aim in opposite
        directions from each other.
    7.7 A "segment" is the part of a section going in a single direction.
-   7.8 An "intersection" is where a N/S and E/W facing roads intersect, and 
-       the segments end. An intersection is composed of four divisions. 
+   7.8 An "intersection" is where N/S and E/W facing roads intersect, and 
+       the segments end. An intersection is composed of four slots. 
    7.9 A car that is "approaching the intersection" is a car that is in the 
-       division of road directly before the intersection.
+       slot of road directly before the intersection.
    7.10 The "command line" is an all text display mode on a computer monitor
         that allows the user to enter commands and data.
-   7.11 A "division" refers to a portion that makes up a segment, or one of the 
-        four portions of an intersection. It is the amount of space that one car 
-        takes up, and thus only one car can occupy a division at a time.
+   7.11 A "slot" refers to a portion of real estate that makes up a segment, or    
+        one of the four portions of an intersection. Only one car can occupy a 
+        slot at a time, and one car can only occupy one slot.
    7.12 Cars that are traveling in "opposite" directions are either coming
         from the N and S, or from the E and W. 
    7.13 Cars that are approaching "perpendicular" to one another are approaching
-        the intersection from the following directions:
+        the intersection according to exactly one of these:
         7.13.1 One car is coming from N, and one car is coming from E.
         7.13.2 One car is coming from N, and one car is coming from W.
         7.13.3 One car is coming from S, and one car is coming from E.

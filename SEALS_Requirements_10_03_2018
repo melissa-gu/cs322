@@ -18,14 +18,13 @@ Traffic Flow Simulator: Requirements Document
 2. Description of Software
    This software will simulate autonomous cars as they travel through a city 
    represented as a grid of intersecting streets. The software will not include 
-   a GUI or 
-   virtual reality goggles, as the time and monetary cost needed to implement 
-   would not be feasible. The software will take in input that specifies 
-   simulation parameters: the size of the grid of streets and approximate rate 
-   of entry and location of entry and exit of each car. This input will be given 
-   either through the command line or a file. The software will generate new 
-   cars as the simulation proceeds, and output the average amount of time a
-   car takes to exit the city. 
+   a GUI or virtual reality goggles, as the time and monetary cost needed to 
+   implement would not be feasible. The software will take in input that 
+   specifies simulation parameters: the size of the grid of streets and 
+   approximate rate of entry and location of entry and exit of each car. This 
+   input will be given either through the command line or a file. The software 
+   will generate new cars as the simulation proceeds, and output the average 
+   amount of time a car takes to exit the city. 
 
 3. Environmental Characteristics
    (You need put nothing in this section at this time, but have such a

@@ -7,14 +7,13 @@ Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
 Traffic Flow Simulator: Requirements Document
 1. Background
-   Self-Driving cars are quickly becoming more common and more proficient. Some 
-   predict that in the coming years self-driving cars will be common,
-   transforming how people travel.  It's important for research to determine 
-   both the efficiency and the safety of autonomous cars. Hackers have found 
-   ways to control cars from outside of a car by sending it signals. One 
-   possible solution is to program the cars to use visual cues from other cars 
-   and to eliminate the need for wireless communication, preventing such 
-   hacking. 
+   Self-Driving cars are quickly becoming more proficient. Some predict that in 
+   the coming years self-driving cars will be common, transforming how people 
+   travel. It's important for research to determine both the efficiency and the 
+   safety of autonomous cars. Hackers have found ways to control cars from 
+   outside of a car by sending it signals. One possible solution is to program 
+   the cars to use visual cues from other cars and to eliminate the need for 
+   wireless communication, preventing such hacking. 
 2. Description of Software
    This software will simulate autonomous cars as they travel through a city 
    represented as a grid of intersecting streets. The software will not include 
@@ -202,7 +201,8 @@ Traffic Flow Simulator: Requirements Document
        cross through the entire simulated city. This average is calculated 
        by summing up the times each car takes to enter and exit the simulated 
        city and dividing that quantity by the total number of cars that have 
-       fully exited the simulated city. 
+       fully exited the simulated city. If no cars have fully exited the city,
+       the program will display a message that no cars have exited the city yet.
    7.4 A "direction" is exactly one of the following: N, W, S, E.
        Those letters abbreviate North, West, South, East, respectively.
    7.5 A "section" is the area of a street between two adjacent 

@@ -1,0 +1,81 @@
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+--- BEGIN First normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+              
+            Assume the number of segment user input is 10. Car 1 is going
+            towards N and is at the slot three slots away from the intersection. 
+            Car 2 is going towards W and is at the slot three slots away from 
+            the intersection. Car 3 is going towards S and is at the slot five 
+            slots away from the intersection.
+            1. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+               W. Car 3 travels one slot towards S.
+            2. Car 1 travels one slot towards N. Car 1 is at the slot adjacent 
+               to the intersection. Car 1 signals to go straight. Car 2 travels 
+               one slot towards W. Car 2 is at the slot adjacent to the 
+               intersection. Car 2 signals to turn left. Car 3 travels one slot 
+               towards S.
+            3. Car 1 travels one slot towards N. Car 1 is in the intersection. 
+               Car 2 waits at the slot adjacent to the intersection. Car 3 
+               travels one slot towards S. 
+            4. Car 1 travels one slot towards N. Car 1 is in the intersection. 
+               Car 2 waits at the slot adjacent to the intersection. Car 3 
+               travels one slot towards S. Car 3 is at the slot adjacent to the 
+               intersection and signals to turn left.
+            5. Car 1 travels one slot towards N. Car 1 is exiting the 
+               intersection. Car 2 waits at the slot adjacent to the 
+               intersection. Car 3 travels one slot towards S in the 
+               intersection.
+            6. Car 1 travels one slot towards N. Car 2 waits at the slot 
+               adjacent to the intersection. Car 3 travels one slot towards S 
+               in the intersection.
+            7. Car 1 travels one slot towards N. Car 2 waits at the slot 
+               adjacent to the intersection. Car 3 travels one slot towards E 
+               in the intersection. 
+            8. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+               W in the intersection. Car 3 travels one slot towards E and is 
+               exiting the intersection.
+            9. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+               W in the intersection. Car 3 travels one slot towards E.
+            10. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S in the intersection. Car 3 travels one slot towards E.
+            11. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S and is exiting the intersection. Car 3 travels one slot 
+                towards E.
+            12. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S. Car 3 travels one slot towards E.
+            13. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S. Car 3 travels one slot towards E.
+            14. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S. Car 3 travels one slot towards E.
+            15. Car 1 travels one slot towards N. Car 2 travels one slot towards 
+                S. Car 3 travels one slot towards E.
+
+--- END 
+--- BEGIN Second normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END 
+--- BEGIN Third normal scenario (all in English, no diagram) that
+            - involves three different cars and two intersections 
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END 
+--- BEGIN Noun Extraction
+Description of the simulation (from section 2 of Requirements for 10_10_18:
+...
+List of all the nouns that appear in the above description:
+...
+Sublist of the above list that is our initial proposal for classes:
+...
+--- END 
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890

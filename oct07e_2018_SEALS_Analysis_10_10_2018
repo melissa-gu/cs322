@@ -1,0 +1,192 @@
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+--- BEGIN First normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END
+--- BEGIN Second normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+              1. Three cars are approaching the intersection, car1 is approaching
+                 from the South, car2 is approaching from the West and car3 is
+                 approaching from the East. Each car indicates their turn signal,
+                 and all three cars are planning to make a left turn.
+              2. No cars are in slots exiting the intersection, so car1 begins its
+                 turn by moving one slot forward into the intersection in the
+                 North direction.
+              3. Car1 continues its turn and moves one slot forward in the North
+                 direction.
+              4. Car1 moves one slot in the West direction.
+              5. Car1 moves one slot forward in the West direction, exiting the
+                 intersection.
+              6. Car3 begins making its turn, first moving into the intersection
+                 in the West direction.
+              7. Car1 moves one slot forward in the West direction, and car3
+                 moves one slot forward in the West direction.
+              8. Car1 moves one slot forward in the West direction, and car3
+                 moves one slot to it's left in the South direction.
+              9. Car1 moves one slot forward in the West direction, and car3
+                  exits the intersection and moves one slot forward in the South
+                  direction.
+              10. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 enters the
+                  first slot in the intersection toward the West.
+              11. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  forward toward West.
+              12. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  to the left heading North.
+              13. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  forward heading north and exiting the intersection.
+              14. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  forward in the North direction.
+              15. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  forward in the North direction.
+
+--- END
+--- BEGIN Third normal scenario (all in English, no diagram) that
+            - involves three different cars and two intersections 
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            - each segment contains 10 slots.
+            - State of the simulation before any car moves:
+               Three cars 1, 2, 3 are approaching the same intersection. Car 1
+               is on the NS segment, occupying the slot adjacent to the
+               intersection and wants to turn left. Car 2 is on the WE segment,
+               is occupying the slot adjacent to the intersection and wants to
+               go straight. Car 3 is on the SN segment, also occupying the slot
+               adjacent to the intersection, and wants to turn right. 
+            1. Because Car 2 wants to go straight, Car 2 receives priority,
+               and moves one more step to the intersection slot where the NS
+               segment meets the WE segment. Car 1 and Car 3 do not move during
+               this time step.
+            2. Car 2, still going straight, moves one more step forward to the
+               intersection slot where the SN segment meets the WE segment.
+               Car 1 and Car 3 do not move during this time step.
+            3. Car 2 is exiting the intersection and moves to the slot
+               adjacent to the intersection on the segment WE, aiming away from
+               the intersection (further in the E direction than the
+               intersection). Car 1 and Car 3 do not move during this time step.
+            4. Car 2 moves one slot forward further in the E direction,
+               to the second slot of the WE segment. Car 3, which wants to turn
+               right, now moves one step forward in the N direction to occupy
+               the intersection slot where the WE and SN segments meet. Car 1,
+               which wants to turn left, receives less priority and does not
+               move in this timestep.
+            5. Car 2 moves one slot forward further in the E direction,
+               to the third slot of the WE segment. Car 3 is exiting the
+               intersection and moves to the slot adjacent to the intersection
+               on the segment WE, aiming away from the intersection (further in
+               the E direction than the intersection). Car 1 still does not
+               move in this timestep.
+            6. Car 2 moves one slot forward further in the E direction, to the
+               fourth slot of the WE segment. Car 3 moves one slot forward
+               further in the E direction, to the second slot of the WE segment.
+               Car 1 moves forward in the S direction, to occupy the
+               intersection slot where the EW and NS segments meet.
+            7. Car 2 moves one slot forward further in the E direction, to the
+               fifth slot of the WE segment. Car 3 moves one slot forward
+               further in the E direction, to the third slot of the WE segment.
+               Car 1 moves forward in the S direction, to occupy the
+               intersection slot where the WE and NS segments meet.
+            8. Car 2 moves one slot forward further in the E direction, to the
+               sixth slot of the WE segment. Car 3 moves one slot forward
+               further in the E direction, to the fourth slot of the WE segment.
+               Car 1 moves forward in the E direction, to occupy the
+               intersection slot where the WE and SN segments meet.
+            9. Car 2 moves one slot forward further in the E direction, to the
+               seventh slot of the WE segment. Car 3 moves one slot forward
+               further in the E direction, to the fifth slot of the WE segment.
+               Car 1 is exiting the intersection and moves to the
+               slot adjacent to the intersection on the segment WE, aiming away
+               from the intersection (further in the E direction than the
+               intersection).
+            10. Car 2 moves one slot forward further in the E direction, to the
+                eigth slot of the WE segment. Car 3 moves one slot forward
+                further in the E direction, to the sixth slot of the WE segment.
+                Car 1 moves one slot forward further in the E direction, to the
+                second slot of the WE segment.
+            11. Car 2 moves one slot forward further in the E direction, to the
+                ninth slot of the WE segment. Car 3 moves one slot forward
+                further in the E direction, to the seventh slot of the WE
+                segment. Car 1 moves one slot forward further in the E
+                direction, to the third lot of the WE segment.
+            12. Car 2 moves one slot forward further in the E direction, to the
+                tenth slot of the WE segment and is approaching the second
+                intersection. Car 3 moves one slot forward further in the E
+                direction, to the eighth slot of the WE segment. Car 1 moves one
+                slot forward further in the E direction, to the fourth lot of
+                the WE segment.
+            13. Car 2 wants to move straight, so it moves one slot forward
+                further in the E direction, to occupy the intersection slot
+                where the NS and WE segments meet. Car 3 moves one slot
+                forward further in the E direction, to the ninth slot of the
+                WE segment. Car 1 moves one slot forward further in the E
+                direction, to the fifth slot of the WE segment.
+            14. Car 2 moves one slot forward further in the E direction, to
+                occupy the intersection slot where the SN and WE segments meet.
+                Car 3 moves one slot forward further in the E direction, to the
+                tenth slot of the WE segment and is now approaching the second
+                intersection. Car 1 moves one slot forward further in the E
+                direction, to the sixth slot of the WE segment.
+            15. Car 2 moves one slot forward further in the E direction, is
+                exiting the second intersection and moves to the slot adjacent
+                to the second intersection on the segment WE, aiming away from
+                the second intersection (further in the E direction). Car 3
+                wants to turn right, so it first moves one slot forward further
+                in the E direction, to occupy the intersection slot where
+                NS and WE segments meet. Car 1 moves one slot forward further
+                in the E direction, to the seventh slot of the WE segment.
+--- END
+--- BEGIN Noun Extraction
+Description of the simulation (from section 2 of Requirements for 10_10_18:
+This software will simulate autonomous cars as they travel through a city
+represented as a grid of intersecting streets. The software will not include a
+GUI or virtual reality goggles, because the time and monetary cost needed to
+implement would not be feasible. The software will take input that specifies
+simulation parameters: the size of the grid of streets and approximate rate of
+entry and location of entry and exit of each car. This input will be given
+either through the command line or a file. The software will generate new cars
+as the simulation proceeds, and output the average amount of time a car takes to
+exit the city.
+
+List of all the nouns that appear in the above description:
+- Software
+- Autonomous cars
+- City
+- Grid of intersecting streets
+- GUI
+- Virtual reality goggles
+- Time
+- Monetary cost
+- Input
+- Simulation parameters
+- Size of grid of streets
+- Rate of entry
+- Entry
+- Exit
+- Location of entry
+- Location of exit
+- Command line
+- File
+- Simulation
+- Output
+- Average amount of time car takes to exit city
+
+Sublist of the above list that is our initial proposal for classes:
+- Simulation
+- Car
+- Grid
+--- END
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890

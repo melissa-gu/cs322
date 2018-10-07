@@ -1,0 +1,65 @@
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+--- BEGIN First normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END 
+--- BEGIN Second normal scenario (all in English, no diagram) that
+            - involves three different cars at a single intersection
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END 
+--- BEGIN Third normal scenario (all in English, no diagram) that
+            - involves three different cars and two intersections 
+            - has 15 time steps (more than one event can happen simultaneously
+            - cars need not enter at the grid boundary; the scenario could
+              occur (so to speak) in the middle of an entire simulation.
+            ...
+--- END 
+--- BEGIN Noun Extraction
+Description of the simulation (from section 2 of Requirements for 10_10_18:
+This software will simulate autonomous cars as they travel through a city
+represented as a grid of intersecting streets. The software will not include a
+GUI or virtual reality goggles, because the time and monetary cost needed to
+implement would not be feasible. The software will take input that specifies
+simulation parameters: the size of the grid of streets and approximate rate of
+entry and location of entry and exit of each car. This input will be given
+either through the command line or a file. The software will generate new cars
+as the simulation proceeds, and output the average amount of time a car takes to
+exit the city.
+
+List of all the nouns that appear in the above description:
+- Software
+- Autonomous cars
+- City
+- Grid of intersecting streets
+- GUI
+- Virtual reality goggles
+- Time
+- Monetary cost
+- Input
+- Simulation parameters
+- Size of grid of streets
+- Rate of entry
+- Entry
+- Exit
+- Location of entry
+- Loation of exit
+- Command line
+- File
+- Simulation
+- Output
+- Average amount of time car takes to exit city
+
+Sublist of the above list that is our initial proposal for classes:
+- Simulation
+- Car
+- Grid
+--- END 
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890

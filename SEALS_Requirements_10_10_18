@@ -53,20 +53,19 @@ Traffic Flow Simulator: Requirements Document
                                - Cars coming from W
              4.2.1.3 Any car in the intersection has priority over cars that
                      are not in the intersection.
-             4.2.1.4 A car (A) must wait for any other car (B), exiting in the
-                     direction through which A intends to exit, to fully exit
-                     the intersection and exit the slot right outside the
-                     intersection before A will proceed.
-                     A car can not enter the intersection if another
-                     car is at the slot immediately after exiting the
-                     intersection where the car approaching the intersection
-
+             4.2.1.4 Consider the case in which two cars plan to exit the
+                     intersection in the same direction. Let us refer to these 
+                     cars as car A and car B. Assume that car A is already in 
+                     the intersection, and car B is not. Car B will wait until 
+                     car A has fully exited the intersection, and moved beyond 
+                     the slot adjacent to the intersection, before car B will 
+                     proceed.
              4.2.1.5 In certain conditions, cars will have paths that don't
                      intersect, and will proceed through intersection
                      simultaneously. These conditions are specified
                      as follows:
-                     4.2.1.5.1 Cars are approaching from opposite directions
-                               and:
+                     4.2.1.5.1 Cars are approaching traveling opposite 
+                               directions and:
                                - Both cars are proceeding straight
                                - Both cars are turning right
                                - One car is proceeding straight, and one car is
@@ -112,24 +111,28 @@ Traffic Flow Simulator: Requirements Document
                                - All three cars are turning right
                                or:
                                4.2.1.5.3.1 One car is coming from N, and two
-                                           cars are coming from S and E and:
+                                           cars are coming from S and E, 
+                                           respectively, and:
                                            - The car from N is proceeding
                                              straight
                                            - The cars from S and E are turning
                                              right
                                4.2.1.5.3.2 One car is coming from S, and two
-                                           cars are coming from N and W and:
+                                           cars are coming from N and W,
+                                           respectively, and:
                                            - The car from S is proceeding
                                              straight
                                            - The cars from N and W are turning
                                4.2.1.5.3.3 One car is coming from E, and two
-                                           cars are coming from W and S and:
+                                           cars are coming from W and S, 
+                                           respectively, and:
                                            - The car from E is proceeding
                                              straight
                                            - The cars from W and S are turning
                                              right
                                4.2.1.5.3.4 One car is coming from W, and two
-                                           cars are coming from N and E and:
+                                           cars are coming from N and E, 
+                                           respectively, and:
                                            - The car from W is proceeding
                                              straight
                                            - The cars from N and E are turning
@@ -216,7 +219,8 @@ Traffic Flow Simulator: Requirements Document
        directions from each other.
    7.7 A "segment" is the part of a section going in a single direction.
    7.8 An "intersection" is where N/S and E/W facing roads intersect, and
-       the segments end. An intersection is composed of four slots.
+       the segments end. An intersection is composed of four slots to form a 
+       two-by-two grid of slots.
    7.9 A car that is "approaching the intersection" is a car that is in the
        slot adjacent to but not in the intersection and the car's direction is
        aiming toward the intersection.
@@ -225,10 +229,9 @@ Traffic Flow Simulator: Requirements Document
    7.11 A "slot" refers to a portion of real estate that makes up a segment, or
         one of the four portions of an intersection. Only one car can occupy a
         slot at a time, and one car can only occupy one slot.
-   7.12 Cars that are traveling in "opposite" directions are approaching the
-        intersection according to exactly one of these:
-        7.12.1 One car is coming from N, and one car is coming from S.
-        7.12.2 One car is coming from E, and one car is coming from W.
+   7.12 "Opposite" directions refer either of the following pairs of directions:
+        7.12.1 N and S
+        7.12.2 E and W
    7.13 Cars that are approaching "perpendicular" to one another are approaching
         the intersection according to exactly one of these:
         7.13.1 One car is coming from N, and one car is coming from E.
@@ -238,7 +241,6 @@ Traffic Flow Simulator: Requirements Document
    7.14 A car that is "exiting the intersection" is a car that is in the slot
         adjacent to but not in the intersection and the car's direction is
         aiming away from the intersection.
-   7.15 
 
 
 8. Names of values.  (Below is at least a partial chart you can use.)

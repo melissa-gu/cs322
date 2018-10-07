@@ -238,7 +238,7 @@ Traffic Flow Simulator: Requirements Document
    7.14 A car that is "exiting the intersection" is a car that is in the slot
         adjacent to but not in the intersection and the car's direction is
         aiming away from the intersection.
-   
+   7.15 
 
 
 8. Names of values.  (Below is at least a partial chart you can use.)

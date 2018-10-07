@@ -16,35 +16,38 @@
                  from the South, car2 is approaching from the West and car3 is
                  approaching from the East. Each car indicates their turn signal,
                  and all three cars are planning to make a left turn.
-              3. No cars are in slots exiting the intersection, so car1 begins its
+              2. No cars are in slots exiting the intersection, so car1 begins its
                  turn by moving one slot forward into the intersection in the
                  North direction.
-              4. Car1 continues its turn and moves one slot forward in the North
+              3. Car1 continues its turn and moves one slot forward in the North
                  direction.
-              5. Car1 moves one slot in the West direction.
-              6. Car1 moves one slot forward in the West direction, exiting the
+              4. Car1 moves one slot in the West direction.
+              5. Car1 moves one slot forward in the West direction, exiting the
                  intersection.
-              7. Car3 begins making its turn, first moving into the intersection
+              6. Car3 begins making its turn, first moving into the intersection
                  in the West direction.
-              8. Car1 moves one slot forward in the West direction, and car3
+              7. Car1 moves one slot forward in the West direction, and car3
                  moves one slot forward in the West direction.
-              9. Car1 moves one slot forward in the West direction, and car3
+              8. Car1 moves one slot forward in the West direction, and car3
                  moves one slot to it's left in the South direction.
-              10. Car1 moves one slot forward in the West direction, and car3
+              9. Car1 moves one slot forward in the West direction, and car3
                   exits the intersection and moves one slot forward in the South
                   direction.
-              11. Car1 moves one slot forward in the West direction, car3 moves
+              10. Car1 moves one slot forward in the West direction, car3 moves
                   one slot forward in the South direction, and car2 enters the
                   first slot in the intersection toward the West.
-              12. Car1 moves one slot forward in the West direction, car3 moves
+              11. Car1 moves one slot forward in the West direction, car3 moves
                   one slot forward in the South direction, and car2 moves one slot
                   forward toward West.
-              13. Car1 moves one slot forward in the West direction, car3 moves
+              12. Car1 moves one slot forward in the West direction, car3 moves
                   one slot forward in the South direction, and car2 moves one slot
                   to the left heading North.
-              14. Car1 moves one slot forward in the West direction, car3 moves
+              13. Car1 moves one slot forward in the West direction, car3 moves
                   one slot forward in the South direction, and car2 moves one slot
                   forward heading north and exiting the intersection.
+              14. Car1 moves one slot forward in the West direction, car3 moves
+                  one slot forward in the South direction, and car2 moves one slot
+                  forward in the North direction.
               15. Car1 moves one slot forward in the West direction, car3 moves
                   one slot forward in the South direction, and car2 moves one slot
                   forward in the North direction.

@@ -5,7 +5,7 @@
             - has 15 time steps (more than one event can happen simultaneously
             - cars need not enter at the grid boundary; the scenario could
               occur (so to speak) in the middle of an entire simulation.
-           
+            - State of the simulation before any car moves:
             Assume the number of segment user input is 10. Car 1 is going
             towards N and is at the slot three slots away from the intersection. 
             Car 2 is going towards W and is at the slot three slots away from 
@@ -59,7 +59,7 @@
             - has 15 time steps (more than one event can happen simultaneously
             - cars need not enter at the grid boundary; the scenario could
               occur (so to speak) in the middle of an entire simulation.
-              
+              - State of the simulation before any car moves:
               Three cars are approaching the intersection, car 1 is 
               approaching from the South, car 2 is approaching from the West 
               and car 3 is approaching from the East. Each car indicates their 

@@ -1,0 +1,104 @@
+
+
+Authors: Melissa Gu, Jessica Li, Tracy Nguyen, Will Saada 
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+Traffic Flow Simulator: Requirements Document
+1. Background
+   Self-Driving cars are quickly becoming more common and more proficient. Some 
+   predict that in the coming years self-driving cars will be everywhere 
+   transforming how people travel.  It's important that research is done to 
+   determine both the efficiency and the safety of autonomous vehicles. Hackers 
+   have found ways to control vehicles from outside of the car by sending it 
+   signals. One possible solution is to program the cars to use visual cues from 
+   other cars and to eliminate the need for wireless communication and safeguard 
+   against such hacking. This piece of software will strive to model the 
+   efficiency and behavior of such vehicles according to the regulations listed 
+   below.
+2. Description of Software
+   ... (one paragraph description of the purpose of this software)
+3. Environmental Characteristics
+   (You need put nothing in this section at this time, but have such a
+   section heading; the section might eventually describe such things as the 
+   operating system that could be used, the version of compilers used, etc.)
+4. Simulation Characteristics
+   4.1 Geographic layout
+       4.1.1 The city section is a grid of up to 20 north-south two-way streets 
+             and 20 east-west two-way streets.
+       etc.
+   4.2 Traffic control devices
+       4.2.1 Intersections controlled by rules rather than control devices
+             ... (subdivide 4.2.1 into as many rules as you think necessary)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+       4.2.2 Stop signs at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.3 Traffic lights at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.4 Sensors at intersections
+             (don't put anything in this section for now, but have its heading)
+       4.2.5 Implicit control devices at entrance to city section
+             (don't put anything in this section for now, but have its heading)
+       ...
+       4.4.??
+   4.3 Traffic flow 
+       4.3.1 Speed of traffic
+             4.3.1.1 All cars travel at the same speed.
+             That speed is given by timeToTraverseSegment.
+       4.3.2 Patterns of traffic flow
+             (don't try to do at all before the deadline on Fri Sep 21; 
+             eventually don't say something vague like "six or seven traffic 
+             patterns will define the traffic flow", instead describe -- 
+             using *separate* outline numbering for each such pattern
+             -- all the traffic flow patterns that exist in the simulation and 
+             thus are available to the user; you need not mention the various
+             specific places where a car could actually make a turn)
+        etc.
+   4.4 Stochastic properties
+       (describe the role of random numbers in the simulation)
+   ...
+   4.?? Additional assumptions
+5. Input/Output
+   (specific description of input and output formats and how the
+   client will provide input and receive output; client has already indicated 
+   whether he wants a graphical view and/or GUI input and output to the overall 
+   software.)
+6. Life Cycle Considerations
+   6.1 Subsets
+       6.1.1 (describe the first deliverable)
+       6.1.2 (describe the second deliverable)
+       ...
+       6.1.5 (describe the deliverable on Wed, October 31, 2016)
+   6.2 Possible extensions
+       (number and list the ways the software can be extended after Oct 31, in 
+       view of the client's longer-term needs)
+   ...
+   6.??
+7. Glossary
+   7.1 A "direction" is exactly one of the following: N, W, S, E.
+       Those letters abbreviate North, West, South, East, respectively.
+   7.2 A "section" is the portion of a street between two adjacent 
+       intersections.  
+   7.3 Each section consists of exactly two segments that aim in opposite
+       directions from each other.
+   7.4 A "segment" is the portion of a section going in a single direction.
+   ... (clarify the above further, and insert additional terms into the
+        glossary)
+
+8. Names of values.  (Below is at least a partial chart you can use.)
+
+  name of value           intended meaning
+  ---------------------   -----------------------------------------------------
+  timeToTraverseSegment   time in time-units for one car to traverse one segment
+  maxSegmentCapacity      maximum num of cars in one segment 
+  ...
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+9. Questions to ask client.
+

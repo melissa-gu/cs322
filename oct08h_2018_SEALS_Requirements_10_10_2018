@@ -223,15 +223,7 @@ Traffic Flow Simulator: Requirements Document
    7.7 A "segment" is the part of a section going in a single direction.
    7.8 An "intersection" is where N/S and E/W facing roads intersect, and
        the segments end. An intersection is composed of four slots to form a 
-       two-by-two grid of slots. These four slots are defined as follows:
-       7.8.1 NE intersection slot
-             - The slot occupying the top right corner of the intersection.
-       7.8.2 NW intersection slot
-             - The slot occupying the top left corner of the intersection.
-       7.8.3 SE intersection slot
-             - The slot occupying the bottom right corner of the intersection.
-       7.8.4 SW intersection slot
-             - The slot occupying the bottom left corner of the intersection.
+       two-by-two grid of slots.
    7.9 A car that is "approaching the intersection" is a car that is in the
        slot adjacent to but not in the intersection and the car's direction is
        aiming toward the intersection.

@@ -119,15 +119,17 @@
             - has 15 time steps (more than one event can happen simultaneously
             - cars need not enter at the grid boundary; the scenario could
               occur (so to speak) in the middle of an entire simulation.
-            - each segment contains 10 slots.
-            - State of the simulation before any car moves:
-               Three cars 1, 2, 3 are approaching the same intersection. Car 1
-               is on the NS segment, occupying the slot adjacent to the
-               intersection and signals to turn left. Car 2 is on the WE segment
-               , is occupying the slot adjacent to the intersection and singals to
-               go straight. Car 3 is on the SN segment, also occupying the slot
-               adjacent to the intersection, and signals to turn right. 
+            
+            State of the simulation before any car moves:
+            - Assume the number of slots in each segment is 10. Cars 1, 2, and 3
+              are approaching the same intersection. Car 1 traveling south, 
+              occupying the slot adjacent to the intersection and signals to 
+              turn left. Car 2 is traveling east, occupying the slot 
+              adjacent to the intersection and signals to go straight. Car 3 is 
+              traveling north, occupying the slot adjacent to the intersection 
+              and signals to turn right. 
 
+            Description of Scenario:  
             1. Because Car 2 wants to go straight, Car 2 receives priority,
                and moves one more step to the intersection slot where the NS
                segment meets the WE segment. Car 1 and Car 3 do not move during

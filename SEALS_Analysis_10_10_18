@@ -136,95 +136,68 @@
             
             State of the simulation before any car moves:
             - Assume the number of slots in each segment is 10. Cars 1, 2, and 3
-              are approaching the same intersection. Car 1 traveling south, 
+              are approaching the same intersection. Car 1 traveling S, 
               occupying the slot adjacent to the intersection and signals to 
-              turn left. Car 2 is traveling east, occupying the slot 
+              turn left. Car 2 is traveling E, occupying the slot 
               adjacent to the intersection and signals to go straight. Car 3 is 
-              traveling north, occupying the slot adjacent to the intersection 
+              traveling N, occupying the slot adjacent to the intersection 
               and signals to turn right. 
 
             Description of Scenario:  
-            1. Because Car 2 wants to go straight, Car 2 receives priority,
-               and moves one more step to the intersection slot where the NS
-               segment meets the WE segment. Car 1 and Car 3 do not move during
-               this time step.
-            2. Car 2, still going straight, moves one more step forward to the
-               intersection slot where the SN segment meets the WE segment.
-               Car 1 and Car 3 do not move during this time step.
-            3. Car 2 is exiting the intersection and moves to the slot
-               adjacent to the intersection on the segment WE, aiming away from
-               the intersection (further in the E direction than the
-               intersection). Car 1 and Car 3 do not move during this time step.
-            4. Car 2 moves one slot forward further in the E direction,
-               to the second slot of the WE segment. Car 3, which wants to turn
-               right, now moves one step forward in the N direction to occupy
-               the intersection slot where the WE and SN segments meet. Car 1,
-               which wants to turn left, receives less priority and does not
-               move in this time step.
-            5. Car 2 moves one slot forward further in the E direction,
-               to the third slot of the WE segment. Car 3 is exiting the
-               intersection and moves to the slot adjacent to the intersection
-               on the segment WE, aiming away from the intersection (further in
-               the E direction than the intersection). Car 1 still does not
-               move in this time step.
-            6. Car 2 moves one slot forward further in the E direction, to the
-               fourth slot of the WE segment. Car 3 moves one slot forward
-               further in the E direction, to the second slot of the WE segment.
-               Car 1 moves forward in the S direction, to occupy the
-               intersection slot where the EW and NS segments meet.
-            7. Car 2 moves one slot forward further in the E direction, to the
-               fifth slot of the WE segment. Car 3 moves one slot forward
-               further in the E direction, to the third slot of the WE segment.
-               Car 1 moves forward in the S direction, to occupy the
-               intersection slot where the WE and NS segments meet.
-            8. Car 2 moves one slot forward further in the E direction, to the
-               sixth slot of the WE segment. Car 3 moves one slot forward
-               further in the E direction, to the fourth slot of the WE segment.
-               Car 1 moves forward in the E direction, to occupy the
-               intersection slot where the WE and SN segments meet.
-            9. Car 2 moves one slot forward further in the E direction, to the
-               seventh slot of the WE segment. Car 3 moves one slot forward
-               further in the E direction, to the fifth slot of the WE segment.
-               Car 1 is exiting the intersection and moves to the
-               slot adjacent to the intersection on the segment WE, aiming away
-               from the intersection (further in the E direction than the
-               intersection).
-            10. Car 2 moves one slot forward further in the E direction, to the
-                eighth slot of the WE segment. Car 3 moves one slot forward
-                further in the E direction, to the sixth slot of the WE segment.
-                Car 1 moves one slot forward further in the E direction, to the
-                second slot of the WE segment.
-            11. Car 2 moves one slot forward further in the E direction, to the
-                ninth slot of the WE segment. Car 3 moves one slot forward
-                further in the E direction, to the seventh slot of the WE
-                segment. Car 1 moves one slot forward further in the E
-                direction, to the third lot of the WE segment.
-            12. Car 2 moves one slot forward further in the E direction, to the
-                tenth slot of the WE segment and is approaching the second
-                intersection. Car 3 moves one slot forward further in the E
-                direction, to the eighth slot of the WE segment. Car 1 moves one
-                slot forward further in the E direction, to the fourth lot of
-                the WE segment.
-            13. Car 2 wants to move straight, so it moves one slot forward
-                further in the E direction, to occupy the intersection slot
-                where the NS and WE segments meet. Car 3 moves one slot
-                forward further in the E direction, to the ninth slot of the
-                WE segment. Car 1 moves one slot forward further in the E
-                direction, to the fifth slot of the WE segment.
-            14. Car 2 moves one slot forward further in the E direction, to
-                occupy the intersection slot where the SN and WE segments meet.
-                Car 3 moves one slot forward further in the E direction, to the
-                tenth slot of the WE segment and is now approaching the second
-                intersection. Car 1 moves one slot forward further in the E
-                direction, to the sixth slot of the WE segment.
-            15. Car 2 moves one slot forward further in the E direction, is
-                exiting the second intersection and moves to the slot adjacent
-                to the second intersection on the segment WE, aiming away from
-                the second intersection (further in the E direction). Car 3
-                wants to turn right, so it first moves one slot forward further
-                in the E direction, to occupy the intersection slot where
-                NS and WE segments meet. Car 1 moves one slot forward further
-                in the E direction, to the seventh slot of the WE segment.
+            1. Car 1 waits at the slot adjacent to the intersection. Car 2 moves
+               one slot forward in the E direction and occupies the SW
+               intersection slot. Car 3 waits at the slot adjacent to the
+               intersection.
+            2. Car 1 waits at the slot adjacent to the intersection. Car 2 moves
+               one slot forward in the E direction and occupies the SE
+               intersection slot. Car 3 waits at the slot adjacent to the
+               intersection.
+            3. Car 1 waits at the slot adjacent to the intersection. Car 2 moves
+               one slot forward in the E direction and is exiting the
+               intersection. Car 3 waits at the slot adjacent to the
+               intersection.
+            4. Car 1 waits at the slot adjacent to the intersection. Car 2 moves
+               one slot forward further in the E direction. Car 3 moves one slot
+               forward further in the N direction and occupies the SE
+               intersection slot. 
+            5. Car 1 waits at the slot adjacent to the intersection. Car 2 moves
+               one slot forward in the E direction. Car 3 moves one slot
+               forward in the E direction and is exiting the intersection.
+            6. Car 1 moves one slot forward in the S direction and occupies the
+               NW intersection slot. Car 2 moves one slot forward in the
+               E direction. Car 3 moves one slot forward in the E direction.
+            7. Car 1 moves one slot forward in the S direction and occupies the
+               SW intersection slot. Car 2 moves one slot forward in the
+               E direction. Car 3 moves one slot forward in the E direction.
+            8. Car 1 moves one slot forward in the E direction and occupies the
+               SE intersection slot. Car 2 moves one slot forward in the
+               E direction. Car 3 moves one slot forward in the E direction.
+            9. Car 1 moves one slot forward in the E direction and is exiting
+               the intersection. Car 2 moves one slot forward in the E
+               direction. Car 3 moves one slot forward in the E direction.
+            10. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction. Car 3 moves one slot forward in
+                the E direction.
+            11. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction. Car 3 moves one slot forward in
+                 the E
+                direction.
+            12. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction, is now approaching the
+                second intersection and signals to go straight. Car 3 moves one
+                slot forward in the E direction.
+            13. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction and occupies the SW intersection
+                slot. Car 3 moves one slot forward in the E direction.
+            14. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction and occupies the SE intersection
+                slot. Car 3 moves one slot forward in the E direction, is now
+                approaching the second intersection and signals to turn right.
+            15. Car 1 moves one slot forward in the E direction. Car 2 moves one
+                slot forward in the E direction and is now exiting the second
+                intersection. Car 3 moves one slot forward in the E direction,
+                and occupies the SW intersection slot.
+
 --- END
 --- BEGIN Noun Extraction
 Description of the simulation (from section 2 of Requirements for 10_10_18:

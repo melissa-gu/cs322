@@ -17,30 +17,29 @@ The class name: Simulation
 Responsibility:
 1. Initialize Grid of slots with number of streets based on constructor
    parameters
-2. Initialize list of Cars
-3. Generate new Car instances based on constructor parameters and add to list of
+2. Generate new Car instances based on constructor parameters and add to list of
    Cars
-4. Send message to grid to update positions of cars
-5. Remove cars from list of cars when they exit the Grid
-6. Receive messages from Car class when cars exit the Grid
-7. Calculate and output the average time Cars take to enter and exit the Grid
-   based on the messages received
+3. Send message to grid to update positions of cars
+4. Remove cars from list of cars when they exit the Grid
+5. Receive messages from Car class when cars exit the Grid
+6. Calculate and output the average time Cars take to enter and exit the Grid
+   based on the messages received from Grid
 Collaboration:
 1. Grid Class
-2. Car Class
+
 
 The class name: Grid
 Responsibility:
 1. Initialize 2D array of slots
 2. Initialize instance of TrafficController
 3. Initialize all instances of Intersection and pass to TrafficController class
-4. Send messages to cars to update their positions in the slots
+4. Send messages to slots to update the positions of cars
+5. Send message to Simulation based on average time in the grid for cars
 
 Collaboration:
 1. Slot Class
 2. Intersection Class
 3. TrafficController Class
-4. Car Class
 
 The class name: TrafficController
 Responsibility:
@@ -53,23 +52,19 @@ Responsibility:
 4. Send messages to Cars approaching Intersections about whether they can move
 
 Collaboration:
-1. Car Class
-2. Intersection Class
+1. Intersection Class
 
 The class name: Car
 Responsibility:
-1. Send message to Slot that Car is occupying slot
-2. Send message to Slot that Car has vacated that slot
-3. Send message to TrafficController indicating the direction Car intends to
-   proceed through the intersection when Car is approaching the intersection
-4. Receive message from TrafficController indicating whether car can move into
+1. Receive message from TrafficController indicating whether car can move into
    Intersection
-5. Send message to Simulation that Car has exited the grid that contains
+2. Send message to TrafficController that Car has exited the grid that contains
    information about the time the Car took to enter and exit
+
 Collaboration:
 1. Slot Class
 2. TrafficController Class
-3. Simulation Class
+
 
 The class name: Intersection
 Responsibility:
@@ -85,7 +80,7 @@ Collaboration:
 The class name: Slot
 Responsibility:
 1. Receive message from Car when that Car is occupying the Slot
-2. Receive message from Car when that Car vacates the Slot
+2. Send message to Car when it should move to a new slot
 3. For Slots that are part of an Intersection, the Slot will send a message
    containing a reference to the Car occupying that Slot to the Intersection
    class, if there is a Car occupying that slot

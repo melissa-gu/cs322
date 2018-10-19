@@ -5,9 +5,18 @@ Authors: SEALS (Jessica, Melissa, Tracy, Will)
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 
+The class name: Setup
+Responsibility:
+1. Read user input from a file or the command-line
+2. Construct a Simulation object based on the input
+3. Run the simulation
+Collaboration:
+1. Simulation Class
+
 The class name: Simulation
 Responsibility:
-1. Initialize Grid of slots with number of streets based on user input
+1. Initialize Grid of slots with number of streets based on constructor
+   parameters.
 2. Initialize list of Cars
 3. Generate new Car instances based on user input and add to list of Cars
 4. Update the positions of cars at each time stamp
@@ -35,7 +44,7 @@ Responsibility:
 1. Contains list of Intersection instances
 2. Receive messages from Intersections containing information about which slots
    are occupied and which cars occupy these slots
-3. Receive messages from Cars approaching the intersection about the direction 
+3. Receive messages from Cars approaching the intersection about the direction
    the Car intends to proceed through the intersection
 3. Determine which Cars approaching Intersections can move
 4. Send messages to Cars approaching Intersections about whether they can move
@@ -74,8 +83,8 @@ The class name: Slot
 Responsibility:
 1. Receive message from Car when that Car is occupying the Slot
 2. Receive message from Car when that Car vacates the Slot
-3. For Slots that are part of an Intersection, the Slot will send a message 
-   containing a reference to the Car occupying that Slot to the Intersection 
+3. For Slots that are part of an Intersection, the Slot will send a message
+   containing a reference to the Car occupying that Slot to the Intersection
    class
 
 Collaboration:

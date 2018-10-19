@@ -75,7 +75,7 @@ Collaboration:
 
 The class name: Slot
 Responsibility:
-1. Receive message from Car when that Car is occupying the Slot
+1. Receive message from Grid on what to do with Car if a car is occupying a slot
 2. Send message to Car when it should move to a new slot
 3. For Slots that are part of an Intersection, the Slot will send a message
    containing a reference to the Car occupying that Slot to the Intersection

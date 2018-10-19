@@ -18,12 +18,12 @@ Responsibility:
 1. Initialize Grid of slots with number of streets based on constructor
    parameters
 2. Initialize list of Cars
-3. Generate new Car instances based on constructor parameters and add to list of 
+3. Generate new Car instances based on constructor parameters and add to list of
    Cars
-4. Update the positions of cars at each time stamp
+4. Send message to grid to update positions of cars
 5. Remove cars from list of cars when they exit the Grid
 6. Receive messages from Car class when cars exit the Grid
-7. Calculate and output the average time Cars take to enter and exit the Grid 
+7. Calculate and output the average time Cars take to enter and exit the Grid
    based on the messages received
 Collaboration:
 1. Grid Class
@@ -34,11 +34,13 @@ Responsibility:
 1. Initialize 2D array of slots
 2. Initialize instance of TrafficController
 3. Initialize all instances of Intersection and pass to TrafficController class
+4. Send messages to cars to update their positions in the slots
 
 Collaboration:
 1. Slot Class
 2. Intersection Class
 3. TrafficController Class
+4. Car Class
 
 The class name: TrafficController
 Responsibility:

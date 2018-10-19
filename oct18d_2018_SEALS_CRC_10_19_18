@@ -1,0 +1,60 @@
+
+
+Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+The class name: Simulation
+Responsibility:
+1. Initialize list of cars
+2. Generate new cars based on user input and add to list of cars
+3. Initialize Grid of slots with number of streets based on user input
+4. Update the positions of cars at each time stamp
+5. Remove cars from list of cars when they exit the Grid
+Collaboration:
+1. Grid Class
+2. Car Class
+
+The class name: Grid
+Responsibility:
+1. Initialize 2D array of slots
+2. Initialize all instances of Intersection and pass to TrafficController class
+3. 
+
+Collaboration:
+1. Slot Class
+2. Intersection Class
+3. TrafficController Class
+
+The class name: TrafficController
+Responsibility:
+
+Collaboration:
+1. Car Class
+2. Intersection Class
+
+The class name: Car
+Responsibility:
+1. Send message to Slot that Car is occupying slot
+2. Send message to TrafficController indicating the direction Car intends to 
+   proceed through the intersection when Car is approaching the intersection
+3. Receive message from TrafficController indicating whether and how Car 
+   should move into the intersection
+4. Send message to Simulation that Car has exited the grid
+Collaboration:
+1. Slot Class
+
+The class name: Intersection
+Responsibility:
+
+Collaboration:
+1. TrafficController Class
+2. Slot Class
+
+The class name: Slot
+Responsibility:
+1. 
+
+Collaboration:
+1. Intersection Class

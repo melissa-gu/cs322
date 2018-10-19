@@ -44,12 +44,11 @@ Collaboration:
 The class name: Car
 Responsibility:
 1. Send message to Slot that Car is occupying slot
-2. Send message to Slot that Car has vacated that slot
-3. Send message to TrafficController indicating the direction Car intends to 
+2. Send message to TrafficController indicating the direction Car intends to 
    proceed through the intersection when Car is approaching the intersection
-4. Receive message from TrafficController indicating whether car can move into 
+3. Receive message from TrafficController indicating whether car can move into 
    Intersection
-5. Send message to Simulation that Car has exited the grid
+4. Send message to Simulation that Car has exited the grid
 Collaboration:
 1. Slot Class
 2. TrafficController Class
@@ -68,10 +67,7 @@ Collaboration:
 
 The class name: Slot
 Responsibility:
-1. Receive message from Car when that Car is occupying the Slot
-2. Receive message from Car when that Car vacates the Slot
-3. Send message containing reference to Car occupying Slot to Intersection
+1. 
 
 Collaboration:
-1. Car Class
-2. Intersection Class
+1. Intersection Class

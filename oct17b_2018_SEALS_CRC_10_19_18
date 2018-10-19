@@ -1,0 +1,44 @@
+
+
+Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+The class name: Simulation
+Responsibility:
+1. 
+Collaboration:
+
+The class name: Car
+Responsibility:
+
+Collaboration:
+1. Send message to Slot that it is occupying slot
+2. Send message to TrafficController indicating the direction it intends to 
+   proceed through the intersection
+The class name: Grid
+Responsibility:
+
+Collaboration:
+
+The class name: Intersection
+Responsibility:
+
+Collaboration:
+
+The class name: TrafficController
+Responsibility:
+
+Collaboration:
+
+The class name: Section
+Responsibility:
+
+Collaboration:
+
+The class name: Slot
+Responsibility:
+1. 
+
+Collaboration:

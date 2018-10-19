@@ -17,12 +17,8 @@ The class name: Simulation
 Responsibility:
 1. Initialize Grid of slots with number of streets based on constructor
    parameters
-2. Generate new Car instances based on constructor parameters and add to list of
-   Cars
-3. Send message to grid to update positions of cars
-4. Remove cars from list of cars when they exit the Grid
-5. Receive messages from Car class when cars exit the Grid
-6. Calculate and output the average time Cars take to enter and exit the Grid
+2. Send message to grid to update positions of cars
+3. Calculate and output the average time Cars take to enter and exit the Grid
    based on the messages received from Grid
 Collaboration:
 1. Grid Class

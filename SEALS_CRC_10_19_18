@@ -32,7 +32,7 @@ Responsibility:
 1. Contains list of Intersection instances
 2. Receive messages from Intersections containing information about which slots
    are occupied and which cars occupy these slots
-3. Receive messages from Cars apporaching the intersection about the direction 
+3. Receive messages from Cars approaching the intersection about the direction 
    the Car intends to proceed through the intersection
 3. Determine which Cars approaching Intersections can move
 4. Send messages to Cars approaching Intersections about whether they can move
@@ -45,9 +45,9 @@ The class name: Car
 Responsibility:
 1. Send message to Slot that Car is occupying slot
 2. Send message to Slot that Car has vacated that slot
-3. Send message to TrafficController indicating the direction Car intends to 
+3. Send message to TrafficController indicating the direction Car intends to
    proceed through the intersection when Car is approaching the intersection
-4. Receive message from TrafficController indicating whether car can move into 
+4. Receive message from TrafficController indicating whether car can move into
    Intersection
 5. Send message to Simulation that Car has exited the grid
 Collaboration:
@@ -57,9 +57,9 @@ Collaboration:
 
 The class name: Intersection
 Responsibility:
-1. Receive message from Slot Class about cars contained in slots making up 
+1. Receive message from Slot Class about cars contained in slots making up
    Intersection
-2. Sends message to TrafficController class with references to the cars 
+2. Sends message to TrafficController class with references to the cars
    occupying the Intersection and its adjacent slots
 
 Collaboration:

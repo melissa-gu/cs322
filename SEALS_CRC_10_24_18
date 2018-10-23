@@ -1,0 +1,72 @@
+
+
+Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+The class name: Simulation
+Responsibility:
+1. Constructor is generated 
+2. Initialize Grid of slots with number of streets based on constructor
+   parameters
+3. Send message to grid to update positions of cars
+4. Calculate and output the average time Cars take to enter and exit the Grid
+   based on the messages received from Grid
+Collaboration:
+1. Grid Class
+
+The class name: Grid
+Responsibility:
+1. Initialize 2D array of slots
+2. Initialize instance of TrafficController
+3. Initialize all instances of Intersection and pass to TrafficController class
+4. Send messages to slots to update the positions of cars
+5. Send message to Simulation based on average time in the grid for cars
+Collaboration:
+1. Slot Class
+2. Intersection Class
+3. TrafficController Class
+
+The class name: TrafficController
+Responsibility:
+1. Contains list of Intersection instances
+2. Receive messages from Intersections containing information about which slots
+   are occupied and references to the Cars occupying these slots
+3. Receive messages from Cars approaching the intersection about the direction
+   the Car intends to proceed through the intersection
+3. Determine which Cars approaching Intersections can move
+4. Send messages to Cars approaching Intersections about whether they can move
+Collaboration:
+1. Intersection Class
+
+The class name: Car
+Responsibility:
+1. Receive message from TrafficController indicating whether car can move into
+   Intersection
+2. Send message to TrafficController that Car has exited the grid that contains
+   information about the time the Car took to enter and exit
+Collaboration:
+1. Slot Class
+2. TrafficController Class
+
+The class name: Intersection
+Responsibility:
+1. Receive message from Slot Class about cars contained in slots making up
+   Intersection
+2. Send message to TrafficController class with references to the cars
+   occupying the Intersection and its adjacent slots
+Collaboration:
+1. TrafficController Class
+2. Slot Class
+
+The class name: Slot
+Responsibility:
+1. Receive message from Grid on what to do with Car if a car is occupying a slot
+2. Send message to Car when it should move to a new slot
+3. For Slots that are part of an Intersection, the Slot will send a message
+   containing a reference to the Car occupying that Slot to the Intersection
+   class, if there is a Car occupying that slot
+Collaboration:
+1. Car Class
+2. Intersection Class

@@ -5,13 +5,20 @@ Authors: SEALS (Jessica, Melissa, Tracy, Will)
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 
+The class name: Setup
+Responsibility:
+1. Read user input from a file or the command-line
+2. Construct a Simulation object based on the input
+3. Run the simulation
+Collaboration:
+1. Simulation Class
+
 The class name: Simulation
 Responsibility:
-1. Constructor is generated 
-2. Initialize Grid of slots with number of streets based on constructor
+1. Initialize Grid of slots with number of streets based on constructor
    parameters
-3. Send message to grid to update positions of cars
-4. Calculate and output the average time Cars take to enter and exit the Grid
+2. Send message to grid to update positions of cars
+3. Calculate and output the average time Cars take to enter and exit the Grid
    based on the messages received from Grid
 Collaboration:
 1. Grid Class

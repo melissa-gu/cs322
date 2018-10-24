@@ -65,10 +65,10 @@ Responsibility:
        car
    1.3 Initialize integer representing time left in a segment, 
        timeLeftInSegment, with the intial value of timeToTraverseSegment
-4. Receive message from simulation at each time unit to decrement 
+2. Receive message from simulation at each time unit to decrement 
    timeLeftInSegment value at each time unit
-5. Receive message from traffic controller about which queue car should enter
-6. When timeLeftInSegment first becomes 0, send message to instance of 
+3. Receive message from traffic controller about which queue car should enter
+4. When timeLeftInSegment first becomes 0, send message to instance of 
    intersection coresponding to the car's intersection ID to enqueue the car in 
    the correct queue
 Collaboration:
@@ -90,7 +90,3 @@ Responsibility:
 Collaboration:
 1. Intersection Class
 2. Car Class
-
-
-
-

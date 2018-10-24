@@ -25,23 +25,65 @@ Collaboration:
 
 The class name: Grid
 Responsibility:
-1. Initialize 2D array of intersection instances according to message received 
-   from simulation
-2. 
-
+1. Receive message from simulation about number of intersections
+2. Initialize 2D array of intersection instances, sending message to each 
+   instance with an integer representing the intersection
+3. Initialize instance of traffic controller
 Collaboration:
-1. Intersection class
-2. TrafficController class
+1. Simulation Class
+2. Intersection Class
+3. TrafficController Class
+
+The class name: Intersection
+Responsibility:
+1. Receive message from grid containing information about intersection ID, 
+   intialize intersection ID
+2. Initialize 2D integer array of size 4 representing the four slots within an 
+   intersection that contains integer car IDs
+3. Initialize four integer queues corresponding to four directions that contain 
+   integer car IDs. Each queue represents cars occupying the segment 
+   that aims towards the intersection with remaining time values equal to 
+   zero
+4. Initialize four integer instance variables containing the remaining capacity
+   of each of the four segments
+5. Receive message from car instances about direction car will proceed through 
+   intersection
+6. Receive message from traffic controller to dequeue cars that can move 
+   into intersection 
+7. Update the 2D array to reflect the movement of cars
+8. Receive messages from car instances about which queue to enqueue the car 
+   into, enqueue that car
+Collaboration:
+1. Grid Class
+2. TrafficController Class
+
+The class name: Car
+Responsibility:
+1. Receive message from simulation to initialize the following variables:
+   1.1 Integer ID representing the car
+   1.2 Integer representing the coordinate of the segment or intersection the 
+       car
+   1.3 Initialize integer representing time left in a segment, 
+       timeLeftInSegment, with the intial value of timeToTraverseSegment
+4. Receive message from simulation at each time unit to decrement 
+   timeLeftInSegment value at each time unit
+5. Receive message from traffic controller about which queue car should enter
+6. When timeLeftInSegment first becomes 0, send message to instance of 
+   intersection coresponding to the car's intersection ID to enqueue the car in 
+   the correct queue
+Collaboration:
+1. Simulation Class
+2. Intersection Class
 
 
 The class name: TrafficController
 Responsibility:
-1. Receive message from grid containing an instance of intersection
-2. Receive message from intersection containing information about which 
+1. Receive message from intersection containing information about which 
    slots of the 2D array are occupied
-3. Receive message from intersection containing information about cars 
+2. Receive message from intersection containing information about cars 
    approaching the intersection
-3. Determine which car(s) approaching intersection can move
+3. Determine which car(s) approaching intersection can move based on rules
+   specified in Requirements document
 4. Send message to intersection to dequeue cars that can move into intersection 
    and update the 2D array
 5. Send messages to cars about which queue they should enter
@@ -49,36 +91,6 @@ Collaboration:
 1. Intersection Class
 2. Car Class
 
-The class name: Car
-Responsibility:
-1. Initialize integer ID representing the car
-2. Initialize integer representing the intersection it is aiming towards or 
-   in   
-3. Initialize integer representing time left in a segment with the intial value 
-   of timeToTraverseSegment
-4. 
-Collaboration:
 
-2. TrafficController Class
 
-The class name: Intersection
-Responsibility:
-1. Receive message from grid containing information about ID, intialize 
-   intersection ID
-2. Initialize 2D integer array of size 4 containing car IDs (or -1 if no 
-   car is present)
-2. Initialize four integer queues corresponding to four directions that contain 
-   integer car IDs. Each queue represents cars occupying the segment 
-   that aims towards the intersection with remaining time values equal to 
-   zero
-3. Receive message from TrafficController class to dequeue cars that can move 
-   into intersection 
-4. Receive message from car instance about direction car will proceed through 
-   intersection to update the 2D array
-5. Receive message from car instance about which queue to enqueue the car into, 
-   enqueue that car
-7. Initialize four integer instance variables containing the remaining capacity
-   of each segment
-Collaboration:
-1. TrafficController Class
-2. 
+

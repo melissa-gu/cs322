@@ -23,6 +23,8 @@ Responsibility:
        car is in, with the initial value specified by user input
    2.3 Initialize integer representing time left in a segment, 
        timeLeftInSegment, with the intial value of timeToTraverseSegment
+   2.4 Initialize integer representing the direction (N,S,W,E) the car is
+       aiming towards
 3. Send message to instance of cars to update positions of cars and decrement
    the cars' timeToTraverseSegments appropriately
 4. Calculate and output the average time each instance of car takes to enter and 
@@ -30,6 +32,7 @@ Responsibility:
 Collaboration:
 1. Grid Class
 2. Car Class
+3. Setup Class
 
 The class name: Grid
 Responsibility:
@@ -68,11 +71,12 @@ Responsibility:
    timeLeftInSegment value at each time unit
 2. Receive message from traffic controller about which queue car should enter
 3. When timeLeftInSegment first becomes 0, send message to instance of 
-   intersection coresponding to the car's intersection ID to enqueue the car in 
+   intersection corresponding to the car's intersection ID to enqueue the car in 
    the correct queue
 Collaboration:
 1. Simulation Class
 2. Intersection Class
+3. Traffic Controller Class
 
 
 The class name: TrafficController
@@ -83,14 +87,14 @@ Responsibility:
    approaching the intersection
 3. Receive messages from car instances about each car's direction, and
    determines which queue to enqueue the car into after exiting the intersection
-3. Determine which car(s) approaching intersection can move into the
+4. Determine which car(s) approaching intersection can move into the
    intersection based on:
-   3.1. Whether the size of the queue to enqueue the car into after exiting the
+   4.1. Whether the size of the queue to enqueue the car into after exiting the
         intersection is less than maxSegmentCapacity
-   3.2. Rules specified in Requirements document
-4. Send message to intersection to dequeue cars that can move into intersection 
+   4.2. Rules specified in Requirements document
+5. Send message to intersection to dequeue cars that can move into intersection 
    and update the 2D array
-5. Send message to each car instance about which queue the car should enter
+6. Send message to each car instance about which queue the car should enter
    after exiting the intersection
 Collaboration:
 1. Intersection Class

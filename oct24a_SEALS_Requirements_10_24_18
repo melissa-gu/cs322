@@ -16,12 +16,12 @@ Traffic Flow Simulator: Requirements Document
    for wireless communication, preventing such hacking.
 2. Description of Software
    This software will simulate autonomous cars as they travel through a city
-   represented as a Grid of intersections and sections, where sections are 
+   represented as a grid of intersections and sections, where sections are 
    composed of two segments in opposite directions, and intersections and 
    segments are further divided into slots. The software will not include a GUI 
    or virtual reality goggles, because the time and monetary cost needed to 
    implement would not be feasible. The software will take input that
-   specifies simulation parameters: the size of the Grid of streets and
+   specifies simulation parameters: the size of the grid of streets and
    approximate rate of entry and location of entry and exit of each car. This
    input will be given either through the command line or a file. The software
    will generate new cars as the simulation proceeds, model how cars proceed 
@@ -34,7 +34,7 @@ Traffic Flow Simulator: Requirements Document
    operating system that could be used, the version of compilers used, etc.)
 4. Simulation Characteristics
    4.1 Geographic layout
-       4.1.1 The city section is a Grid of up to 20 north-south two-way streets
+       4.1.1 The city section is a grid of up to 20 north-south two-way streets
              and east-west two-way streets. The number of streets of each
              direction is determined by input to the program.
        etc.
@@ -223,7 +223,7 @@ Traffic Flow Simulator: Requirements Document
    7.7 A "segment" is the part of a section going in a single direction.
    7.8 An "intersection" is where N/S and E/W facing roads intersect, and
        the segments end. An intersection is composed of four slots to form a 
-       two-by-two Grid of slots. These four slots are defined as follows:
+       two-by-two grid of slots. These four slots are defined as follows:
        7.8.1 NE intersection slot
              - The slot occupying the top right corner of the intersection.
        7.8.2 NW intersection slot
@@ -240,7 +240,7 @@ Traffic Flow Simulator: Requirements Document
    7.11 A "slot" refers to a portion of real estate that makes up a segment, or
         one of the four portions of an intersection. Only one car can occupy a
         slot at a time, and one car can only occupy one slot.
-   7.12 Two segments "aim in opposite directions" if and only if exactly one of
+   7.12 Two segments aim in opposite directions if and only if exactly one of
         the following holds:
         7.12.1 One segment aims Northward, the other segment aims Southward
         7.12.2 One segment aims Eastward, the other segment aims Westward
@@ -278,11 +278,6 @@ Traffic Flow Simulator: Requirements Document
                           city
   timeLeftInSegment       time left in time-units for an instance of car to
                           traverse the current segment the car is occupying
-  numBlocksBeforeTurning  the number of blocks (or segments) the car travels
-                          past before the car turns at an intersection
-  turnDirectionCode       integer representation of the direction the car is
-                          turning at an intersection after traveling
-                          blocksBeforeTurn blocks
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890

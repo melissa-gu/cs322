@@ -32,9 +32,7 @@ Responsibility:
 3. Send messages to newly initialized cars to enqueue themselves in intersection
    queues
 4. Send messages to instances of cars to update positions of cars and decrement
-   the cars' timeToTraverseSegments appropriately at each time-step
-5. Send message to Grid instance to update the state of the Intersection
-   instances at each time-step
+   the cars' timeToTraverseSegments appropriately
 5. Calculate and output the average time each instance of car takes to enter and 
    exit the grid based on the messages received from grid instance
 Collaboration:
@@ -46,39 +44,30 @@ The class name: Grid
 Responsibility:
 1. Initialize 2D array of Intersection instances, sending message to each 
    instance with an integer ID representing the Intersection
-2. Initialize an instance of TrafficController for each Intersection with an
-   integer ID representing its corresponding Intersection instance
-3. Receive message from Simulation instance to update the Intersection instances
-   at each time-step by doing (4) below
-4. Send message to each TrafficController to update the state of its 
-   corresponding Intersection at each time-step
+2. Initialize an instance of TrafficController for each Intersection
+3. For all Intersection instances, send message to TrafficController to update
+   the state of each intersection
 Collaboration:
 1. Intersection Class
 2. TrafficController Class
-3. Simulation Class
 
 The class name: Intersection
 Responsibility:
 1. Initialize 2D integer array of size 4 representing the four slots within an 
-   intersection that could contain integer car IDs
+   intersection that contains integer car IDs
 2. Initialize four integer queues corresponding to four directions that contain 
    integer car IDs. Each queue represents list of Car instances occupying the
-   segment that aims towards the intersection
+   segment that aims towards the intersection, with timeLeftInSegment values
+   equal to zero
 3. Receive message from Car instances about direction the Car will proceed
    through the Intersection instance
-4. Receive message from TrafficController instance at each time-step to update
-   the state of the Intersection. This message contains information about which 
-   Car(s) to dequeue (if such a Car instance exists).
-5. Update the state of the Intersection in the following ways:
-   5.1 Dequeue cars that can move into the Intersection instance according 
-       to the TrafficController message
-   5.2 Update the 2D array to reflect the movement of Cars instances in the
-       Intersection
-   5.3 Send message to Car instances that have left the intersection. This 
-       message should tell the Car instance which Intersection instance the 
-       car is entering next, and also which direction the Car is traveling. 
+4. Receive message from TrafficController to dequeue cars that can move 
+   into the Intersection instance
+5. Update the 2D array to reflect the movement of Cars instances in the
+   intersection
 6. Receive messages from Car instances about which queue to enqueue the Car 
-   into, and enqueue that Car instance
+   into, and enqueue that Car if the queue's size has not reached
+   maxSegmentCapacity
 Collaboration:
 1. TrafficController Class
 2. Car Class
@@ -89,12 +78,10 @@ Responsibility:
    timeLeftInSegment value at each time unit
 2. Upon initialization, receive message from Simulation instance to enqueue this 
    instance of Car in an intersection queue 
-3. Upon exiting an Intersection instance, the instance of Car will a receive 
+3. Upon exiting an Intersection instance, the instance of car will a receive 
    message from its current Intersection about which Intersection instance the 
-   car is entering next and the direction it is traveling. The car will update 
-   its intersection ID, the variable representing its direction, potentially 
-   decrement the integer representing the number of blocks the car will travel
-   before turning, and also do (4) below 
+   car is entering next. The car will update its Intersection ID and also do (4)
+   below 
 4. Send message to instance of Intersection corresponding to the car's 
    intersection ID to enqueue the car in the correct queue based on the car's 
    direction
@@ -104,24 +91,19 @@ Collaboration:
 
 The class name: TrafficController
 Responsibility:
-1. Receive message from Grid instance at each time-step to update the 
-   Intersection instance corresponding to its Intersection ID
-2. Receive message from Intersection containing information about which 
+1. Receive message from Intersection containing information about which 
    slots of the 2D array are occupied
-3. Receive message from Intersection containing information about Car instances
+2. Receive message from Intersection containing information about cars 
    approaching the intersection
-4. Receive messages from Car instances about each Car's direction and whether 
-   the car is turning, and from this determine which segment/queue the Car will 
-   enter after exiting the intersection
-5. Determine which Car instance(s) approaching intersection can move into the
+3. Receive messages from Car instances about each Car's direction, and
+   determines which segment the Car will enter after exiting the intersection
+4. Determine which Car instance(s) approaching intersection can move into the
    intersection based on:
    4.1. Whether the size of the queue to enqueue the Car into after exiting the
         intersection is less than maxSegmentCapacity
    4.2. Rules specified in Requirements document
-6. Send message at each time-step to corresponding Intersection instance that 
-   tells that Intersection to update its state. This message contains 
-   information about which Car(s) to dequeue (if such a Car instance exists).
+5. Send message to Intersection to dequeue Car instance(s) that can move into
+   the Intersection and update the 2D array
 Collaboration:
 1. Intersection Class
 2. Car Class
-3. Grid Class

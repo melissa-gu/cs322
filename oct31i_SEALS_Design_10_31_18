@@ -38,9 +38,8 @@ Responsibility:
    the cars' timeToTraverseSegments appropriately at each time-step
 6. Send message to Grid instance to update the state of the Intersection
    instances at each time-step
-7. Receive messages from instances of Car which says that instance has left the
-   instance of Grid. Calculate and output the average time each instance of Car 
-   takes to enter and exit the grid based on such messages.
+7. Calculate and output the average time each instance of Car takes to enter and 
+   exit the grid based on the messages received from Grid instance
 Collaboration:
 1. Setup Class
 2. Grid Class
@@ -84,11 +83,8 @@ Responsibility:
    6.2 Update the 2D array to reflect the movement of Car instances in the
        Intersection
    6.3 Send message to Car instances that have left the Intersection instance. 
-       This message should tell the car which Intersection instance the 
-       car is entering next, and also which direction the Car is traveling. If 
-       the car is no longer traveling towards an intersection, but is instead 
-       exiting the instance of Grid, the intersection ID for the next 
-       Intersection instance will be -1.
+       This message should tell the Car instance which Intersection instance the 
+       car is entering next, and also which direction the Car is traveling. 
 7. Receive messages from Car instances about which queue to enqueue the Car 
    into, and enqueue that Car instance
 Collaboration:
@@ -102,21 +98,15 @@ Responsibility:
    and other variables to construct instance of Car class
 2. Receive message from Simulation instance at each time unit to decrement 
    timeLeftInSegment value at each time unit
-   2.1 When the car's intersection ID is equal to -1 and the timeLeftInSegment 
-       value is 0, the Car instance will send a message to the Simulation class 
-       that the Car instance has left the Grid instance.
 3. Upon initialization, receive message from Simulation instance to enqueue this 
    instance of Car in a queue of the Intersection instance corresponding to
    the intersection ID
 4. Upon exiting an Intersection instance, the instance of Car will a receive 
-   message from its current Intersection instance about which Intersection ID
-   the car is entering next and the direction it is traveling. If 
-   the car is no longer traveling towards an intersection, but is instead 
-   exiting the instance of Grid, the intersection ID will be -1. The car 
+   message from its current Intersection instance about which Intersection 
+   instance the car is entering next and the direction it is traveling. The car 
    will update its intersection ID, the variable representing its direction, 
    potentially decrement the integer representing the number of blocks the car 
-   will travel before turning, and then do (4) below if the Intersection ID is 
-   not -1.
+   will travel before turning, and then do (4) below 
 5. Send message to instance of Intersection corresponding to the car's 
    intersection ID to enqueue the car in the correct queue based on the car's 
    direction

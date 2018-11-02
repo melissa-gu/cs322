@@ -50,10 +50,10 @@ Traffic Flow Simulator: Requirements Document
                      4.2.1.2.1 If such cars with intersecting paths have the
                                same priority according to the above rules,
                                priority is given in the following order:
-                               - Cars coming from S
-                               - Cars coming from E
                                - Cars coming from N
                                - Cars coming from W
+                               - Cars coming from S
+                               - Cars coming from E
              4.2.1.3 Any car in the intersection has priority over cars that
                      are not in the intersection.
              4.2.1.4 Consider the case in which two cars plan to exit the

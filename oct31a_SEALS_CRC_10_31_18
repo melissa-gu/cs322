@@ -1,0 +1,109 @@
+
+
+Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+The class name: Setup
+Responsibility:
+1. Read user input from a file or the command-line
+2. Construct an instance of Simulation based on the input
+3. Run the Simulation
+Collaboration:
+1. Simulation Class
+
+The class name: Simulation
+Responsibility:
+1. Send message to Grid to initialize instance of Grid class with number of 
+   Intersections based on constructor parameters
+2. Initialize a list of instances of Car class with the following variables for 
+   each car:
+   2.1 Integer ID representing the instance of car
+   2.2 Integer representing the coordinate of the segment or intersection the 
+       car is in, with the initial value specified by user input
+   2.3 Initialize integer representing time left in a segment, 
+       timeLeftInSegment, with the intial value of timeToTraverseSegment
+   2.4 Initialize integer representing the direction (N,S,W,E) the instance of 
+       car is aiming towards
+   2.5 Initialize integer representing the number of blocks the car will travel
+       before turning
+   2.6 Initialize integer representing direction of turn
+3. Send messages to newly initialized cars to enqueue themselves in intersection
+   queues
+4. Send messages to instances of cars to update positions of cars and decrement
+   the cars' timeToTraverseSegments appropriately
+5. Calculate and output the average time each instance of car takes to enter and 
+   exit the grid based on the messages received from grid instance
+Collaboration:
+1. Grid Class
+2. Car Class
+3. Setup Class
+
+The class name: Grid
+Responsibility:
+1. Initialize 2D array of Intersection instances, sending message to each 
+   instance with an integer ID representing the Intersection
+2. Initialize an instance of TrafficController for each Intersection
+3. For all Intersection instances, send message to TrafficController to update
+   the state of each intersection
+Collaboration:
+1. Intersection Class
+2. TrafficController Class
+
+The class name: Intersection
+Responsibility:
+1. Initialize 2D integer array of size 4 representing the four slots within an 
+   intersection that contains integer car IDs
+2. Initialize four integer queues corresponding to four directions that contain 
+   integer car IDs. Each queue represents list of Car instances occupying the
+   segment that aims towards the intersection, with timeLeftInSegment values
+   equal to zero
+3. Receive message from Car instances about direction the Car will proceed
+   through the Intersection instance
+4. Receive message from TrafficController to dequeue cars that can move 
+   into the Intersection instance
+5. Update the 2D array to reflect the movement of Cars instances in the
+   intersection
+6. Receive messages from Car instances about which queue to enqueue the Car 
+   into, and enqueue that Car if the queue's size has not reached
+   maxSegmentCapacity
+Collaboration:
+1. TrafficController Class
+2. Car Class
+
+The class name: Car
+Responsibility:
+1. Receive message from Simulation instance at each time unit to decrement 
+   timeLeftInSegment value at each time unit
+2. Upon initialization, receive message from Simulation instance to enqueue this 
+   instance of Car in an intersection queue 
+3. Upon exiting an Intersection instance, the instance of car will a receive 
+   message from its current Intersection about which Intersection instance the 
+   car is entering next. The car will update its Intersection ID and also do (4)
+   below 
+4. Send message to instance of Intersection corresponding to the car's 
+   intersection ID to enqueue the car in the correct queue based on the car's 
+   direction
+Collaboration:
+1. Simulation Class
+2. Intersection Class
+
+The class name: TrafficController
+Responsibility:
+1. Receive message from Intersection containing information about which 
+   slots of the 2D array are occupied
+2. Receive message from Intersection containing information about cars 
+   approaching the intersection
+3. Receive messages from Car instances about each Car's direction, and
+   determines which segment the Car will enter after exiting the intersection
+4. Determine which Car instance(s) approaching intersection can move into the
+   intersection based on:
+   4.1. Whether the size of the queue to enqueue the Car into after exiting the
+        intersection is less than maxSegmentCapacity
+   4.2. Rules specified in Requirements document
+5. Send message to Intersection to dequeue Car instance(s) that can move into
+   the Intersection and update the 2D array
+Collaboration:
+1. Intersection Class
+2. Car Class

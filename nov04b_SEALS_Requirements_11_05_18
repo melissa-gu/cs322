@@ -206,31 +206,20 @@ Traffic Flow Simulator: Requirements Document
        describes the number of intersections in one direction, then the 
        number of cars, and finally prints a summary of each inputted car.
        6.1.2 (describe the second deliverable)
-       The second subset allows cars to be placed within the grid according to 
-       the input processed in the first deliverable. This subset considers 
-       top-level logic only, and allows cars to move through the grid of 
-       intersections during simulated time-steps. At each time-step, the subset 
-       processes, updates the cars within, and prints output for intersections 
-       in the following order:  
-            left to right across lowest numbered row,
+       The second subset allows cars to be placed within the grid 
+       according to the input processed in the first deliverable. This subset 
+       considers top-level logic only, and allows cars to move through the grid
+       of intersections. The subset updates each car in simulated time-steps.
+       The subset processes intersections, or updates the cars within 
+       intersections, in the order:  
+            "left to right across lowest numbered row,
             left to right across next-to-lowest numbered row,
             ...
-            left to right across highest numbered row.
-       In updating the cars within each intersection, the subset removes cars 
-       from their segments and places them into new segments according to the 
-       inputted specifications for that car. This subset ignores the following 
-       things that will eventually be true in later iterations: 
-       - a car must remain in a lane for a certain length of time
-       - a car can never move through an intersection within the same time-step
-         that the car begins to move through the intersection
-       - a lane has a maximum capacity of cars
-       At each time-step, the subset prints a summary of the current state of 
-       each intersection in the order specified above. For each intersection, 
-       this summary includes whether each of the segments of that intersection 
-       are empty and the status of each car in the intersection. The status of 
-       a car contains informationabout how the car is updated in that time-step, 
-       including removal from or addition to a segment, and removal from the 
-       grid.
+            left to right across highest numbered row."
+        At each time-step, the subset prints the current state of each 
+        intersection, including whether each segment is empty, and the state of 
+        each car. 
+       6.1.5 (describe the deliverable on Wed, October 31, 2016)
    6.2 Possible extensions
        (number and list the ways the software can be extended after Oct 31, in
        view of the client's longer-term needs)

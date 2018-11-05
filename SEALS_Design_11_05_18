@@ -70,12 +70,12 @@ Responsibility:
    with information about the number of Intersection instances
 2. Initialize 2D array of Intersection instances, sending message to each
    instance with an integer ID representing the Intersection
-3. Initialize an instance of IntersectionController for each Intersection with an
-   integer ID representing its corresponding Intersection instance
+3. Initialize an instance of IntersectionController for each Intersection with
+   an integer ID representing its corresponding Intersection instance
 4. Receive message from Simulation instance to update the Intersection instances
    at each time-step by doing (4) below
-5. Send message to each IntersectionController instance to update the state of its
-   corresponding Intersection at each time-step
+5. Send message to each IntersectionController instance to update the state of
+   its corresponding Intersection at each time-step
 Collaboration:
 1. Simulation Class
 2. Intersection Class

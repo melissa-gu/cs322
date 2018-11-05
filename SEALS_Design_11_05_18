@@ -38,12 +38,11 @@ Responsibility:
    the cars' timeToTraverseSegments appropriately at each time-step
 6. Send message to Grid instance to update the state of the Intersection
    instances at each time-step
-7. Send messages to each instance of Car in the list to check if each instance
-   of Car has left the Grid.  If an instance of Car has left the grid it will be
-   removed from the list of active cars and added to a list of instances of Car
-   that have left the Grid.
-8. When the instance of Simulation is complete, the Simulation instance calls a 
-   method that produces output.  The output is calculated from the list of 
+7. Receives message from each instance of Car about whether that car has left
+   the grid. If the car has left the grid, the car will be removed from the
+   list of active cars and added to a list of cars that have left the grid.
+8. When the instance of Simulation is complete, the Simulation instance calls a
+   method that produces output. The output is calculated from the list of
    instances of Car that have left the grid.
 Collaboration:
 1. Setup Class
@@ -54,12 +53,12 @@ Pseudocode:
 // sends message to grid to update itself
 simulation.update() {
     grid.update();
-    for all car in cars:
+    for all car in activeCars:
         car.update();
         // If car is exiting the grid
-        if (car.intersectionReference.id() == -1
-            && car.timeLeftInSegment == 0) {
-            cars.remove(car);
+        if (car.hasLeftGrid()) {
+            activeCars.remove(car);
+            exitedCars.add(car);
         }
 }
 
@@ -145,7 +144,7 @@ intersection.getApproachingCars() {
 
 intersection.nextSegmentIsFull (car) {
     // Calculate the car's next direction (N/W/E/S) when entering the next
-    // intersection based on the car's current directiom (N/W/E/S) and turning
+    // intersection based on the car's current direction (N/W/E/S) and turning
     // direction (straight/left/right).
     nextDirection = calculateNextDirection(car.dir, car.turning_dir);
     // Get the next intersection based on the car's next direction.
@@ -185,7 +184,7 @@ intersection.update2x2Grid() {
             moveCarAlong(car.dir);
             if (car.turningCode == LEFT) {
                 car.dir = calculateNextDirection(car.dir, car.turning_dir);
-                car.turningCode == STRAIGHT; 
+                car.turningCode == STRAIGHT;
             }
             if (car.isExitingIntersection()) {
                 // Based on the car direction, retrieves the "next" intersection
@@ -232,8 +231,8 @@ Responsibility:
 5. Send message to instance of Intersection corresponding to the car's
    intersection ID to enqueue the car in the correct queue based on the car's
    direction
-6. Receives a message from simulation to check if the instance of Car has exited
-   the grid.
+6. Sends a message to Simulation about whether this instance of Car has
+   exited the grid.
 Collaboration:
 1. Simulation Class
 2. Intersection Class

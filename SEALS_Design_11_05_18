@@ -40,9 +40,15 @@ Responsibility:
    instances at each time-step
 7. Receives message from each instance of Car about whether that car has left
    the grid. If the car has left the grid, the car will be removed from the
-   list of active cars and added to a list of cars that have left the grid.
+   list of active cars and added to a list of cars that have left the grid, 
+   and the numCarsExited variable is incremented. The Simulation also receives 
+   a message containing the car's entry and exit time-steps, and uses them to 
+   compute that car's time to exit the grid, and adds this to 
+   sumOfAllCarTimesToExit.
 8. Receive message from Grid instance at each time-step containing summary of 
    each Intersection instance. This summary is printed at each time-step.
+9. At the end of the Simulation, calculate and print the average time cars that 
+   have exited the grid have taken to exit the grid.
 Collaboration:
 1. Setup Class
 2. Grid Class
@@ -58,12 +64,19 @@ simulation.update() {
         if (car.hasLeftGrid()) {
             activeCars.remove(car);
             exitedCars.add(car);
+            numCarsExited++;
+            timeToExit = car.getExitTime() - car.getEntryTime();
+            sumOfAllCarTimesToExit += timeToExit;
         }
 }
 
-// prints summary of state of intersections and cars
+// prints summary of state of intersections and cars at each time-step
 simulation.printSummary() {
   print(grid.toString());
+}
+
+simulation.printAverage() {
+ print(sumOfAllCarTimesToExit/numCarsExited);
 }
 
 The class name: Grid

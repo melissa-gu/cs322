@@ -41,9 +41,8 @@ Responsibility:
 7. Receives message from each instance of Car about whether that car has left
    the grid. If the car has left the grid, the car will be removed from the
    list of active cars and added to a list of cars that have left the grid.
-8. When the instance of Simulation is complete, the Simulation instance calls a
-   method that produces output. The output is calculated from the list of
-   instances of Car that have left the grid.
+8. Receive message from Grid instance at each time-step containing summary of 
+   each Intersection instance. This summary is printed at each time-step.
 Collaboration:
 1. Setup Class
 2. Grid Class
@@ -62,6 +61,11 @@ simulation.update() {
         }
 }
 
+// prints summary of state of intersections and cars
+simulation.printSummary() {
+  print(grid.toString());
+}
+
 The class name: Grid
 Responsibility:
 1. Receive message from Simulation instance to construct the instance of Grid
@@ -74,6 +78,10 @@ Responsibility:
    at each time-step by doing (4) below
 5. Send message to each IntersectionController instance to update the state of
    its corresponding Intersection at each time-step
+6. Receive message from each Intersection instance containing a String summary 
+   of the segments and the cars occupying the segments
+7. Send message to Simulation instance at each time-step containing summary of 
+   each Intersection instance.
 Collaboration:
 1. Simulation Class
 2. Intersection Class
@@ -83,6 +91,14 @@ Pseudocode:
 grid.update() {
     for intersection_controller : intersection_controllers:
         intersection_controller.update();
+}
+// grid receives message from each instance of Intersection
+grid.toString() {
+  String summary;
+  for intersection : intersections {
+    summary.append(intersection.toString());
+  }
+  return summary;
 }
 
 The class name: Intersection
@@ -116,6 +132,8 @@ Responsibility:
 8. Sends message to Intersection Controller if an instance of Car can enter the
    queue for the next Intersection based on the direction of the Car's turn and
    the Car's current direction.
+9. Send message to Grid instance at each time-step containing a String summary 
+   of the segments and the cars occupying the segments of this Intersection
 
 Collaboration:
 1. Grid Class
@@ -177,7 +195,6 @@ intersection.moveCarIntoIntersection(car) {
     }
 }
 
-
 intersection.update2x2Grid() {
     for (each slot in 2x2grid) {
         if (slot occupied by car) {
@@ -205,6 +222,15 @@ intersection.addCarToQueue(car) {
             break;
         // ...
     }
+}
+
+intersection.toString() {
+  String summary;
+  for car in southQueue {
+    summary.append("Cars in southQueue: ");
+    summary.append(car.ID + " ");
+  }
+  // ..
 }
 
 The class name: Car

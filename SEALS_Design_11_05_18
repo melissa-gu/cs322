@@ -7,7 +7,8 @@ Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
 The class name: Setup
 Responsibility:
-1. Read user input from a file or the command-line
+1. Read user input from a file or the command-line line by line and print 
+   summary of inputted data in English
 2. Construct an instance of Simulation based on the input
 3. Run the Simulation
 Collaboration:
@@ -239,13 +240,14 @@ intersection.addCarToQueue(car) {
     }
 }
 
+// Summary of the intersection queues and cars
 intersection.toString() {
   String summary;
   for car in southQueue {
     summary.append("Cars in southQueue: ");
     summary.append(car.ID + " ");
   }
-  // ..
+  // .. repeat for all queues
 }
 
 The class name: Car

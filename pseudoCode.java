@@ -104,13 +104,20 @@ intersection.moveCarIntoIntersection(car) {
     //  intersection grid) in set2x2SlotOccupied(car), set the slot to contains
     // the integer id of the car instead of -1.
     intersection.set2x2SlotOccupied(car)
+    if (car.turningCode == RIGHT) {
+        car.dir = calculateNextDirection(car.dir, car.turning_dir);
+    }
 }
 
 
 intersection.update2x2Grid() {
-    for (each slot in grid) {
+    for (each slot in 2x2grid) {
         if (slot occupied by car) {
             moveCarAlong(car.dir);
+            if (car.turningCode == LEFT) {
+                car.dir = calculateNextDirection(car.dir, car.turning_dir);
+                car.turningCode == STRAIGHT; 
+            }
             if (car.isExitingIntersection()) {
                 // Based on the car direction, retrieves the "next" intersection
                 // of this current intersection and set the car's intersection

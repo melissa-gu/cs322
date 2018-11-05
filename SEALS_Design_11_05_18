@@ -39,12 +39,12 @@ Responsibility:
 6. Send message to Grid instance to update the state of the Intersection
    instances at each time-step
 7. Send messages to each instance of Car in the list to check if each instance
-   of car has left the Grid.  If an instance of Car has left the grid it will be
+   of Car has left the Grid.  If an instance of Car has left the grid it will be
    removed from the list of active cars and added to a list of instances of Car
    that have left the Grid.
-8. When the simulation is complete, the simulation instance calls a method that
-   produces output.  The output is calculated from the list of instances of Car
-   that have left the grid.
+8. When the instance of Simulation is complete, the Simulation instance calls a 
+   method that produces output.  The output is calculated from the list of 
+   instances of Car that have left the grid.
 Collaboration:
 1. Setup Class
 2. Grid Class
@@ -54,13 +54,12 @@ Pseudocode:
 // sends message to grid to update itself
 simulation.update() {
     grid.update();
-    for all car in activeCars:
+    for all car in cars:
         car.update();
-        // If car is exiting the grid it is removed from the list of active
-        // cars and added to a list instances of Car that have exited.
-        if (car.hasLeftGrid()) {
-            exitedCars.add(car);
-            activeCars.remove(car);
+        // If car is exiting the grid
+        if (car.intersectionReference.id() == -1
+            && car.timeLeftInSegment == 0) {
+            cars.remove(car);
         }
 }
 
@@ -83,8 +82,8 @@ Collaboration:
 Pseudocode:
 // grid sends message to each traffic controller to update
 grid.update() {
-    for traffic_controller : traffic_controllers:
-        traffic_controller.update();
+    for intersection_controller : intersection_controllers:
+        intersection_controller.update();
 }
 
 The class name: Intersection
@@ -146,7 +145,7 @@ intersection.getApproachingCars() {
 
 intersection.nextSegmentIsFull (car) {
     // Calculate the car's next direction (N/W/E/S) when entering the next
-    // intersection based on the car's current direction (N/W/E/S) and turning
+    // intersection based on the car's current directiom (N/W/E/S) and turning
     // direction (straight/left/right).
     nextDirection = calculateNextDirection(car.dir, car.turning_dir);
     // Get the next intersection based on the car's next direction.
@@ -174,12 +173,20 @@ intersection.moveCarIntoIntersection(car) {
     //  intersection grid) in set2x2SlotOccupied(car), set the slot to contains
     // the integer id of the car instead of -1.
     intersection.set2x2SlotOccupied(car)
+    if (car.turningCode == RIGHT) {
+        car.dir = calculateNextDirection(car.dir, car.turning_dir);
+    }
 }
 
+
 intersection.update2x2Grid() {
-    for (each slot in grid) {
+    for (each slot in 2x2grid) {
         if (slot occupied by car) {
             moveCarAlong(car.dir);
+            if (car.turningCode == LEFT) {
+                car.dir = calculateNextDirection(car.dir, car.turning_dir);
+                car.turningCode == STRAIGHT; 
+            }
             if (car.isExitingIntersection()) {
                 // Based on the car direction, retrieves the "next" intersection
                 // of this current intersection and set the car's intersection
@@ -225,13 +232,12 @@ Responsibility:
 5. Send message to instance of Intersection corresponding to the car's
    intersection ID to enqueue the car in the correct queue based on the car's
    direction
-6. Receives a message from simulation to check if the instance of car has exited
+6. Receives a message from simulation to check if the instance of Car has exited
    the grid.
 Collaboration:
 1. Simulation Class
 2. Intersection Class
 Pseudocode:
-// CAR functions
 // car contains a reference to an intersection the car is currently moving
 // through or moving towards.
 car.moveToNextIntersection(nextIntersection) {
@@ -249,7 +255,6 @@ car.moveToNextIntersection(nextIntersection) {
 car.update() {
     timeLeftInSegment--;
 }
-
 // method to check if a car has left the grid
 car.hasLeftGrid() {
   if(intersectionReference.id() == -1
@@ -289,9 +294,9 @@ Collaboration:
 2. Car Class
 3. Grid Class
 Pseudocode:
-// Traffic controller owns an Intersection instance to handle called
+// Intersection controller owns an Intersection instance to handle called
 // my_intersection
-IntersectionController.update() {
+intersectionController.update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     bool empty = my_intersection.isEmpty();
     cars = my_intersection.getApproachingCars();

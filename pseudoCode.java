@@ -25,7 +25,7 @@ grid.update() {
 // TRAFFIC CONTROLLER functions
 // Traffic controller owns an Intersection instance to handle called
 // my_intersection
-trafficCongroller.update() {
+trafficController.update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     bool empty = my_intersection.isEmpty();
     cars = my_intersection.getApproachingCars();
@@ -106,6 +106,7 @@ intersection.moveCarIntoIntersection(car) {
     intersection.set2x2SlotOccupied(car)
     if (car.turningCode == RIGHT) {
         car.dir = calculateNextDirection(car.dir, car.turning_dir);
+        car.turningCode = STRAIGHT;
     }
 }
 

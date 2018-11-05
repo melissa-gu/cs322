@@ -33,6 +33,10 @@ Responsibility:
    3.5 Initialize integer representing the number of blocks the car will travel
        before turning
    3.6 Initialize integer representing direction of turn
+   3.7 Initialize string representing a summary of the car's status in each 
+       simulated time-step. This string is initially empty, and remains 
+       empty except in cases where the car moves to a new Intersection 
+       instance or leaves the grid.
 4. Send messages to newly initialized cars to enqueue themselves in queues of
    the Intersection instance corresponding to their intersection ID
 5. Send messages to instances of Car to update positions of cars and decrement
@@ -45,7 +49,8 @@ Responsibility:
    and the numCarsExited variable is incremented. The Simulation also receives 
    a message containing the car's entry and exit time-steps, and uses them to 
    compute that car's time to exit the grid, and adds this to 
-   sumOfAllCarTimesToExit.
+   sumOfAllCarTimesToExit. The Simulation sends a message to the Car instance to
+   update that car's summary string.
 8. Receive message from Grid instance at each time-step containing summary of 
    each Intersection instance. This summary is printed at each time-step.
 9. At the end of the Simulation, calculate and print the average time cars that 
@@ -63,6 +68,7 @@ simulation.update() {
         car.update();
         // If car is exiting the grid
         if (car.hasLeftGrid()) {
+            car.appendToSummary("car#" + car.ID + " has left the grid");
             activeCars.remove(car);
             exitedCars.add(car);
             numCarsExited++;
@@ -76,8 +82,11 @@ simulation.printSummary() {
   print(grid.toString());
 }
 
+// prints average time cars took to exit the grid
 simulation.printAverage() {
+ print("The average time cars took to exit the grid was ");
  print(sumOfAllCarTimesToExit/numCarsExited);
+ print(" simulated time-steps");
 }
 
 The class name: Grid
@@ -92,7 +101,7 @@ Responsibility:
    at each time-step by doing (4) below
 5. Send message to each IntersectionController instance to update the state of
    its corresponding Intersection at each time-step
-6. Receive message from each Intersection instance containing a String summary 
+6. Receive message from each Intersection instance containing a string summary 
    of the segments and the cars occupying the segments
 7. Send message to Simulation instance at each time-step containing summary of 
    each Intersection instance.
@@ -142,14 +151,18 @@ Responsibility:
        car is entering next, and also which direction the Car is traveling. If
        the car is no longer traveling towards an intersection, but is instead
        exiting the instance of Grid, the intersection ID for the next
-       Intersection instance will be -1.
+       Intersection instance will be -1
 7. Receive messages from Car instances about which queue to enqueue the Car
    into, and enqueue that Car instance
 8. Sends message to Intersection Controller if an instance of Car can enter the
    queue for the next Intersection based on the direction of the Car's turn and
    the Car's current direction.
-9. Send message to Grid instance at each time-step containing a String summary 
-   of the segments and the cars occupying the segments of this Intersection
+9. Receive message from Car instance at each time-step containing a String 
+   summary of that car's status at that time-step (e.g. "car#4 is removed
+   from SOUTHWARD queue of intersection [1,2] and placed into SOUTHWARD 
+   queue of intersection [1,1]").
+10. Send message to Grid instance at each time-step containing a String summary 
+    of the segments and the cars occupying the segments of this Intersection
 
 Collaboration:
 1. Grid Class
@@ -158,7 +171,7 @@ Collaboration:
 Pseudocode:
 intersection.isEmpty() {
     // Check slots of the 2x2 intersection grid (represented as a 2D int array).
-    // if any slots contains a carID (>= 0) instead of -1, return false.
+    // if any slots contains a carID (>= 0) instead of -1 return false.
     // else if all 4 slots' values are -1 (indicating vacancy), return true.
 }
 
@@ -240,14 +253,20 @@ intersection.addCarToQueue(car) {
     }
 }
 
-// Summary of the intersection queues and cars
+// Returns summary of the intersection queues and cars
 intersection.toString() {
   String summary;
+  if southQueue.isEmpty() {
+    summary.append("incoming lane having direction SOUTHWARD is empty");
+  }
+  else {
+    summary.append("incoming lane having direction SOUTHWARD is nonempty");
+  }
   for car in southQueue {
-    summary.append("Cars in southQueue: ");
-    summary.append(car.ID + " ");
+    summary.append(car.toString());
   }
   // .. repeat for all queues
+  return summary;
 }
 
 The class name: Car
@@ -256,9 +275,11 @@ Responsibility:
    and other variables to construct instance of Car class
 2. Receive message from Simulation instance at each time unit to decrement
    timeLeftInSegment value at each time unit
-   2.1 When the car's intersection ID is equal to -1 and the timeLeftInSegment
-       value is 0, the Car instance will send a message to the Simulation class
-       that the Car instance has left the Grid instance.
+   2.1 When the car's intersection ID is equal to -1and the 
+       timeLeftInSegment value is 0, the Car instance will send a message to the 
+       Simulation class that the Car instance has left the Grid instance. The 
+       Car instance will also receive a message from the Simulation class to the 
+       car's summary to reflect that it has been removed from the Grid instance.
 3. Upon initialization, receive message from Simulation instance to enqueue this
    instance of Car in a queue of the Intersection instance corresponding to
    the intersection ID
@@ -276,18 +297,30 @@ Responsibility:
    direction
 6. Sends a message to Simulation about whether this instance of Car has
    exited the grid.
+7. Send message to Intersection instance at each time-step containing a string 
+   summary of that car's status at that time-step (e.g. "car#4 is removed
+   from SOUTHWARD queue of intersection [1,2] and placed into SOUTHWARD 
+   queue of intersection [1,1]")
+
 Collaboration:
 1. Simulation Class
 2. Intersection Class
 Pseudocode:
 // car contains a reference to an intersection the car is currently moving
-// through or moving towards.
+// through or moving towards. This method updates the summary string of the 
+// car that gets printed at each time-step to describe the removal and 
+// addition of the car to a new queue of a new intersection
 car.moveToNextIntersection(nextIntersection) {
+    car.appendToSummary("car#" + car.ID + " is removed from " + car.dir + " queue of " 
+                  + "intersection " + car.intersectionReference + 
+                  " and placed into ");
     car.intersectionReference = nextIntersection;
     // Car dir has same direction as queue direction, so the intersection will
     // add the car to the corresponding queue.
     car.intersectionReference.addCarToQueue(car);
-    car.timeLeftInSegment = maxSegmentCapacity;
+    car.timeLeftInSegment = timeToTraverseSegment;
+    car.appendToSummary(car.dir + "queue of intersection " + 
+                       car.intersectionReference);
 }
 
 // Update is called at each time step, invoked by the Simulation.update()
@@ -299,12 +332,27 @@ car.update() {
 }
 // method to check if a car has left the grid
 car.hasLeftGrid() {
-  if(intersectionReference.id() == -1
-      && timeLeftInSegment == 0){
+  if(intersectionReference.id() == -1      && timeLeftInSegment == 0){
       return true;
   } else {
       return false;
   }
+}
+
+// appends a passed in string to the summary string for that car
+// called in car.moveToNextIntersection() and simulation.update()
+// so the summary reflects movement to a new intersection or 
+// removal from the grid
+car.appendToSummary(String summary){
+  car.summary.append(summary);
+}
+
+// method that returns summary of car's status to intersection
+// and resets the summary to be the empty string
+car.toString() {
+  String temp = car.summary;
+  car.summary = "";
+  return temp;
 }
 
 The class name: IntersectionController

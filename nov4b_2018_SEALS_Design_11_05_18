@@ -38,13 +38,9 @@ Responsibility:
    the cars' timeToTraverseSegments appropriately at each time-step
 6. Send message to Grid instance to update the state of the Intersection
    instances at each time-step
-7. Send messages to each instance of Car in the list to check if each instance
-   of car has left the Grid.  If an instance of Car has left the grid it will be
-   removed from the list of active cars and added to a list of instances of Car
-   that have left the Grid.
-8. When the simulation is complete, the simulation instance calls a method that
-   produces output.  The output is calculated from the list of instances of Car
-   that have left the grid.
+7. Receive messages from instances of Car which says that instance has left the
+   instance of Grid. Calculate and output the average time each instance of Car
+   takes to enter and exit the grid based on such messages.
 Collaboration:
 1. Setup Class
 2. Grid Class
@@ -54,13 +50,12 @@ Pseudocode:
 // sends message to grid to update itself
 simulation.update() {
     grid.update();
-    for all car in activeCars:
+    for all car in cars:
         car.update();
-        // If car is exiting the grid it is removed from the list of active
-        // cars and added to a list instances of Car that have exited.
-        if (car.hasLeftGrid()) {
-            exitedCars.add(car);
-            activeCars.remove(car);
+        // If car is exiting the grid
+        if (car.intersectionReference.id() == -1
+            && car.timeLeftInSegment == 0) {
+            cars.remove(car);
         }
 }
 
@@ -216,46 +211,14 @@ Responsibility:
    exiting the instance of Grid, the intersection ID will be -1. The car
    will update its intersection ID, the variable representing its direction,
    potentially decrement the integer representing the number of blocks the car
-   will travel before turning, and then do (5) below if the Intersection ID is
+   will travel before turning, and then do (4) below if the Intersection ID is
    not -1.
 5. Send message to instance of Intersection corresponding to the car's
    intersection ID to enqueue the car in the correct queue based on the car's
    direction
-6. Receives a message from simulation to check if the instance of car has exited
-   the grid.
 Collaboration:
 1. Simulation Class
 2. Intersection Class
-Pseudocode:
-// CAR functions
-// car contains a reference to an intersection the car is currently moving
-// through or moving towards.
-car.moveToNextIntersection(nextIntersection) {
-    car.intersectionReference = nextIntersection;
-    // Car dir has same direction as queue direction, so the intersection will
-    // add the car to the corresponding queue.
-    car.intersectionReference.addCarToQueue(car);
-    car.timeLeftInSegment = maxSegmentCapacity;
-}
-
-// Update is called at each time step, invoked by the Simulation.update()
-// function timeLeftInSegment is reset to MAX_SEGMENT_CAPACITY when the car is
-// first spawn or when the car just exits the intersection and is added to the
-// queue of the next intersection.
-car.update() {
-    timeLeftInSegment--;
-}
-
-// method to check if a car has left the grid
-car.hasLeftGrid() {
-  if(intersectionReference.id() == -1
-      && timeLeftInSegment == 0){
-      return true;
-  } else {
-      return false;
-  }
-}
-
 
 The class name: TrafficController
 Responsibility:

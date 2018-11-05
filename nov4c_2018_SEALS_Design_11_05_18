@@ -54,13 +54,11 @@ Pseudocode:
 // sends message to grid to update itself
 simulation.update() {
     grid.update();
-    for all car in activeCars:
+    for all car in cars:
         car.update();
-        // If car is exiting the grid it is removed from the list of active
-        // cars and added to a list instances of Car that have exited.
+        // If car is exiting the grid
         if (car.hasLeftGrid()) {
-            exitedCars.add(car);
-            activeCars.remove(car);
+            cars.remove(car);
         }
 }
 
@@ -216,7 +214,7 @@ Responsibility:
    exiting the instance of Grid, the intersection ID will be -1. The car
    will update its intersection ID, the variable representing its direction,
    potentially decrement the integer representing the number of blocks the car
-   will travel before turning, and then do (5) below if the Intersection ID is
+   will travel before turning, and then do (4) below if the Intersection ID is
    not -1.
 5. Send message to instance of Intersection corresponding to the car's
    intersection ID to enqueue the car in the correct queue based on the car's

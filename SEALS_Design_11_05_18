@@ -115,6 +115,10 @@ Responsibility:
        Intersection instance will be -1.
 7. Receive messages from Car instances about which queue to enqueue the Car
    into, and enqueue that Car instance
+8. Sends message to Intersection Controller if an instance of Car can enter the
+   queue for the next Intersection based on the direction of the Car's turn and
+   the Car's current direction.
+
 Collaboration:
 1. Grid Class
 2. IntersectionController Class

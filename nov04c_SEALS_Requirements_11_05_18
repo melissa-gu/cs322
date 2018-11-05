@@ -317,12 +317,6 @@ Traffic Flow Simulator: Requirements Document
   turnDirectionCode       integer representation of the direction the car is
                           turning at an intersection after traveling
                           blocksBeforeTurn blocks
-  sumOfAllCarTimesToExit  the sum of the times all of the cars that have exited 
-                          the grid have taken to exit the grid
-  numCarsExited           the total number of cars that have exited the grid
-  averageTimeToExit       the average time cars that have exited the grid have 
-                          taken to exit the grid, calculated by dividing 
-                          sumOfAllCarTimesToExit by numCarsExited
 
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890

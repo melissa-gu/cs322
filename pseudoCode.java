@@ -13,19 +13,19 @@ simulation.update() {
 
 //////////////////////////////////////////////////////////////////////////
 // GRID FUNCTIONS
-// GRID owns a list of Traffic Controllers and a 2D array of intersections.
-// Each TrafficController is assigned a corresponding Intersection when the
-// trafficController instance is initialized in Grid.
+// GRID owns a list of Intersection Controllers and a 2D array of intersections.
+// Each Intersection Controller is assigned a corresponding Intersection when the
+// intersectionController instance is initialized in Grid.
 grid.update() {
-    for traffic_controller : traffic_controllers:
-        traffic_controller.update();
+    for intersection_controller : intersection_controllers:
+        intersection_controller.update();
 }
 
 //////////////////////////////////////////////////////////////////////////
 // TRAFFIC CONTROLLER functions
-// Traffic controller owns an Intersection instance to handle called
+// Intersection controller owns an Intersection instance to handle called
 // my_intersection
-trafficController.update() {
+intersectionController.update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     bool empty = my_intersection.isEmpty();
     cars = my_intersection.getApproachingCars();
@@ -157,4 +157,14 @@ car.moveToNextIntersection(nextIntersection) {
 // queue of the next intersection.
 car.update() {
     timeLeftInSegment--;
+}
+
+// method to check if a car has left the grid
+car.hasLeftGrid() {
+  if(intersectionReference.id() == -1
+      && timeLeftInSegment == 0){
+      return true;
+  } else {
+      return false;
+  }
 }

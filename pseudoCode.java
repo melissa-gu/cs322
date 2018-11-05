@@ -25,7 +25,7 @@ grid.update() {
 // TRAFFIC CONTROLLER functions
 // Traffic controller owns an Intersection instance to handle called
 // my_intersection
-trafficCongroller.update() {
+trafficController.update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     bool empty = my_intersection.isEmpty();
     cars = my_intersection.getApproachingCars();
@@ -35,10 +35,10 @@ trafficCongroller.update() {
             // Decide which car can move into intersection based on:
             // 1. priority of the car instance's turning direction, specified in
             //  Requirements Doc
-            // 2. whether the car's timeLeftInSegment has reached 0 
+            // 2. whether the car's timeLeftInSegment has reached 0
             //   (already checked in intersection.getApproachingCars())
             // 3. Whether the outgoing segment is full.
-            if (car.canMoveBasedOnRequirementsDoc() && 
+            if (car.canMoveBasedOnRequirementsDoc() &&
                 !my_intersection.nextSegmentIsFull(car)) {
                 my_intersection.moveCarIntoIntersection(car);
             }
@@ -51,7 +51,7 @@ trafficCongroller.update() {
 
 //////////////////////////////////////////////////////////////////////////
 // INTERSECTION functions
-// Each Intersection instance owns 4 instances of queues, representing the 
+// Each Intersection instance owns 4 instances of queues, representing the
 // 4 ingoing segments.
 
 intersection.isEmpty() {
@@ -62,7 +62,7 @@ intersection.isEmpty() {
 
 intersection.getApproachingCars() {
     // Check the 4 queues that represent the ingoing segments, and only add
-    // cars that are the first to be in the queue (FIFO) AND has finished 
+    // cars that are the first to be in the queue (FIFO) AND has finished
     // traversing the segments (timeLeftInSegment = 0).
     ArrayList<Car> approachingCars;
     for (queue : ingoing_segments) {
@@ -94,7 +94,7 @@ intersection.checkIfQueueIsFull(nextDirection) {
 
 intersection.moveCarIntoIntersection(car) {
     queue = get correct queue among the 4 queues, with same direction as car
-    // Dequeue the approaching car. Because moveCar() is only invoked when the 
+    // Dequeue the approaching car. Because moveCar() is only invoked when the
     // conditions of the approaching car is satisfied, and the car's direction
     // should be unique among all the approaching cars, we always dequeue the
     // intended car correctly.
@@ -104,13 +104,20 @@ intersection.moveCarIntoIntersection(car) {
     //  intersection grid) in set2x2SlotOccupied(car), set the slot to contains
     // the integer id of the car instead of -1.
     intersection.set2x2SlotOccupied(car)
+    if (car.turningCode == RIGHT) {
+        car.dir = calculateNextDirection(car.dir, car.turning_dir);
+    }
 }
 
 
 intersection.update2x2Grid() {
-    for (each slot in grid) {
+    for (each slot in 2x2grid) {
         if (slot occupied by car) {
             moveCarAlong(car.dir);
+            if (car.turningCode == LEFT) {
+                car.dir = calculateNextDirection(car.dir, car.turning_dir);
+                car.turningCode == STRAIGHT; 
+            }
             if (car.isExitingIntersection()) {
                 // Based on the car direction, retrieves the "next" intersection
                 // of this current intersection and set the car's intersection
@@ -151,5 +158,3 @@ car.moveToNextIntersection(nextIntersection) {
 car.update() {
     timeLeftInSegment--;
 }
-
-

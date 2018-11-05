@@ -1,0 +1,311 @@
+
+
+Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+The class name: Setup
+Responsibility:
+1. Read user input from a file or the command-line
+2. Construct an instance of Simulation based on the input
+3. Run the Simulation
+Collaboration:
+1. Simulation Class
+
+The class name: Simulation
+Responsibility:
+1. Receive message from Setup instance to construct the instance of Simulation
+   class
+2. Send message to Grid to initialize instance of Grid class with number of
+   Intersections based on constructor parameters
+3. Initialize a list of instances of Car class with the following variables for
+   each car:
+   3.1 Integer ID representing the instance of Car
+   3.2 Integer representing the coordinate of the segment or instance of
+       Intersection the car is in, with the initial value specified by user
+       input
+   3.3 Initialize integer representing time left in a segment,
+       timeLeftInSegment, with the initial value of timeToTraverseSegment
+   3.4 Initialize integer representing the direction (N,S,W,E) the instance of
+       Car is aiming towards
+   3.5 Initialize integer representing the number of blocks the car will travel
+       before turning
+   3.6 Initialize integer representing direction of turn
+4. Send messages to newly initialized cars to enqueue themselves in queues of
+   the Intersection instance corresponding to their intersection ID
+5. Send messages to instances of Car to update positions of cars and decrement
+   the cars' timeToTraverseSegments appropriately at each time-step
+6. Send message to Grid instance to update the state of the Intersection
+   instances at each time-step
+7. Send messages to each instance of Car in the list to check if each instance
+   of car has left the Grid.  If an instance of Car has left the grid it will be
+   removed from the list of active cars and added to a list of instances of Car
+   that have left the Grid.
+8. When the simulation is complete, the simulation instance calls a method that
+   produces output.  The output is calculated from the list of instances of Car
+   that have left the grid.
+Collaboration:
+1. Setup Class
+2. Grid Class
+2. Car Class
+Pseudocode:
+// updates the position of each car in the simulation
+// sends message to grid to update itself
+simulation.update() {
+    grid.update();
+    for all car in activeCars:
+        car.update();
+        // If car is exiting the grid it is removed from the list of active
+        // cars and added to a list instances of Car that have exited.
+        if (car.hasLeftGrid()) {
+            exitedCars.add(car);
+            activeCars.remove(car);
+        }
+}
+
+The class name: Grid
+Responsibility:
+1. Receive message from Simulation instance to construct the instance of Grid
+   with information about the number of Intersection instances
+2. Initialize 2D array of Intersection instances, sending message to each
+   instance with an integer ID representing the Intersection
+3. Initialize an instance of TrafficController for each Intersection with an
+   integer ID representing its corresponding Intersection instance
+4. Receive message from Simulation instance to update the Intersection instances
+   at each time-step by doing (4) below
+5. Send message to each TrafficController instance to update the state of its
+   corresponding Intersection at each time-step
+Collaboration:
+1. Simulation Class
+2. Intersection Class
+3. TrafficController Class
+Pseudocode:
+// grid sends message to each traffic controller to update
+grid.update() {
+    for traffic_controller : traffic_controllers:
+        traffic_controller.update();
+}
+
+The class name: Intersection
+Responsibility:
+1. Receive message from Grid instance with integer ID to construct instance of
+   Intersection class
+2. Initialize 2D integer array of size 4 representing the four slots within an
+   intersection that could contain integer car IDs
+3. Initialize four integer queues corresponding to four directions that could
+   contain integer car IDs. Each queue represents list of Car instances
+   occupying the segment that aims towards the Intersection instance
+4. Receive message from Car instances about direction the Car will proceed
+   through the Intersection instance
+5. Receive message from TrafficController instance at each time-step to update
+   the state of the Intersection. This message could contain information about
+   which Car instance(s) to dequeue (if such a Car instance exists) and how to
+   update Car instances already in the 2D array.
+6. Update the state of the Intersection in the following ways:
+   6.1 Dequeue cars that can move into the Intersection instance according
+       to the TrafficController message
+   6.2 Update the 2D array to reflect the movement of Car instances in the
+       Intersection
+   6.3 Send message to Car instances that have left the Intersection instance.
+       This message should tell the car which Intersection instance the
+       car is entering next, and also which direction the Car is traveling. If
+       the car is no longer traveling towards an intersection, but is instead
+       exiting the instance of Grid, the intersection ID for the next
+       Intersection instance will be -1.
+7. Receive messages from Car instances about which queue to enqueue the Car
+   into, and enqueue that Car instance
+Collaboration:
+1. Grid Class
+2. TrafficController Class
+3. Car Class
+Pseudocode:
+intersection.isEmpty() {
+    // Check slots of the 2x2 intersection grid (represented as a 2D int array).
+    // if any slots contains a carID (>= 0) instead of -1, return false.
+    // else if all 4 slots' values are -1 (indicating vacancy), return true.
+}
+
+intersection.getApproachingCars() {
+    // Check the 4 queues that represent the ingoing segments, and only add
+    // cars that are the first to be in the queue (FIFO) AND has finished
+    // traversing the segments (timeLeftInSegment = 0).
+    ArrayList<Car> approachingCars;
+    for (queue : ingoing_segments) {
+        Car potentialCar = queue.peek();
+        if (potentialCar.timeLeftInSegment <= 0) {
+            approachingCars.add(potentialCar);
+        }
+    }
+    return approachingCars;
+}
+
+intersection.nextSegmentIsFull (car) {
+    // Calculate the car's next direction (N/W/E/S) when entering the next
+    // intersection based on the car's current direction (N/W/E/S) and turning
+    // direction (straight/left/right).
+    nextDirection = calculateNextDirection(car.dir, car.turning_dir);
+    // Get the next intersection based on the car's next direction.
+    nextIntersection = this.getNextIntersection(nextDirection);
+    return nextIntersection.checkIfQueueIsFull(nextDirection);
+}
+
+intersection.checkIfQueueIsFull(nextDirection) {
+    switch (nextDirection) {
+        case 0: // Southwards
+            return southQueue.size() >= MAX_SEGMENT_CAPACITY;
+        /// ....
+    }
+}
+
+intersection.moveCarIntoIntersection(car) {
+    queue = get correct queue among the 4 queues, with same direction as car
+    // Dequeue the approaching car. Because moveCar() is only invoked when the
+    // conditions of the approaching car is satisfied, and the car's direction
+    // should be unique among all the approaching cars, we always dequeue the
+    // intended car correctly.
+    car = queue.dequeue();
+    // choose the 2x2 grid slot to move car into based on the car direction
+    // (etc: East queue and car going East corresponds to the SE slot of the 2x2
+    //  intersection grid) in set2x2SlotOccupied(car), set the slot to contains
+    // the integer id of the car instead of -1.
+    intersection.set2x2SlotOccupied(car)
+}
+
+intersection.update2x2Grid() {
+    for (each slot in grid) {
+        if (slot occupied by car) {
+            moveCarAlong(car.dir);
+            if (car.isExitingIntersection()) {
+                // Based on the car direction, retrieves the "next" intersection
+                // of this current intersection and set the car's intersection
+                // reference to that intersection.
+                nextIntersection = this.getNextIntersection(car.dir)
+                car.moveToNextIntersection(nextIntersection);
+            }
+        }
+    }
+}
+
+// Invoked in the function moveToNextIntersection below.
+intersection.addCarToQueue(car) {
+    switch(car.dir()) {
+        case 0: // Car moving South
+            southQueue.enqueue(car);
+            break;
+        // ...
+    }
+}
+
+The class name: Car
+Responsibility:
+1. Receive message from Simulation instance containing information about car ID
+   and other variables to construct instance of Car class
+2. Receive message from Simulation instance at each time unit to decrement
+   timeLeftInSegment value at each time unit
+   2.1 When the car's intersection ID is equal to -1 and the timeLeftInSegment
+       value is 0, the Car instance will send a message to the Simulation class
+       that the Car instance has left the Grid instance.
+3. Upon initialization, receive message from Simulation instance to enqueue this
+   instance of Car in a queue of the Intersection instance corresponding to
+   the intersection ID
+4. Upon exiting an Intersection instance, the instance of Car will a receive
+   message from its current Intersection instance about which Intersection ID
+   the car is entering next and the direction it is traveling. If
+   the car is no longer traveling towards an intersection, but is instead
+   exiting the instance of Grid, the intersection ID will be -1. The car
+   will update its intersection ID, the variable representing its direction,
+   potentially decrement the integer representing the number of blocks the car
+   will travel before turning, and then do (5) below if the Intersection ID is
+   not -1.
+5. Send message to instance of Intersection corresponding to the car's
+   intersection ID to enqueue the car in the correct queue based on the car's
+   direction
+6. Receives a message from simulation to check if the instance of car has exited
+   the grid.
+Collaboration:
+1. Simulation Class
+2. Intersection Class
+Pseudocode:
+// CAR functions
+// car contains a reference to an intersection the car is currently moving
+// through or moving towards.
+car.moveToNextIntersection(nextIntersection) {
+    car.intersectionReference = nextIntersection;
+    // Car dir has same direction as queue direction, so the intersection will
+    // add the car to the corresponding queue.
+    car.intersectionReference.addCarToQueue(car);
+    car.timeLeftInSegment = maxSegmentCapacity;
+}
+
+// Update is called at each time step, invoked by the Simulation.update()
+// function timeLeftInSegment is reset to MAX_SEGMENT_CAPACITY when the car is
+// first spawn or when the car just exits the intersection and is added to the
+// queue of the next intersection.
+car.update() {
+    timeLeftInSegment--;
+}
+
+// method to check if a car has left the grid
+car.hasLeftGrid() {
+  if(intersectionReference.id() == -1
+      && timeLeftInSegment == 0){
+      return true;
+  } else {
+      return false;
+  }
+}
+
+
+The class name: TrafficController
+Responsibility:
+1. Receive message from Grid instance containing information about intersection
+   ID to construct instance of TrafficController class
+2. Receive message from Grid instance at each time-step to update the
+   Intersection instance corresponding to its Intersection ID
+3. Receive message from Intersection instance containing information about which
+   slots of the 2D array are occupied
+4. Receive message from Intersection instance containing information about Car
+   instances approaching the Intersection instance
+5. Receive messages from Car instances about each Car's direction and whether
+   the car is turning, and from this determine which segment/queue the Car will
+   enter after exiting the Intersection instance
+6. Determine which Car instance(s) approaching an Intersection instance can move
+   into the instance based on:
+   6.1 Whether the size of the queue to enqueue the Car into after exiting the
+       Intersection instance is less than maxSegmentCapacity
+   6.2 Rules specified in Requirements document
+   6.3 Whether the values of timeLeftInSegment for each Car instance are zero
+7. Send message at each time-step to corresponding Intersection instance that
+   tells that instance to update its state. This message could contain
+   information about which Car instance(s) to dequeue (if such a Car instance
+   exists).
+Collaboration:
+1. Intersection Class
+2. Car Class
+3. Grid Class
+Pseudocode:
+// Traffic controller owns an Intersection instance to handle called
+// my_intersection
+trafficController.update() {
+    // Check whether no car is traveling within the 2x2 grid of the intersection
+    bool empty = my_intersection.isEmpty();
+    cars = my_intersection.getApproachingCars();
+    if (empty) {
+        for (car : cars) {
+            // Get car direction carDir = car.dir()
+            // Decide which car can move into intersection based on:
+            // 1. priority of the car instance's turning direction, specified in
+            //  Requirements Doc
+            // 2. whether the car's timeLeftInSegment has reached 0
+            //   (already checked in intersection.getApproachingCars())
+            // 3. Whether the outgoing segment is full.
+            if (car.canMoveBasedOnRequirementsDoc() &&
+                !my_intersection.nextSegmentIsFull(car)) {
+                my_intersection.moveCarIntoIntersection(car);
+            }
+        }
+    } else {
+        my_intersection.update2x2Grid();
+    }
+}

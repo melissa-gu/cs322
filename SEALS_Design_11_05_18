@@ -108,8 +108,10 @@ grid.update() {
 // grid receives message from each instance of Intersection
 grid.toString() {
   String summary;
-  for intersection : intersections {
-    summary.append(intersection.toString());
+  for (int i = 1; i <= grid.numRows; i++) {
+    for (int j = 1; j <= grid.numCols; j++) {
+      summary.append(intersection[i,j].toString());
+    }
   }
   return summary;
 }

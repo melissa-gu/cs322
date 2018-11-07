@@ -1,3 +1,11 @@
+// Authors: SEALS (Jessica, Melissa, Tracy, Will)
+
+// *****************************************************************************
+// *****************************************************************************
+// **** Car
+// *****************************************************************************
+// *****************************************************************************
+
 import java.util.*;
 
 public class Car {
@@ -12,8 +20,9 @@ public class Car {
   private String summary;
 
   // Constructor
-  public Car(int id, int intersectionId, int timeToTraverseSegment, int direction,
-    int turningDirection, int numBlocksBeforeTurning, Intersection intersection) {
+  public Car(int id, int intersectionId, int timeToTraverseSegment, 
+             int direction, int turningDirection, int numBlocksBeforeTurning, 
+             Intersection intersection) {
     this.id = id;
     this.intersectionId = intersectionId;
     this.intersectionReference = intersection;
@@ -64,13 +73,13 @@ public class Car {
   // Method that moves car to another intersection
   public void moveToNextIntersection(Intersection nextIntersection) {
     appendToSummary("car#" + id + " is removed from " + direction + 
-    	      " queue of intersection " + intersectionReference + 
-            " and placed into ");
+    	            " queue of intersection " + intersectionReference + 
+                    " and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);
     timeLeftInSegment = timeToTraverseSegment;
     appendToSummary(direction + "queue of intersection " + 
-        intersectionReference.getId());
+                    intersectionReference.getId());
   } 
 
 

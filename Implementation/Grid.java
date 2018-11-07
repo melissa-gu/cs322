@@ -6,6 +6,18 @@
 // *****************************************************************************
 // *****************************************************************************
 
+
+// Converting from grid coordinates to Intersection coordinates:
+// row and col are iterators from 1 to numIntersections inclusive.
+// grid[i,j] = grid[row - 1][col - 1]
+//           = Intersection(row: numIntersections - row + 1, col)
+
+// Converting from intersection coordinates to grid coordinates:
+// grid[row,col] = (numIntersections - intersection[row], intersection[col] - 1)
+
+// grid[i, j] = grid[row - 1][col - 1]
+// = (numIntersections - intersection[row] + 1, intersection[col])
+// grid[i, j] = 
 public class Grid {
   private int numIntersections;
   // The 2D representations of intersections.
@@ -24,10 +36,10 @@ public class Grid {
 
     // Construct instances of intersection and populate the grid.
     int intersection_id = numIntersections * numIntersections;
-    for (int row = 1; row < numIntersections; row++) {
-      for (int col = 1; col < numIntersections; col++) {
-        intersection = new Intersection(intersection_id,
-          numIntersections - row - 1, col - 1, maxSegmentCapacity);
+    for (int row = 1; row <= numIntersections; row++) {
+      for (int col = 1; col <= numIntersections; col++) {
+        Intersection intersection = new Intersection(intersection_id,
+          numIntersections - row + 1, col, maxSegmentCapacity);
         grid[row - 1][col - 1] = intersection;
 
         // Construct a corresponding intersection controller.
@@ -88,17 +100,17 @@ public class Grid {
   
 
   public String toString() {
-    String summary;
+    String summary = "";
     // Intersections are processed in the order of  
     // row 1 intersections, from left to right
     // row 2 intersections, from left to right, etc, for all rows.
     // but row i corresponds to row [num_intersections - i] of the grid.
     // and col i corresponds to col [i - 1] of the grid.
     int rowNumber = 1;
-    for (int row = num_intersections - rowNumber; row >= 0; row--) {
+    for (int row = numIntersections - rowNumber; row >= 0; row--) {
       for (int col = 1; col <= numIntersections; col++) {
         Intersection intersection = grid[row][col - 1];
-        summary.append(.toString());
+        summary += intersection.toString();
       }
     } // end of for (each intersection in grid)
     return summary;

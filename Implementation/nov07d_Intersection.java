@@ -29,7 +29,7 @@ public class Intersection {
   private Intersection[] nextIntersections;
 
   // 2x2 intersection grids of the NW, NE, SE, SW in clockwise order.
-  private Car[] intersectionGrid;
+  private int[] intersectionGrid;
 
   // Setters and getters
   public int getId() {
@@ -53,10 +53,10 @@ public class Intersection {
       segment = new PriorityQueue<Car>();
     } // end of for (segment : ingoingSegments)
 
-    intersectionGrid = new Car[2][2];
+    intersectionGrid = new int[2][2];
     for (int row = 0; row < intersectionGrid.length; row ++) {
       for (int col = 0; col < intersectionGrid[0].length; col++) {
-        intersectionGrid[row][col] = null;
+        intersectionGrid[row][col] = -1;
       }
     } // end of for (row, col in intersectionGrid)
   } // end of Intersection() constructor
@@ -65,7 +65,7 @@ public class Intersection {
   public boolean intersectionIsEmpty() {
     for (int row = 0; row < intersectionGrid.length; row ++) {
       for (int col = 0; col < intersectionGrid[0].length; col++) {
-        if (intersectionGrid[row][col] != null) {
+        if (intersectionGrid[row][col] != -1) {
           return false;
         }
       }
@@ -144,137 +144,46 @@ public class Intersection {
       // throw error
     }
 
-    switch (car.getDirection()) {
-      case 0:
-        intersectionGrid[0][0] = car;
-        break;
-      case 1:
-        intersectionGrid[1][0] = car;
-        break;
-      case 2:
-        intersectionGrid[1][1] = car;
-        break;
-      case 3:
-        intersectionGrid[0][1] = car;
-        break;
-    }
-     
-    if (car.getTurningDirection() == 1) {
-      car.setDirection(calculateNextDirection(car.getDirection(),
-        car.getTurningDirection()));
-    }
-  } // end of moveCarIntoIntersection()
 
+      car = queue.dequeue();
+      // choose the 2x2 grid slot to move car into based on the car direction
+      // (etc: East queue and car going East corresponds to the SE slot of the 2x2
+      //  intersection grid) in set2x2SlotOccupied(car), set the slot to contains
+      // the integer id of the car instead of -1.
+      intersection.set2x2SlotOccupied(car)
+      if (car.turningCode == RIGHT) {
+          car.dir = calculateNextDirection(car.dir, car.turning_dir);
+      }
+  }
 
-  public void updateIntersectionGrid() {
+  intersection.update2x2Grid() {
+      for (each slot in 2x2grid) {
+          if (slot occupied by car) {
+              moveCarAlong(car.dir);
+              if (car.turningCode == LEFT) {
+                  car.dir = calculateNextDirection(car.dir, car.turning_dir);
+                  car.turningCode == STRAIGHT;
+              }
+              if (car.isExitingIntersection()) {
+                  // Based on the car direction, retrieves the "next" intersection
+                  // of this current intersection and set the car's intersection
+                  // reference to that intersection.
+                  nextIntersection = this.getNextIntersection(car.dir)
+                  car.moveToNextIntersection(nextIntersection);
+              }
+          }
+      }
+  }
 
-    // Check the NW slot
-    if (intersectionGrid[0][0] != null) {
-      Car car = intersectionGrid[0][0];
-      updateNWSlot(car);
-    } 
-
-    if (intersectionGrid[0][1] != null) {
-      Car car = intersectionGrid[0][1];
-      updateNESlot(car);
-    } 
-
-    if (intersectionGrid[1][0] != null) {
-      Car car = intersectionGrid[1][0];
-      updateSWSlot(car);
-    } 
-
-    if (intersectionGrid[1][1] != null) {
-      Car car = intersectionGrid[1][1];
-      updateSESlot(car);
-    } 
-  } // end of updateIntersectionGrid ()
-
-
-  private void resetCarDirIfTurningLeft(Car car) {
-    if (car.getTurningDirection() == -1) {
-      car.setDirection(calculateNextDirection(car.getDirection(),
-        car.getTurningDirection()));
-      car.setTurningDirection(0);
-    }
-  } // end of resetCarDirIfTurningLeft()
-
-
-  private void updateNWSlot(Car car) {
-    intersectionGrid[0, 0] = null;
-    resetCarDirIfTurningLeft(car);
-    switch(car.getDirection()) {
-      case 0:
-        intersectionGrid[1, 0] = car;
-        break;
-      case 1:
-        intersectionGrid[0, 1] = car;
-        break;
-      default:
-        Intersection nextIntersection = nextIntersections[car.getDirection()];
-        car.moveToNextIntersection(nextIntersection);
-        break;
-    }
-  } // end of updateNWSlot()
-
-
-  private void updateSWSlot(Car car) {
-    intersectionGrid[1, 0] = null;
-    resetCarDirIfTurningLeft(car);
-    switch(car.getDirection()) {
-      case 1:
-        intersectionGrid[1, 1] = car;
-        break;
-      case 2:
-        intersectionGrid[0, 0] = car;
-        break;
-      default:
-        Intersection nextIntersection = nextIntersections[car.getDirection()];
-        car.moveToNextIntersection(nextIntersection);
-        break;
-    }
-  } // end of updateSWSlot()
-
-
-  private void updateNESlot(Car car) {
-    intersectionGrid[0, 1] = null;
-    resetCarDirIfTurningLeft(car);
-    switch(car.getDirection()) {
-      case 0:
-        intersectionGrid[1, 1] = car;
-        break;
-      case 3:
-        intersectionGrid[0, 0] = car;
-        break;
-      default:
-        Intersection nextIntersection = nextIntersections[car.getDirection()];
-        car.moveToNextIntersection(nextIntersection);
-        break;
-    }
-  } // end of updateNESlot()
-
-
-  private void updateSESlot(Car car) {
-    intersectionGrid[1, 1] = null;
-    resetCarDirIfTurningLeft(car);
-    switch(car.getDirection()) {
-      case 2:
-        intersectionGrid[0, 1] = car;
-        break;
-      case 3:
-        intersectionGrid[1, 0] = car;
-        break;
-      default:
-        Intersection nextIntersection = nextIntersections[car.getDirection()];
-        car.moveToNextIntersection(nextIntersection);
-        break;
-    }
-  } // end of updateSESlot()
-
-
-  public void addCarToQueue(Car car) {
-    ingoingSegments[car.getDirection()].add(car);
-  } // end of addCarToQueue ()
+  // Invoked in the function moveToNextIntersection below.
+  intersection.addCarToQueue(car) {
+      switch(car.dir()) {
+          case 0: // Car moving South
+              southQueue.enqueue(car);
+              break;
+          // ...
+      }
+  }
 
   // Returns summary of the intersection queues and cars
   public String toString() {
@@ -290,6 +199,6 @@ public class Intersection {
     }
     // .. repeat for all queues
     return summary;
-  } // end of toString()
+  }
 
 }

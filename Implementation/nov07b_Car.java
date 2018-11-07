@@ -33,19 +33,8 @@ public class Car {
     return direction;
   }
 
-
   public int getTurningDirection() {
     return turningDirection;
-  }
-
-
-  public int setTurningDirection(int direction) {
-    turningDirection = direction;
-  }
-
-
-  public int getId() {
-    return id;
   }
 
 
@@ -56,15 +45,15 @@ public class Car {
 
 
   // Method that moves car to another intersection
-  public void moveToNextIntersection(Intersection nextIntersection) {
+  public void moveToNextIntersection(int nextIntersectionId) {
     appendToSummary("car#" + id + " is removed from " + direction + 
     	      " queue of intersection " + car.intersectionReference + 
             " and placed into ");
-    intersectionReference = nextIntersection;
-    intersectionReference.addCarToQueue(this);
+    intersectionId = nextIntersectionId;
+    // HOW DO WE GET THE ACTUAL INTERSECTION
+    intersectionReference.addCarToQueue(id);
     timeLeftInSegment = timeToTraverseSegment;
-    appendToSummary(direction + "queue of intersection " + 
-        intersectionReference.getId());
+    appendToSummary(direction + "queue of intersection " + intersectionId);
   } 
 
 

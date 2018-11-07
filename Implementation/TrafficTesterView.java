@@ -59,10 +59,10 @@ public class TrafficTesterView {
       System.out.println("Car #" + carID);
       console.nextLine();
       console.nextLine();
-      row = console.nextInt();
-      console.nextLine();
-      console.nextLine();
       col = console.nextInt();
+      console.nextLine();
+      console.nextLine();
+      row = console.nextInt();
       console.nextLine();
       console.nextLine();
       segmentDirectionCode = console.nextInt();

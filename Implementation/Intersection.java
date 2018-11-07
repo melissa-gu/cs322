@@ -202,7 +202,6 @@ public class Intersection {
 
   private void updateNWSlot(Car car) {
     intersectionGrid[0, 0] = null;
-    resetCarDirIfTurningLeft(car);
     switch(car.getDirection()) {
       case 0:
         intersectionGrid[1, 0] = car;
@@ -215,12 +214,12 @@ public class Intersection {
         car.moveToNextIntersection(nextIntersection);
         break;
     }
+    resetCarDirIfTurningLeft(car);
   } // end of updateNWSlot()
 
 
   private void updateSWSlot(Car car) {
     intersectionGrid[1, 0] = null;
-    resetCarDirIfTurningLeft(car);
     switch(car.getDirection()) {
       case 1:
         intersectionGrid[1, 1] = car;
@@ -233,12 +232,12 @@ public class Intersection {
         car.moveToNextIntersection(nextIntersection);
         break;
     }
+    resetCarDirIfTurningLeft(car);
   } // end of updateSWSlot()
 
 
   private void updateNESlot(Car car) {
     intersectionGrid[0, 1] = null;
-    resetCarDirIfTurningLeft(car);
     switch(car.getDirection()) {
       case 0:
         intersectionGrid[1, 1] = car;
@@ -251,12 +250,12 @@ public class Intersection {
         car.moveToNextIntersection(nextIntersection);
         break;
     }
+    resetCarDirIfTurningLeft(car);
   } // end of updateNESlot()
 
 
   private void updateSESlot(Car car) {
     intersectionGrid[1, 1] = null;
-    resetCarDirIfTurningLeft(car);
     switch(car.getDirection()) {
       case 2:
         intersectionGrid[0, 1] = car;
@@ -269,6 +268,7 @@ public class Intersection {
         car.moveToNextIntersection(nextIntersection);
         break;
     }
+    resetCarDirIfTurningLeft(car);
   } // end of updateSESlot()
 
 

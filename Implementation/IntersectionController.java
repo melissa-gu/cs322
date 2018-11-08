@@ -6,6 +6,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+import java.util.*;
+
 public class IntersectionController {
 
   private Intersection myIntersection;
@@ -18,7 +20,7 @@ public class IntersectionController {
 
 	public void update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
-    boolean empty = my_intersection.intersectionIsEmpty();
+    boolean empty = myIntersection.intersectionIsEmpty();
     cars = myIntersection.getApproachingCars();
 
     if (empty) {
@@ -43,7 +45,7 @@ public class IntersectionController {
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
     int carTurn = curCar.getTurningDirection();
-    int carDir = curCar.getDirection()
+    int carDir = curCar.getDirection();
 
     // Loop through approaching cars to check whether the current car can move
     for (Car car : cars) {

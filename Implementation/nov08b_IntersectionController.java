@@ -10,16 +10,15 @@ public class IntersectionController {
 
   private Intersection myIntersection;
   private ArrayList<Car> cars;
-
 	// Constructor
-	public IntersectionController(Intersection intersection) {
+	public IntersectionController (Intersection intersection) {
     myIntersection = intersection;
 	}
 
 	public void update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     boolean empty = my_intersection.intersectionIsEmpty();
-    cars = myIntersection.getApproachingCars();
+    cars = my_intersection.getApproachingCars();
 
     if (empty) {
     	for (Car car : cars) {
@@ -30,7 +29,7 @@ public class IntersectionController {
         //   (already checked in intersection.getApproachingCars())
         // 3. Whether the outgoing segment is full.
         if (canMoveBasedOnRequirementsDoc(car) &&
-          !myIntersection.nextSegmentIsFull(car) ) {
+          !myIntersection.nextSegmentIsFull(car)) {
             myIntersection.moveCarIntoIntersection(car);
           }
         }
@@ -42,14 +41,12 @@ public class IntersectionController {
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
+    // boolean value representing curCar has priority to move
+    boolean priority = true;
     int carTurn = curCar.getTurningDirection();
     int carDir = curCar.getDirection()
 
-    // Loop through approaching cars to check whether the current car can move
     for (Car car : cars) {
-      if (car == curCar) {
-        continue;
-      }
       int otherCarTurn = car.getTurningDirection();
       int otherCarDir = car.getDirection();
       if (carTurn == 0) {
@@ -60,36 +57,24 @@ public class IntersectionController {
           }
         }
       }
-      else if (carTurn == 1) {
+      else if (carTurn == 1){
         // Turn right
-        if (otherCarTurn == 0) {
-          // Conflict with car going straight
-          if ( (carDir - otherCarDir == 1) || (carDir - otherCarDir == -3) ) {
+        if(otherCarTurn == 0){
+          if(carDir - otherCarDir == 1){
             return false;
           }
+        }
+        else if(carTurn == otherCarTurn){
+
         }
       }
       else {
         // Turn left == -1
-        if (otherCarTurn == 0) {
-          return false;
-        }
-        else if (otherCarTurn == 1){
-          // No conflict if the other car turning right in this specified
-          // direction, otherwise conflict
-          if ( (carDir - otherCarDir != 1) || (carDir - otherCarDir != -3) ) {
-            return false;
-          }
-        } else {
-            if (carDir > otherCarDir) {
-              return false;
-            }
-        }
 
       }
-
     }
-    return true;
+    return priority;
+
   }
 
 }

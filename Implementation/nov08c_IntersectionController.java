@@ -10,9 +10,9 @@ public class IntersectionController {
 
   private Intersection myIntersection;
   private ArrayList<Car> cars;
-
+  
 	// Constructor
-	public IntersectionController(Intersection intersection) {
+	public IntersectionController (Intersection intersection) {
     myIntersection = intersection;
 	}
 
@@ -30,7 +30,7 @@ public class IntersectionController {
         //   (already checked in intersection.getApproachingCars())
         // 3. Whether the outgoing segment is full.
         if (canMoveBasedOnRequirementsDoc(car) &&
-          !myIntersection.nextSegmentIsFull(car) ) {
+          !myIntersection.nextSegmentIsFull(car)) {
             myIntersection.moveCarIntoIntersection(car);
           }
         }
@@ -64,7 +64,7 @@ public class IntersectionController {
         // Turn right
         if (otherCarTurn == 0) {
           // Conflict with car going straight
-          if ( (carDir - otherCarDir == 1) || (carDir - otherCarDir == -3) ) {
+          if((carDir - otherCarDir == 1) || (carDir - otherCarDir == -3)){
             return false;
           }
         }
@@ -77,7 +77,7 @@ public class IntersectionController {
         else if (otherCarTurn == 1){
           // No conflict if the other car turning right in this specified
           // direction, otherwise conflict
-          if ( (carDir - otherCarDir != 1) || (carDir - otherCarDir != -3) ) {
+          if((carDir - otherCarDir != 1) || (carDir - otherCarDir != -3)){
             return false;
           }
         } else {

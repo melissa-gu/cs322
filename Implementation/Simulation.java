@@ -6,31 +6,37 @@
 // *****************************************************************************
 // *****************************************************************************
 
+import java.util.*;
+
 public class Simulation {
   private int numIntersectionsInOneDirection;
-  private int numberOfCars;
   private double sumOfAllCarTimesToExit;
   private int numCarsExited;
+  private Grid grid;
+  private ArrayList<Car> cars;
+  private ArrayList<Car> exitedCars;
   
-  public Simulation(int numIntersectionsInOneDirection, int numberOfCars) {
+  public Simulation(int numIntersectionsInOneDirection) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
-    this.numberOfCars = numberOfCars;
-  }
+    grid = new Grid(numIntersectionsInOneDirection);
+    cars = new ArrayList<Car>();
+    exitedCars = new ArrayList<Car>();
+  } // End of constructor Simulation()
 
 
   public void update() {
       grid.update();
-      for all car in activeCars:
-          car.update();
-          // If car is exiting the grid
-          if (car.hasLeftGrid()) {
-              car.appendToSummary("car#" + car.ID + " has left the grid");
-              activeCars.remove(car);
-              exitedCars.add(car);
-              numCarsExited++;
-              timeToExit = car.getExitTime() - car.getEntryTime();
-              sumOfAllCarTimesToExit += timeToExit;
-          }
+      for (Car car : cars) {
+        car.update();
+        // If car is exiting the grid
+        if (car.hasLeftGrid()) {
+          car.appendToSummary("car#" + car.getId() + " has left the grid");
+          cars.remove(car);
+          exitedCars.add(car);
+          numCarsExited++;
+          double timeToExit = car.getExitTime() - car.getEntryTime();
+          sumOfAllCarTimesToExit += timeToExit;
+      } // end for (Car car: cars) 
     }
   } // end of update ()
 
@@ -40,6 +46,7 @@ public class Simulation {
     Intersection intersectionReference = grid.getIntersection(row, col);
     Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,
       numBlocksBeforeTurning, intersectionReference);
+    cars.add(car);
   } // end of insertCar()
 
 
@@ -48,12 +55,14 @@ public class Simulation {
   } // end of toString()
 
 
-
-// prints average time cars took to exit the grid
-  public double getAverage() {
-    String result;
+  // prints average time cars took to exit the grid
+  public String getAverage() {
+    String result = "";
     result += "The average time cars took to exit the grid was ";
     result += sumOfAllCarTimesToExit/numCarsExited;
     result += " simulated time-steps";
     return result;
-  }
+  } // end of getAverage()
+
+
+}

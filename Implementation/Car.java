@@ -11,29 +11,24 @@ import java.util.*;
 public class Car {
   private int id;
   private Intersection intersectionReference;
-  private int timeLeftInSegment;
-  private int timeToTraverseSegment;
   private int direction;
   private int turningDirection;
   private int numBlocksBeforeTurning;
   private String summary;
+  private int entryTime;
+  private int exitTime;
 
   // Constructor
-  public Car(int id, int timeToTraverseSegment, 
+  public Car(int id,
              int direction, int turningDirection, int numBlocksBeforeTurning, 
              Intersection intersection) {
     this.id = id;
     this.intersectionReference = intersection;
-    this.timeToTraverseSegment = timeToTraverseSegment;
-    this.timeLeftInSegment = timeToTraverseSegment;
     this.direction = direction;
     this.summary = "";
     this.turningDirection = turningDirection;
     this.numBlocksBeforeTurning = numBlocksBeforeTurning;
-  }
-
-  public int getTimeLeftInSegment() {
-    return timeLeftInSegment;
+    intersectionReference.addCarToQueue(this);
   }
 
 
@@ -57,6 +52,16 @@ public class Car {
   }
 
 
+  public double getExitTime() {
+    return exitTime;
+  }
+
+
+  public double getEntryTime() {
+    return entryTime;
+  }
+
+
   public int getId() {
     return id;
   }
@@ -64,25 +69,24 @@ public class Car {
 
   // Update method
   public void update() {
-    timeLeftInSegment--;   
+    
   }
 
 
   // Method that moves car to another intersection
   public void moveToNextIntersection(Intersection nextIntersection) {
     appendToSummary("car#" + id + " is removed from " + direction + 
-    	            " queue of intersection " + intersectionReference + 
+    	              " queue of intersection " + intersectionReference + 
                     " and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);
-    timeLeftInSegment = timeToTraverseSegment;
     appendToSummary(direction + "queue of intersection " + 
                     intersectionReference.getId());
   } 
 
 
   public boolean hasLeftGrid() {
-    return (intersectionId == -1 && timeLeftInSegment == 0);
+    return (intersectionReference == null);
   }
 
 

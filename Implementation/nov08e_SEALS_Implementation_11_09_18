@@ -74,7 +74,7 @@ public class TrafficTesterView {
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();
-      simulation.insertCar(carID, col, row, segmentDirectionCode, 
+      Simulation.insertCar(carID, col, row, segmentDirectionCode, 
                            numBlocksBeforeTurning, turnDirectionCode);
       System.out.println("  is born in the segment located at col " + col +
                          " and row " + row + ", that aims " +
@@ -83,12 +83,6 @@ public class TrafficTesterView {
                          " block(s) to go before turning");
       System.out.println("  and plans to " +
                          convertToTurnDirection(turnDirectionCode));
-    } // end for
-
-    // run the simulation (one time-step for now)
-    for (int i = 0; i < 1; i++) {
-      simulation.update();
-      System.out.println(simulation.toString());
     } // end for
   } // main
 
@@ -161,6 +155,52 @@ public class TrafficTesterView {
 //  and plans to NEVER_TURN
 
 
+////////////////// Example of sample use of the above program //////////////////
+// except for the fact that all the following lines have been made comments,  //
+// and also the actual phrase "additional blocks to travel" in the data       //
+// shown below has been shortened to the phrase "additional blocks" to fit    //
+// the lines below into the required 80-columns per line.                     //
+////////////////////////////////////////////////////////////////////////////////
+//numIntersectionsInOneDirection:
+//1
+//number of cars created for the test:
+//2
+//car number:
+//1
+//born in the segment that is positioned at col:
+//1
+//born in the segment that is positioned at row:
+//1
+//born in the segment that is oriented in direction:
+//0
+//additional blocks prior to turning (-1 means the car will never turn):
+//0
+//direction the car will turn, when the car turns:
+//1
+//car number:
+//2
+//born in the segment that is positioned at col:
+//1
+//born in the segment that is positioned at row:
+//1
+//born in the segment that is oriented in direction:
+//3
+//additional blocks prior to turning (-1 means the car will never turn):
+//-1
+//direction the car will turn, when the car turns:
+//0
+//hopper2{acharles}2484: java TrafficTesterView < data1_for_TrafficTesterView
+//The number of intersections in one direction is: 1
+//The number of cars is: 2
+//Car #1
+//  is born in the segment located at col 1 and row 1, that aims SOUTHWARD,
+//  and has 0 block(s) to go before turning
+//  and plans to TURN_RIGHTWARD
+//Car #2
+//  is born in the segment located at col 1 and row 1, that aims WESTWARD,
+//  and has -1 block(s) to go before turning
+//  and plans to NEVER_TURN
+
 
 
 // Authors: SEALS (Jessica, Melissa, Tracy, Will)
@@ -202,7 +242,7 @@ public class Simulation {
           numCarsExited++;
           double timeToExit = car.getExitTime() - car.getEntryTime();
           sumOfAllCarTimesToExit += timeToExit;
-      } // end for (Car car: cars) 
+      }
     }
   } // end of update ()
 
@@ -228,9 +268,7 @@ public class Simulation {
     result += sumOfAllCarTimesToExit/numCarsExited;
     result += " simulated time-steps";
     return result;
-  } // end of getAverage()
-
-
+  }
 }
 
 
@@ -361,7 +399,6 @@ public class Grid {
 
 
 
-
 // Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
 // *****************************************************************************
@@ -398,20 +435,19 @@ public class IntersectionController {
         if (canMoveBasedOnRequirementsDoc(car) &&
           !myIntersection.nextSegmentIsFull(car) ) {
             myIntersection.moveCarIntoIntersection(car);
+          }
         }
-      } // end of (for Car car : cars)
     } else {
       myIntersection.updateIntersectionGrid();
-    }
-  } // end of update()
+    }     
+  }
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
     return true;
-  } // end of canMoveBasedOnRequirementsDoc()
+  }
 
 }
-
 
 
 // Authors: SEALS (Jessica, Melissa, Tracy, Will)
@@ -435,13 +471,13 @@ public class Intersection {
   // Queues representing the four ingoing segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Queue.
-  private ArrayList<Queue<Car>> ingoingSegments = 
-    new ArrayList<Queue<Car>>();
+  private ArrayList<PriorityQueue<Car>> ingoingSegments = 
+    new ArrayList<PriorityQueue<Car>>();
 
   // Four next intersections of this intersection. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Intersection instances.
-  private Intersection[] nextIntersections = new Intersection[4];
+  private Intersection[] nextIntersections;
 
   // 2x2 intersection grids of the NW, NE, SE, SW in clockwise order.
   private Car[][] intersectionGrid;
@@ -464,7 +500,7 @@ public class Intersection {
     this.col = col;
 
     for (int i = 0; i < 4; i++) {
-      Queue<Car> segment = new LinkedList<Car>();
+      PriorityQueue<Car> segment = new PriorityQueue<Car>();
       ingoingSegments.add(segment);
     }
 
@@ -513,7 +549,6 @@ public class Intersection {
     int nextDirection = calculateNextDirection(car.getDirection(),
       car.getTurningDirection());
     Intersection nextIntersection = nextIntersections[nextDirection];
-    if (nextIntersection == null) return true;
     return nextIntersection.checkIfQueueIsFull(nextDirection);
   } // end of nextSegmentIsFull()
 
@@ -559,7 +594,7 @@ public class Intersection {
 
 
   public void moveCarIntoIntersection(Car car) {
-    Queue<Car> segment = ingoingSegments.get(car.getDirection());
+    PriorityQueue<Car> segment = ingoingSegments.get(car.getDirection());
     Car carToDequeue = segment.poll();
     if (carToDequeue != car) {
       // throw error
@@ -698,8 +733,7 @@ public class Intersection {
 
   // Returns summary of the intersection queues and cars
   public String toString() {
-    String summary = "At the intersection located at col " + col + " and row " 
-                     + row + "\n";
+    String summary = "";
 
     for (int i = 0; i < ingoingSegments.size(); i++) {
       String direction = "";
@@ -719,11 +753,11 @@ public class Intersection {
           break;
       }
       if (ingoingSegments.get(i).size() == 0) {
-        summary += ("  incoming lane having direction " + direction + 
-          " is empty\n");
+        summary += ("incoming lane having direction " + direction + 
+          " is empty");
       } else {
-        summary += ("  incoming lane having direction " + direction + 
-          " is nonempty\n");
+        summary += ("incoming lane having direction " + direction + 
+          " is nonempty");
       }
 
       for (Car car : ingoingSegments.get(i)) {

@@ -34,65 +34,17 @@ public class IntersectionController {
         if (canMoveBasedOnRequirementsDoc(car) &&
           !myIntersection.nextSegmentIsFull(car) ) {
             myIntersection.moveCarIntoIntersection(car);
-          }
         }
+      } // end of (for Car car : cars)
     } else {
-        myIntersection.updateIntersectionGrid();
-      }
-        
-  }
+      myIntersection.updateIntersectionGrid();
+    }
+  } // end of update()
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
-    int carTurn = curCar.getTurningDirection();
-    int carDir = curCar.getDirection();
-
-    // Loop through approaching cars to check whether the current car can move
-    for (Car car : cars) {
-      if (car == curCar) {
-        continue;
-      }
-      int otherCarTurn = car.getTurningDirection();
-      int otherCarDir = car.getDirection();
-      if (carTurn == 0) {
-        // Go straight
-        if (carTurn == otherCarTurn) {
-          if (carDir > otherCarDir) {
-            return false;
-          }
-        }
-      }
-      else if (carTurn == 1) {
-        // Turn right
-        if (otherCarTurn == 0) {
-          // Conflict with car going straight
-          if ( (carDir - otherCarDir == 1) || (carDir - otherCarDir == -3) ) {
-            return false;
-          }
-        }
-      }
-      else {
-        // Turn left == -1
-        if (otherCarTurn == 0) {
-          return false;
-        }
-        else if (otherCarTurn == 1){
-          // No conflict if the other car turning right in this specified
-          // direction, otherwise conflict
-          if ( (carDir - otherCarDir != 1) || (carDir - otherCarDir != -3) ) {
-            return false;
-          }
-        } else {
-            if (carDir > otherCarDir) {
-              return false;
-            }
-        }
-
-      }
-
-    }
     return true;
-  }
+  } // end of canMoveBasedOnRequirementsDoc()
 
 }
 

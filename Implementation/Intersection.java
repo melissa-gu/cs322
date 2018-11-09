@@ -16,18 +16,16 @@ public class Intersection {
   private int row;
   private int col;
 
-  // the maximum number of Car instances each segment can accomodate.
-  private int maxSegmentCapacity;
-
   // Queues representing the four ingoing segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Queue.
-  private PriorityQueue<Car>[] ingoingSegments;
+  private ArrayList<Queue<Car>> ingoingSegments = 
+    new ArrayList<Queue<Car>>();
 
   // Four next intersections of this intersection. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Intersection instances.
-  private Intersection[] nextIntersections;
+  private Intersection[] nextIntersections = new Intersection[4];
 
   // 2x2 intersection grids of the NW, NE, SE, SW in clockwise order.
   private Car[][] intersectionGrid;
@@ -38,21 +36,31 @@ public class Intersection {
   } // end of getId()
 
 
+  public int getRow() {
+    return row;
+  } // end of getRow()
+
+
+  public int getCol() {
+    return col;
+  } // end of getCol()
+
+
   public void setNextIntersections(Intersection[] nextIntersections) {
     this.nextIntersections = nextIntersections;
   } // end of setNextIntersections()
 
 
   // Constructor
-  public Intersection(int id, int row, int col, int maxSegmentCapacity) {
+  public Intersection(int id, int row, int col) {
     this.id = id;
     this.row = row;
     this.col = col;
-    this.maxSegmentCapacity = maxSegmentCapacity;
 
-    for (Queue segment : ingoingSegments) {
-      segment = new PriorityQueue<Car>();
-    } // end of for (segment : ingoingSegments)
+    for (int i = 0; i < 4; i++) {
+      Queue<Car> segment = new LinkedList<Car>();
+      ingoingSegments.add(segment);
+    }
 
     intializeIntersectionGrid();
   } // end of Intersection() constructor
@@ -88,9 +96,8 @@ public class Intersection {
     for (Queue<Car> segment : ingoingSegments) {
       Car potentialCar = segment.peek();
       if (potentialCar == null) continue;
-      if (potentialCar.getTimeLeftInSegment() <= 0) {
-        approachingCars.add(potentialCar);
-      }
+      // temporarily not checking for whether Car's timeToTraverseSegment is 0.
+      approachingCars.add(potentialCar);
     } // end of for (segment in ingoingSegments)
     return approachingCars;
   } // end of getApproachingCars()
@@ -100,12 +107,13 @@ public class Intersection {
     int nextDirection = calculateNextDirection(car.getDirection(),
       car.getTurningDirection());
     Intersection nextIntersection = nextIntersections[nextDirection];
+    if (nextIntersection == null) return true;
     return nextIntersection.checkIfQueueIsFull(nextDirection);
   } // end of nextSegmentIsFull()
 
 
   private boolean checkIfQueueIsFull(int nextDirection) {
-    return ingoingSegments[nextDirection].size() > maxSegmentCapacity;
+    return false; // temporarily
   } // end of checkIfQueueuIsFull()
 
 
@@ -145,7 +153,7 @@ public class Intersection {
 
 
   public void moveCarIntoIntersection(Car car) {
-    PriorityQueue<Car> segment = ingoingSegments[car.getDirection()];
+    Queue<Car> segment = ingoingSegments.get(car.getDirection());
     Car carToDequeue = segment.poll();
     if (carToDequeue != car) {
       // throw error
@@ -279,14 +287,15 @@ public class Intersection {
 
 
   public void addCarToQueue(Car car) {
-    ingoingSegments[car.getDirection()].add(car);
+    ingoingSegments.get(car.getDirection()).add(car);
   } // end of addCarToQueue ()
 
   // Returns summary of the intersection queues and cars
   public String toString() {
-    String summary = "";
+    String summary = "At the intersection located at col " + col + " and row " 
+                     + row + "\n";
 
-    for (int i = 0; i < ingoingSegments.length; i++) {
+    for (int i = 0; i < ingoingSegments.size(); i++) {
       String direction = "";
 
       switch(i) {
@@ -303,15 +312,15 @@ public class Intersection {
           direction = "WESTWARD";
           break;
       }
-      if (ingoingSegments[i].size() == 0) {
-        summary += ("incoming lane having direction " + direction + 
-          " is empty");
+      if (ingoingSegments.get(i).size() == 0) {
+        summary += ("  incoming lane having direction " + direction + 
+          " is empty\n");
       } else {
-        summary += ("incoming lane having direction " + direction + 
-          " is nonempty");
+        summary += ("  incoming lane having direction " + direction + 
+          " is nonempty\n");
       }
 
-      for (Car car : ingoingSegments[i]) {
+      for (Car car : ingoingSegments.get(i)) {
         summary += (car.toString());
       }
     }

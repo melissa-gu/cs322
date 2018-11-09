@@ -1,5 +1,6 @@
 
 // Programmer: Arthur Charlesworth  (c) Copyright 2018
+// Additional Authors: SEALS (Jessica, Melissa, Tracy, Will)
 // *****************************************************************************
 // *****************************************************************************
 // **** TrafficTesterView
@@ -46,6 +47,8 @@ public class TrafficTesterView {
     console.nextLine();
     int numberOfCars = console.nextInt();
     System.out.println("The number of cars is: " + numberOfCars);
+    Simulation simulation = new Simulation(numIntersectionsInOneDirection, 
+                                           numberOfCars);
     int carID;
     int row;
     int col;
@@ -72,6 +75,8 @@ public class TrafficTesterView {
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();
+      Simulation.insertCar(carID, col, row, segmentDirectionCode, 
+                           numBlocksBeforeTurning, turnDirectionCode);
       System.out.println("  is born in the segment located at col " + col +
                          " and row " + row + ", that aims " +
                          convertToSegmentDirection(segmentDirectionCode) + ",");
@@ -80,7 +85,6 @@ public class TrafficTesterView {
       System.out.println("  and plans to " +
                          convertToTurnDirection(turnDirectionCode));
     } // end for
-
   } // main
 
 

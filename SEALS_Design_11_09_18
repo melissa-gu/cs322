@@ -5,7 +5,7 @@ Authors: SEALS (Jessica, Melissa, Tracy, Will)
          1         2         3         4         5         6         7         8
 12345678901234567890123456789012345678901234567890123456789012345678901234567890
 
-The class name: SimulationView
+The class name: TrafficTesterView
 Responsibility:
 1. Read user input from a file or the command-line line by line and print 
    summary of inputted data in English
@@ -16,17 +16,17 @@ Responsibility:
 Collaboration:
 1. Simulation Class
 Pseudocode:
-SimulationView.printSummary() {
+TrafficTesterView.printSummary() {
   print(simulation.toString());
 }
 
-SimulationView.printAverage() {
+TrafficTesterView.printAverage() {
   print(simulation.getAverage());
 }
 
 The class name: Simulation
 Responsibility:
-1. Receive message from SimulationView instance to construct the instance of 
+1. Receive message from TrafficTesterView instance to construct the instance of 
    Simulation class
 2. Send message to Grid to initialize instance of Grid class with number of
    Intersections based on constructor parameters
@@ -63,13 +63,13 @@ Responsibility:
    update that car's summary string.
 8. Receive message from Grid instance at each time-step containing summary of 
    each Intersection instance.
-9. Send message to SimulationView class that contains summary of entire 
+9. Send message to TrafficTesterView class that contains summary of entire 
    Simulation instance at each time-step.
-10. At the end of the Simulation, send message to SimulationView class that 
+10. At the end of the Simulation, send message to TrafficTesterView class that 
     contains the average time cars that have exited the grid have taken to exit 
     the grid.
 Collaboration:
-1. SimulationView Class
+1. TrafficTesterView Class
 2. Grid Class
 2. Car Class
 Pseudocode:

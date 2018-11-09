@@ -47,8 +47,7 @@ public class TrafficTesterView {
     console.nextLine();
     int numberOfCars = console.nextInt();
     System.out.println("The number of cars is: " + numberOfCars);
-    Simulation simulation = new Simulation(numIntersectionsInOneDirection, 
-                                           numberOfCars);
+    Simulation simulation = new Simulation(numIntersectionsInOneDirection);
     int carID;
     int row;
     int col;

@@ -54,7 +54,7 @@ public class Car {
   }
 
 
-  public int setTurningDirection(int direction) {
+  public void setTurningDirection(int direction) {
     turningDirection = direction;
   }
 

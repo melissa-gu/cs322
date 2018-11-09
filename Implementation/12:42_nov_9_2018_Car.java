@@ -22,6 +22,7 @@ public class Car {
   public Car(int id, int direction, int turningDirection, 
              int numBlocksBeforeTurning, Intersection intersection) {
     this.id = id;
+    this.intersectionId = intersectionId;
     this.intersectionReference = intersection;
     this.direction = direction;
     this.summary = "";

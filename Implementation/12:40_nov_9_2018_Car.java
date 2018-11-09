@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Car {
   private int id;
+  private int intersectionId;
   private Intersection intersectionReference;
   private int direction;
   private int turningDirection;
@@ -19,9 +20,11 @@ public class Car {
   private int exitTime;
 
   // Car Constructor
-  public Car(int id, int direction, int turningDirection, 
-             int numBlocksBeforeTurning, Intersection intersection) {
+  public Car(int id,
+             int direction, int turningDirection, int numBlocksBeforeTurning,
+             Intersection intersection) {
     this.id = id;
+    this.intersectionId = intersectionId;
     this.intersectionReference = intersection;
     this.direction = direction;
     this.summary = "";

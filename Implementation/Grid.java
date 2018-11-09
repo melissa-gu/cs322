@@ -18,12 +18,14 @@
 // grid[i, j] = grid[row - 1][col - 1] are for "for loops"
 // and (row, col) = (numIntersections - intersection[row] + 1, 
 //                  intersection[col])
-// grid[i, j] = 
+import java.util.*;
+
 public class Grid {
   private int numIntersections;
   // The 2D representations of intersections.
   private Intersection[][] grid;
-  private IntersectionController[] intersectionControllers;
+  private ArrayList<IntersectionController> intersectionControllers = 
+    new ArrayList<IntersectionController>();
 
 
   public Intersection getIntersection(int row, int col) {
@@ -36,8 +38,6 @@ public class Grid {
   public Grid (int numIntersections) {
     this.numIntersections = numIntersections;
     grid = new Intersection[numIntersections][numIntersections];
-    intersectionControllers = 
-      new IntersectionController[numIntersections * numIntersections];
 
     // Construct instances of intersection and populate the grid.
     int intersection_id = numIntersections * numIntersections;
@@ -46,14 +46,18 @@ public class Grid {
         Intersection intersection = new Intersection(intersection_id,
           numIntersections - row + 1, col);
         grid[row - 1][col - 1] = intersection;
-
-        // Construct a corresponding intersection controller.
-        intersectionControllers[intersection_id - 1] = 
-          new IntersectionController(intersection);
         intersection_id--;
       }
     } // end of for (each row and column of grid)
 
+    // Add intersection controllers in order of processing
+    for (int row = numIntersections; row >= 1; row--) {
+      for (int col = 1; col <= numIntersections; col++) {
+        IntersectionController controller = 
+          new IntersectionController(grid[row-1][col-1]);
+        intersectionControllers.add(controller);
+      }
+    }
     connectIntersections();
   } // end of Grid()
 
@@ -118,6 +122,7 @@ public class Grid {
         summary += intersection.toString();
       }
     } // end of for (each intersection in grid)
+
     return summary;
   } // end of toString()
 }

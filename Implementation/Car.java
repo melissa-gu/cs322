@@ -78,7 +78,7 @@ public class Car {
   // Method that moves car to another intersection
   public void moveToNextIntersection(Intersection nextIntersection) {
     appendToSummary("car#" + id + " is removed from " + direction + 
-    	            " queue of intersection " + intersectionReference + 
+    	              " queue of intersection " + intersectionReference + 
                     " and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);

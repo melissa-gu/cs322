@@ -13,10 +13,11 @@
 //           = Intersection(row: numIntersections - row + 1, col)
 
 // Converting from intersection coordinates to grid coordinates:
-// grid[row,col] = (numIntersections - intersection[row], intersection[col] - 1)
+// grid[i,j] = (numIntersections - intersection[row], intersection[col] - 1)
 
-// grid[i, j] = grid[row - 1][col - 1]
-// = (numIntersections - intersection[row] + 1, intersection[col])
+// grid[i, j] = grid[row - 1][col - 1] are for "for loops"
+// and (row, col) = (numIntersections - intersection[row] + 1, 
+//                  intersection[col])
 // grid[i, j] = 
 public class Grid {
   private int numIntersections;

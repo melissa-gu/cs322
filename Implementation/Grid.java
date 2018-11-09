@@ -32,7 +32,7 @@ public class Grid {
 
   // Constructor
   // @param numIntersections: the number of intersections in one direction.
-  public Grid (int numIntersections, int maxSegmentCapacity) {
+  public Grid (int numIntersections) {
     this.numIntersections = numIntersections;
     grid = new Intersection[numIntersections][numIntersections];
     intersectionControllers = 
@@ -43,7 +43,7 @@ public class Grid {
     for (int row = 1; row <= numIntersections; row++) {
       for (int col = 1; col <= numIntersections; col++) {
         Intersection intersection = new Intersection(intersection_id,
-          numIntersections - row + 1, col, maxSegmentCapacity);
+          numIntersections - row + 1, col);
         grid[row - 1][col - 1] = intersection;
 
         // Construct a corresponding intersection controller.

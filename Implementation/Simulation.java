@@ -34,7 +34,7 @@ public class Simulation {
           cars.remove(car);
           exitedCars.add(car);
           numCarsExited++;
-          timeToExit = car.getExitTime() - car.getEntryTime();
+          double timeToExit = car.getExitTime() - car.getEntryTime();
           sumOfAllCarTimesToExit += timeToExit;
       }
     }
@@ -56,10 +56,11 @@ public class Simulation {
 
 
   // prints average time cars took to exit the grid
-  public double getAverage() {
-    String result;
+  public String getAverage() {
+    String result = "";
     result += "The average time cars took to exit the grid was ";
     result += sumOfAllCarTimesToExit/numCarsExited;
     result += " simulated time-steps";
     return result;
   }
+}

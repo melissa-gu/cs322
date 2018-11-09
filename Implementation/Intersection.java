@@ -16,9 +16,6 @@ public class Intersection {
   private int row;
   private int col;
 
-  // the maximum number of Car instances each segment can accomodate.
-  private int maxSegmentCapacity;
-
   // Queues representing the four ingoing segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Queue.
@@ -44,11 +41,10 @@ public class Intersection {
 
 
   // Constructor
-  public Intersection(int id, int row, int col, int maxSegmentCapacity) {
+  public Intersection(int id, int row, int col) {
     this.id = id;
     this.row = row;
     this.col = col;
-    this.maxSegmentCapacity = maxSegmentCapacity;
 
     for (Queue segment : ingoingSegments) {
       segment = new PriorityQueue<Car>();
@@ -88,9 +84,7 @@ public class Intersection {
     for (Queue<Car> segment : ingoingSegments) {
       Car potentialCar = segment.peek();
       if (potentialCar == null) continue;
-      if (potentialCar.getTimeLeftInSegment() <= 0) {
-        approachingCars.add(potentialCar);
-      }
+      approachingCars.add(potentialCar);
     } // end of for (segment in ingoingSegments)
     return approachingCars;
   } // end of getApproachingCars()
@@ -105,7 +99,7 @@ public class Intersection {
 
 
   private boolean checkIfQueueIsFull(int nextDirection) {
-    return ingoingSegments[nextDirection].size() > maxSegmentCapacity;
+    return false; // temporarily
   } // end of checkIfQueueuIsFull()
 
 

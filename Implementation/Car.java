@@ -18,6 +18,8 @@ public class Car {
   private int turningDirection;
   private int numBlocksBeforeTurning;
   private String summary;
+  private int entryTime;
+  private int exitTime;
 
   // Constructor
   public Car(int id, int intersectionId, int timeToTraverseSegment, 
@@ -59,6 +61,16 @@ public class Car {
   }
 
 
+  public void getExitTime() {
+    return exitTime;
+  }
+
+
+  public void getEntryTime() {
+    return entryTime;
+  }
+
+  
   public int getId() {
     return id;
   }

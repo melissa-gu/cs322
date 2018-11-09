@@ -24,8 +24,6 @@ public class Grid {
   private Intersection[][] grid;
   private IntersectionController[] intersectionControllers;
 
-  private int maxSegmentCapacity;
-
 
   public Intersection getIntersection(int row, int col) {
     return grid[numIntersections - row + 1][col];

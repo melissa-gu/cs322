@@ -9,8 +9,6 @@
 public class Simulation {
   private int numIntersectionsInOneDirection;
   private int numberOfCars;
-  private double sumOfAllCarTimesToExit;
-  private int numCarsExited;
   
   public Simulation(int numIntersectionsInOneDirection, int numberOfCars) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
@@ -37,9 +35,7 @@ public class Simulation {
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode, 
                         int numBlocksBeforeTurning, int turnDirectionCode) {
-    Intersection intersectionReference = grid.getIntersection(row, col);
-    Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,
-      numBlocksBeforeTurning, intersectionReference);
+
   } // end of insertCar()
 
 
@@ -48,12 +44,12 @@ public class Simulation {
   } // end of toString()
 
 
-
 // prints average time cars took to exit the grid
-  public double getAverage() {
-    String result;
-    result += "The average time cars took to exit the grid was ";
-    result += sumOfAllCarTimesToExit/numCarsExited;
-    result += " simulated time-steps";
-    return result;
-  }
+simulation.getAverage() {
+ String result;
+ result += "The average time cars took to exit the grid was ";
+ result += sumOfAllCarTimesToExit/numCarsExited;
+ result += " simulated time-steps";
+ return result;
+}
+}

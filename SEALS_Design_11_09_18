@@ -290,26 +290,26 @@ Responsibility:
    and other variables to construct instance of Car class
 2. Receive message from Simulation instance at each time unit to decrement
    timeLeftInSegment value at each time unit
-   2.1 When the car's intersection ID is equal to -1and the 
+   2.1 When the car's intersection is equal to null and the 
        timeLeftInSegment value is 0, the Car instance will send a message to the 
        Simulation class that the Car instance has left the Grid instance. The 
        Car instance will also receive a message from the Simulation class to the 
        car's summary to reflect that it has been removed from the Grid instance.
 3. Upon initialization, receive message from Simulation instance to enqueue this
    instance of Car in a queue of the Intersection instance corresponding to
-   the intersection ID
+   the intersection reference
 4. Upon exiting an Intersection instance, the instance of Car will a receive
-   message from its current Intersection instance about which Intersection ID
+   message from its current Intersection instance about which Intersection
    the car is entering next and the direction it is traveling. If
    the car is no longer traveling towards an intersection, but is instead
-   exiting the instance of Grid, the intersection ID will be -1. The car
-   will update its intersection ID, the variable representing its direction,
-   potentially decrement the integer representing the number of blocks the car
-   will travel before turning, and then do (5) below if the Intersection ID is
-   not -1.
+   exiting the instance of Grid, the intersection reference will be null. The 
+   car will update its intersection reference, the variable representing its 
+   direction, potentially decrement the integer representing the number of 
+   blocks the car will travel before turning, and then do (5) below if the 
+   Intersection reference is not null.
 5. Send message to instance of Intersection corresponding to the car's
-   intersection ID to enqueue the car in the correct queue based on the car's
-   direction
+   intersection reference to enqueue the car in the correct queue based on the 
+   car's direction
 6. Sends a message to Simulation about whether this instance of Car has
    exited the grid.
 7. Send message to Intersection instance at each time-step containing a string 

@@ -1,16 +1,16 @@
-// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
+// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 // *****************************************************************************
 // *****************************************************************************
 // **** Car
 // *****************************************************************************
 // *****************************************************************************
-// The Car class is a representation of a Car in the simulation.  Cars are
+// The Car class is a representation of a car in the simulation. Cars are
 // constructed in the Simulation class as a result of the input received from
 // TrafficTesterView. Each car has a series of variables that are used to
-// determine the route taken by the Car inside the Car.  In this design
-// Intersections send messages to Cars to receive get their attributes and
-// determine where to move them in the Grid.
+// determine the route taken by the Car inside the Grid instance. In this design
+// intersections send messages to cars to get their attributes and determine 
+// where to move them in the Grid instance.
 import java.util.*;
 
 public class Car {

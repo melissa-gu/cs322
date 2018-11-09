@@ -74,7 +74,7 @@ public class TrafficTesterView {
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();
-      Simulation.insertCar(carID, col, row, segmentDirectionCode, 
+      simulation.insertCar(carID, col, row, segmentDirectionCode, 
                            numBlocksBeforeTurning, turnDirectionCode);
       System.out.println("  is born in the segment located at col " + col +
                          " and row " + row + ", that aims " +

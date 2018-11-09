@@ -26,7 +26,7 @@ public class Grid {
 
 
   public Intersection getIntersection(int row, int col) {
-    return grid[numIntersections - row + 1][col];
+    return grid[numIntersections - row][col - 1];
   } // end of getIntersection()
 
 

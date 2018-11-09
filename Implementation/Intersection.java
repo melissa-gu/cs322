@@ -6,6 +6,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
+import java.util.*;
 
 public class Intersection {
   // id identifies which intersection this Intersection instance is.
@@ -21,7 +22,7 @@ public class Intersection {
   // Queues representing the four ingoing segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Queue.
-  private Queue<Car>[] ingoingSegments;
+  private PriorityQueue<Car>[] ingoingSegments;
 
   // Four next intersections of this intersection. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
@@ -29,7 +30,7 @@ public class Intersection {
   private Intersection[] nextIntersections;
 
   // 2x2 intersection grids of the NW, NE, SE, SW in clockwise order.
-  private Car[] intersectionGrid;
+  private Car[][] intersectionGrid;
 
   // Setters and getters
   public int getId() {
@@ -37,7 +38,7 @@ public class Intersection {
   } // end of getId()
 
 
-  public setNextIntersections(Intersection[] nextIntersections) {
+  public void setNextIntersections(Intersection[] nextIntersections) {
     this.nextIntersections = nextIntersections;
   } // end of setNextIntersections()
 
@@ -53,13 +54,18 @@ public class Intersection {
       segment = new PriorityQueue<Car>();
     } // end of for (segment : ingoingSegments)
 
+    intializeIntersectionGrid();
+  } // end of Intersection() constructor
+
+
+  private void intializeIntersectionGrid() {
     intersectionGrid = new Car[2][2];
     for (int row = 0; row < intersectionGrid.length; row ++) {
       for (int col = 0; col < intersectionGrid[0].length; col++) {
         intersectionGrid[row][col] = null;
       }
     } // end of for (row, col in intersectionGrid)
-  } // end of Intersection() constructor
+  } // end of initializeIntersectionGrid()
 
 
   public boolean intersectionIsEmpty() {
@@ -138,8 +144,8 @@ public class Intersection {
 
 
   public void moveCarIntoIntersection(Car car) {
-    Queue segment = ingoingSegments[car.getCarDirection()];
-    Car carToDequeue = segment.dequeue();
+    PriorityQueue<Car> segment = ingoingSegments[car.getDirection()];
+    Car carToDequeue = segment.poll();
     if (carToDequeue != car) {
       // throw error
     }
@@ -162,12 +168,11 @@ public class Intersection {
     if (car.getTurningDirection() == 1) {
       car.setDirection(calculateNextDirection(car.getDirection(),
         car.getTurningDirection()));
-    }
+    } // end of if (car.getTurningDirection() == 1)
   } // end of moveCarIntoIntersection()
 
 
   public void updateIntersectionGrid() {
-
     // Check the NW slot
     if (intersectionGrid[0][0] != null) {
       Car car = intersectionGrid[0][0];
@@ -201,13 +206,13 @@ public class Intersection {
 
 
   private void updateNWSlot(Car car) {
-    intersectionGrid[0, 0] = null;
+    intersectionGrid[0][0] = null;
     switch(car.getDirection()) {
       case 0:
-        intersectionGrid[1, 0] = car;
+        intersectionGrid[1][0] = car;
         break;
       case 1:
-        intersectionGrid[0, 1] = car;
+        intersectionGrid[0][1] = car;
         break;
       default:
         Intersection nextIntersection = nextIntersections[car.getDirection()];
@@ -219,13 +224,13 @@ public class Intersection {
 
 
   private void updateSWSlot(Car car) {
-    intersectionGrid[1, 0] = null;
+    intersectionGrid[1][0] = null;
     switch(car.getDirection()) {
       case 1:
-        intersectionGrid[1, 1] = car;
+        intersectionGrid[1][1] = car;
         break;
       case 2:
-        intersectionGrid[0, 0] = car;
+        intersectionGrid[0][0] = car;
         break;
       default:
         Intersection nextIntersection = nextIntersections[car.getDirection()];
@@ -237,13 +242,13 @@ public class Intersection {
 
 
   private void updateNESlot(Car car) {
-    intersectionGrid[0, 1] = null;
+    intersectionGrid[0][1] = null;
     switch(car.getDirection()) {
       case 0:
-        intersectionGrid[1, 1] = car;
+        intersectionGrid[1][1] = car;
         break;
       case 3:
-        intersectionGrid[0, 0] = car;
+        intersectionGrid[0][0] = car;
         break;
       default:
         Intersection nextIntersection = nextIntersections[car.getDirection()];
@@ -255,13 +260,13 @@ public class Intersection {
 
 
   private void updateSESlot(Car car) {
-    intersectionGrid[1, 1] = null;
+    intersectionGrid[1][1] = null;
     switch(car.getDirection()) {
       case 2:
-        intersectionGrid[0, 1] = car;
+        intersectionGrid[0][1] = car;
         break;
       case 3:
-        intersectionGrid[1, 0] = car;
+        intersectionGrid[1][0] = car;
         break;
       default:
         Intersection nextIntersection = nextIntersections[car.getDirection()];
@@ -278,17 +283,38 @@ public class Intersection {
 
   // Returns summary of the intersection queues and cars
   public String toString() {
-    String summary;
-    if southQueue.isEmpty() {
-      summary.append("incoming lane having direction SOUTHWARD is empty");
+    String summary = "";
+
+    for (int i = 0; i < ingoingSegments.length; i++) {
+      String direction = "";
+
+      switch(i) {
+        case 0:
+          direction = "SOUTHWARD";
+          break;
+        case 1:
+          direction = "EASTWARD";
+          break;
+        case 2:
+          direction = "NORTHWARD";
+          break;
+        case 3:
+          direction = "WESTWARD";
+          break;
+      }
+      if (ingoingSegments[i].size() == 0) {
+        summary += ("incoming lane having direction " + direction + 
+          " is empty");
+      } else {
+        summary += ("incoming lane having direction " + direction + 
+          " is nonempty");
+      }
+
+      for (Car car : ingoingSegments[i]) {
+        summary += (car.toString());
+      }
     }
-    else {
-      summary.append("incoming lane having direction SOUTHWARD is nonempty");
-    }
-    for car in southQueue {
-      summary.append(car.toString());
-    }
-    // .. repeat for all queues
+
     return summary;
   } // end of toString()
 

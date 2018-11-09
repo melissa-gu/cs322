@@ -6,6 +6,8 @@
 // *****************************************************************************
 // *****************************************************************************
 
+import java.util.*;
+
 public class Car {
   private int id;
   private int intersectionId;
@@ -42,6 +44,11 @@ public class Car {
   }
 
 
+  public void setDirection (int direction) {
+    direction = direction;
+  }
+
+
   public int getTurningDirection() {
     return turningDirection;
   }
@@ -66,7 +73,7 @@ public class Car {
   // Method that moves car to another intersection
   public void moveToNextIntersection(Intersection nextIntersection) {
     appendToSummary("car#" + id + " is removed from " + direction + 
-    	              " queue of intersection " + intersectionReference + 
+    	            " queue of intersection " + intersectionReference + 
                     " and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);

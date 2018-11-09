@@ -6,35 +6,15 @@
 // *****************************************************************************
 // *****************************************************************************
 
-
-// Converting from grid coordinates to Intersection coordinates:
-// row and col are iterators from 1 to numIntersections inclusive.
-// grid[i,j] = grid[row - 1][col - 1]
-//           = Intersection(row: numIntersections - row + 1, col)
-
-// Converting from intersection coordinates to grid coordinates:
-// grid[row,col] = (numIntersections - intersection[row], intersection[col] - 1)
-
-// grid[i, j] = grid[row - 1][col - 1]
-// = (numIntersections - intersection[row] + 1, intersection[col])
-// grid[i, j] = 
 public class Grid {
   private int numIntersections;
   // The 2D representations of intersections.
   private Intersection[][] grid;
   private IntersectionController[] intersectionControllers;
 
-  private int maxSegmentCapacity;
-
-
-  public Intersection getIntersection(int row, int col) {
-    return grid[numIntersections - row + 1][col];
-  } // end of getIntersection()
-
-
   // Constructor
   // @param numIntersections: the number of intersections in one direction.
-  public Grid (int numIntersections, int maxSegmentCapacity) {
+  public Grid (int numIntersections) {
     this.numIntersections = numIntersections;
     grid = new Intersection[numIntersections][numIntersections];
     intersectionControllers = 
@@ -42,10 +22,10 @@ public class Grid {
 
     // Construct instances of intersection and populate the grid.
     int intersection_id = numIntersections * numIntersections;
-    for (int row = 1; row <= numIntersections; row++) {
-      for (int col = 1; col <= numIntersections; col++) {
-        Intersection intersection = new Intersection(intersection_id,
-          numIntersections - row + 1, col, maxSegmentCapacity);
+    for (int row = 1; row < numIntersections; row++) {
+      for (int col = 1; col < numIntersections; col++) {
+        intersection = new Intersection(intersection_id,
+          numIntersections - row - 1, col - 1);
         grid[row - 1][col - 1] = intersection;
 
         // Construct a corresponding intersection controller.
@@ -56,8 +36,7 @@ public class Grid {
     } // end of for (each row and column of grid)
 
     connectIntersections();
-  } // end of Grid()
-
+  }
 
   private void connectIntersections() {
     for (int row = 1; row <= numIntersections; row++) {
@@ -95,30 +74,50 @@ public class Grid {
         intersection.setNextIntersections(nextIntersections);
       }
     } // end of for (each row and column of grid)
-  } // end of connectIntersections()
-
+  }
 
   public void update() {
     for (IntersectionController controller : intersectionControllers) {
       controller.update();
     } // end of for (each controller in intersectionControllers)
-  } // end of update()
+  }
   
-
   public String toString() {
-    String summary = "";
-    // Intersections are processed in the order of  
-    // row 1 intersections, from left to right
-    // row 2 intersections, from left to right, etc, for all rows.
-    // but row i corresponds to row [num_intersections - i] of the grid.
-    // and col i corresponds to col [i - 1] of the grid.
-    int rowNumber = 1;
-    for (int row = numIntersections - rowNumber; row >= 0; row--) {
-      for (int col = 1; col <= numIntersections; col++) {
-        Intersection intersection = grid[row][col - 1];
-        summary += intersection.toString();
+    String summary;
+    for (int i = 1; i <= numIntersections; i++) {
+      for (int j = 1; j <= numIntersections; j++) {
+        summary.append(intersection[i,j].toString());
       }
     } // end of for (each intersection in grid)
     return summary;
-  } // end of toString()
+  }
+}
+
+
+
+// The class name: Grid
+// Responsibility:
+// 1. Receive message from Simulation instance to construct the instance of Grid
+//    with information about the number of Intersection instances
+// 2. Initialize 2D array of Intersection instances, sending message to each
+//    instance with an integer ID representing the Intersection
+// 3. Initialize an instance of IntersectionController for each Intersection with
+//    an integer ID representing its corresponding Intersection instance
+// 4. Receive message from Simulation instance to update the Intersection instances
+//    at each time-step by doing (4) below
+// 5. Send message to each IntersectionController instance to update the state of
+//    its corresponding Intersection at each time-step
+// 6. Receive message from each Intersection instance containing a string summary 
+//    of the segments and the cars occupying the segments
+// 7. Send message to Simulation instance at each time-step containing summary of 
+//    each Intersection instance.
+// Collaboration:
+// 1. Simulation Class
+// 2. Intersection Class
+// 3. IntersectionController Class
+// Pseudocode:
+// grid sends message to each traffic controller to update
+grid.update() {
+    for intersection_controller : intersection_controllers:
+        intersection_controller.update();
 }

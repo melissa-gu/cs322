@@ -1,0 +1,16 @@
++ Write Authors: SEALS (Jessica, Melissa, Tracy, Will) in a comment in first
+  line of code file and add explanation for the class. Add blocks of asterisk too.
++ Consistent indentation style and {} style
++ Variable/method name < 40 characters, camelCase
++ No tab character, line < 80 columns
++ Blank on either side of operators
++ Indent by multiple of two blank spaces.
++ Method definition <= 60 lines of code, including comments.
++ To the right of the "}" at the end of a method, put "end of" and the method name
+in the comment.  Put exactly two blank lines after the end of each method.  
++ To the right of the "}" that ends an if statement, comment "end of if (...)";
+ ... is the condition of the if statement (pseudocode permitted).
++ To the right of the "}" that ends a for statement, comment "end of for (...)";
+ ... is relates to the specific for statement (pseudocode permitted). Same with while loop.
++ In for loop, use col or row instead of i to iterate if applies, and starts counting from 1.
++ avoid using lower-case L as variable name since it looks like 1.

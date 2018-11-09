@@ -34,17 +34,17 @@ public class IntersectionController {
         if (canMoveBasedOnRequirementsDoc(car) &&
           !myIntersection.nextSegmentIsFull(car) ) {
             myIntersection.moveCarIntoIntersection(car);
-          }
         }
+      } // end of (for Car car : cars)
     } else {
       myIntersection.updateIntersectionGrid();
-    }     
-  }
+    }
+  } // end of update()
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
     return true;
-  }
+  } // end of canMoveBasedOnRequirementsDoc()
 
 }
 

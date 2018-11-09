@@ -19,13 +19,13 @@ public class Intersection {
   // Queues representing the four ingoing segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Queue.
-  private ArrayList<PriorityQueue<Car>> ingoingSegments = 
-    new ArrayList<PriorityQueue<Car>>();
+  private ArrayList<Queue<Car>> ingoingSegments = 
+    new ArrayList<Queue<Car>>();
 
   // Four next intersections of this intersection. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this array of Intersection instances.
-  private Intersection[] nextIntersections;
+  private Intersection[] nextIntersections = new Intersection[4];
 
   // 2x2 intersection grids of the NW, NE, SE, SW in clockwise order.
   private Car[][] intersectionGrid;
@@ -48,7 +48,7 @@ public class Intersection {
     this.col = col;
 
     for (int i = 0; i < 4; i++) {
-      PriorityQueue<Car> segment = new PriorityQueue<Car>();
+      Queue<Car> segment = new LinkedList<Car>();
       ingoingSegments.add(segment);
     }
 
@@ -97,6 +97,7 @@ public class Intersection {
     int nextDirection = calculateNextDirection(car.getDirection(),
       car.getTurningDirection());
     Intersection nextIntersection = nextIntersections[nextDirection];
+    if (nextIntersection == null) return true;
     return nextIntersection.checkIfQueueIsFull(nextDirection);
   } // end of nextSegmentIsFull()
 
@@ -142,7 +143,7 @@ public class Intersection {
 
 
   public void moveCarIntoIntersection(Car car) {
-    PriorityQueue<Car> segment = ingoingSegments.get(car.getDirection());
+    Queue<Car> segment = ingoingSegments.get(car.getDirection());
     Car carToDequeue = segment.poll();
     if (carToDequeue != car) {
       // throw error

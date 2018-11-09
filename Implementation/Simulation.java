@@ -15,7 +15,7 @@ public class Simulation {
   private Grid grid;
   private ArrayList<Car> cars;
   private ArrayList<Car> exitedCars;
-  
+
   public Simulation(int numIntersectionsInOneDirection) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
     grid = new Grid(numIntersectionsInOneDirection);
@@ -36,12 +36,11 @@ public class Simulation {
           numCarsExited++;
           double timeToExit = car.getExitTime() - car.getEntryTime();
           sumOfAllCarTimesToExit += timeToExit;
-      } // end for (Car car: cars) 
+      } // end for (Car car: cars)
     }
   } // end of update ()
 
-
-  public void insertCar(int carID, int col, int row, int segmentDirectionCode, 
+  public void insertCar(int carID, int col, int row, int segmentDirectionCode,
                         int numBlocksBeforeTurning, int turnDirectionCode) {
     Intersection intersectionReference = grid.getIntersection(row, col);
     Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,

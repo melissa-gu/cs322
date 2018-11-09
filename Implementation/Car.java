@@ -5,7 +5,12 @@
 // **** Car
 // *****************************************************************************
 // *****************************************************************************
-
+// The Car class is a representation of a Car in the simulation.  Cars are
+// constructed in the Simulation class as a result of the input received from
+// TrafficTesterView. Each car has a series of variables that are used to
+// determine the route taken by the Car inside the Car.  In this design
+// Intersections send messages to Cars to receive get their attributes and
+// determine where to move them in the Grid.
 import java.util.*;
 
 public class Car {
@@ -21,7 +26,7 @@ public class Car {
 
   // Constructor
   public Car(int id,
-             int direction, int turningDirection, int numBlocksBeforeTurning, 
+             int direction, int turningDirection, int numBlocksBeforeTurning,
              Intersection intersection) {
     this.id = id;
     this.intersectionId = intersectionId;
@@ -71,20 +76,20 @@ public class Car {
 
   // Update method
   public void update() {
-    
+
   }
 
 
   // Method that moves car to another intersection
   public void moveToNextIntersection(Intersection nextIntersection) {
-    appendToSummary("car#" + id + " is removed from " + direction + 
-    	            " queue of intersection " + intersectionReference + 
+    appendToSummary("car#" + id + " is removed from " + direction +
+    	            " queue of intersection " + intersectionReference +
                     " and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);
-    appendToSummary(direction + "queue of intersection " + 
+    appendToSummary(direction + "queue of intersection " +
                     intersectionReference.getId());
-  } 
+  }
 
 
   public boolean hasLeftGrid() {
@@ -97,7 +102,7 @@ public class Car {
   }
 
 
-  // Returns 
+  // Returns
   public String toString() {
     String temp = this.summary;
     this.summary = "";

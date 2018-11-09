@@ -43,7 +43,7 @@ public class IntersectionController {
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
-    return true;
+    return false;
   } // end of canMoveBasedOnRequirementsDoc()
 
 }

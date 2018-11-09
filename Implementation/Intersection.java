@@ -36,6 +36,16 @@ public class Intersection {
   } // end of getId()
 
 
+  public int getRow() {
+    return row;
+  } // end of getRow()
+
+
+  public int getCol() {
+    return col;
+  } // end of getCol()
+
+
   public void setNextIntersections(Intersection[] nextIntersections) {
     this.nextIntersections = nextIntersections;
   } // end of setNextIntersections()

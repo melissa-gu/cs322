@@ -17,7 +17,6 @@ public class Simulation {
   private ArrayList<Car> exitedCars;
   
   public Simulation(int numIntersectionsInOneDirection) {
-    System.out.println("Num Intersection: " + numIntersectionsInOneDirection);
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
     grid = new Grid(numIntersectionsInOneDirection);
     cars = new ArrayList<Car>();

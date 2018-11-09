@@ -37,7 +37,7 @@ public class Simulation {
           numCarsExited++;
           double timeToExit = car.getExitTime() - car.getEntryTime();
           sumOfAllCarTimesToExit += timeToExit;
-      }
+      } // end for (Car car: cars) 
     }
   } // end of update ()
 
@@ -63,5 +63,7 @@ public class Simulation {
     result += sumOfAllCarTimesToExit/numCarsExited;
     result += " simulated time-steps";
     return result;
-  }
+  } // end of getAverage()
+
+
 }

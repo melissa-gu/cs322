@@ -84,6 +84,12 @@ public class TrafficTesterView {
       System.out.println("  and plans to " +
                          convertToTurnDirection(turnDirectionCode));
     } // end for
+
+    // run the simulation (one time-step for now)
+    for (int i = 0; i < 1; i++) {
+      simulation.update();
+      System.out.println(simulation.toString());
+    } // end for
   } // main
 
 

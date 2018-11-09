@@ -281,7 +281,8 @@ public class Intersection {
 
   // Returns summary of the intersection queues and cars
   public String toString() {
-    String summary = "";
+    String summary = "At the intersection located at col " + col + " and row " 
+                     + row + "\n";
 
     for (int i = 0; i < ingoingSegments.size(); i++) {
       String direction = "";
@@ -301,11 +302,11 @@ public class Intersection {
           break;
       }
       if (ingoingSegments.get(i).size() == 0) {
-        summary += ("incoming lane having direction " + direction + 
-          " is empty");
+        summary += ("  incoming lane having direction " + direction + 
+          " is empty\n");
       } else {
-        summary += ("incoming lane having direction " + direction + 
-          " is nonempty");
+        summary += ("  incoming lane having direction " + direction + 
+          " is nonempty\n");
       }
 
       for (Car car : ingoingSegments.get(i)) {

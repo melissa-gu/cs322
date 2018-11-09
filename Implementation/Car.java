@@ -30,6 +30,7 @@ public class Car {
     this.summary = "";
     this.turningDirection = turningDirection;
     this.numBlocksBeforeTurning = numBlocksBeforeTurning;
+    intersectionReference.addCarToQueue(this);
   }
 
 

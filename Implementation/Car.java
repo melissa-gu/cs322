@@ -10,7 +10,6 @@ import java.util.*;
 
 public class Car {
   private int id;
-  private int intersectionId;
   private Intersection intersectionReference;
   private int timeLeftInSegment;
   private int timeToTraverseSegment;
@@ -20,11 +19,10 @@ public class Car {
   private String summary;
 
   // Constructor
-  public Car(int id, int intersectionId, int timeToTraverseSegment, 
+  public Car(int id, int timeToTraverseSegment, 
              int direction, int turningDirection, int numBlocksBeforeTurning, 
              Intersection intersection) {
     this.id = id;
-    this.intersectionId = intersectionId;
     this.intersectionReference = intersection;
     this.timeToTraverseSegment = timeToTraverseSegment;
     this.timeLeftInSegment = timeToTraverseSegment;

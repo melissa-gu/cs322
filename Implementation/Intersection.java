@@ -140,6 +140,7 @@ public class Intersection {
         }
         return 3;
     }
+    return -1;
   } // end of calculateNextDirection()
 
 

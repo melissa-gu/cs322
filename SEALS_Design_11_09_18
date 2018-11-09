@@ -372,10 +372,10 @@ car.toString() {
 
 The class name: IntersectionController
 Responsibility:
-1. Receive message from Grid instance containing Intersection instance to 
-   construct corresponding instance of IntersectionController class
+1. Receive message from Grid instance containing information about intersection
+   ID to construct instance of IntersectionController class
 2. Receive message from Grid instance at each time-step to update the
-   Intersection instance that this IntersectionController owns
+   Intersection instance corresponding to its Intersection ID
 3. Receive message from Intersection instance containing information about which
    slots of the 2D array are occupied
 4. Receive message from Intersection instance containing information about Car

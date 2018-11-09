@@ -7,23 +7,17 @@
 // *****************************************************************************
 
 
-// NOTE on coordinates-conversion:
-// a. Notation:
-// Coordinates of intersection are formatted as intersection[col, row], with:
-// 1 <= intersection.row <= numIntersections,
-// 1 <= intersection.col <= numIntersections.
-// Coordinates of the corresponding intersection element stored in the grid are
-// formatted as grid[i][j]. When looping through grid with double for loops, 
-// counters are grid.row = i + 1, grid.col = j + 1;
-// 0 <= grid.i < numIntersections, 0 <= grid.j < numIntersections
-// 
-// b. Conversion rules
-// 1. grid[i][j] = grid[row - 1][col - 1]
-// 2. intersection.row = numIntersections - grid.i
-//                     = numIntersections - grid.row + 1
-//    intersection.col = grid.j + 1 = grid.col
-// 3. grid.row = grid.i + 1 = (numIntersections - intersection.row) + 1.
-//    grid.col = grid.j + 1 = intersection.col
+// Converting from grid coordinates to Intersection coordinates:
+// row and col are iterators from 1 to numIntersections inclusive.
+// grid[i,j] = grid[row - 1][col - 1]
+//           = Intersection(row: numIntersections - row + 1, col)
+
+// Converting from intersection coordinates to grid coordinates:
+// grid[i,j] = (numIntersections - intersection[row], intersection[col] - 1)
+
+// grid[i, j] = grid[row - 1][col - 1] are for "for loops"
+// and (row, col) = (numIntersections - intersection[row] + 1, 
+//                  intersection[col])
 import java.util.*;
 
 public class Grid {

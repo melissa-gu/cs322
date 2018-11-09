@@ -5,7 +5,11 @@
 // **** IntersectionController
 // *****************************************************************************
 // *****************************************************************************
-
+// The IntersectionController class represents the rules that controls each
+// Intersection. IntersectionControllers are constructed in the Grid class
+// and each instance owns an Intersection class to control all the approaching
+// cars' movements of that intersection based on rules specified in the 
+// requirements document.
 import java.util.*;
 
 public class IntersectionController {

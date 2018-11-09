@@ -5,7 +5,9 @@
 // **** Simulation
 // *****************************************************************************
 // *****************************************************************************
-
+// Simulation creates an instance of Grid and creates an ArrayList of Car
+// instances.  TrafficTesterView sends messages to Simulation to construct
+// instances of Car that are placed in the list.  
 import java.util.*;
 
 public class Simulation {

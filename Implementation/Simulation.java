@@ -1,13 +1,11 @@
-// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
+// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 // *****************************************************************************
 // *****************************************************************************
 // **** Simulation
 // *****************************************************************************
 // *****************************************************************************
-// Simulation creates an instance of Grid and creates an ArrayList of Car
-// instances.  TrafficTesterView sends messages to Simulation to construct
-// instances of Car that are placed in the list.  
+
 import java.util.*;
 
 public class Simulation {
@@ -27,19 +25,19 @@ public class Simulation {
 
 
   public void update() {
-      grid.update();
-      for (Car car : cars) {
-        car.update();
-        // If car is exiting the grid
-        if (car.hasLeftGrid()) {
-          car.appendToSummary("car#" + car.getId() + " has left the grid");
-          cars.remove(car);
-          exitedCars.add(car);
-          numCarsExited++;
-          double timeToExit = car.getExitTime() - car.getEntryTime();
-          sumOfAllCarTimesToExit += timeToExit;
-      } // end for (Car car: cars)
-    }
+    grid.update();
+    for (Car car : cars) {
+      car.update();
+      // If car is exiting the grid
+      if (car.hasLeftGrid()) {
+        car.appendToSummary("car#" + car.getId() + " has left the grid");
+        cars.remove(car);
+        exitedCars.add(car);
+        numCarsExited++;
+        double timeToExit = car.getExitTime() - car.getEntryTime();
+        sumOfAllCarTimesToExit += timeToExit;
+    } // end for (Car car: cars)
+  }
   } // end of update ()
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,

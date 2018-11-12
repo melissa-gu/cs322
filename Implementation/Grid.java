@@ -1,5 +1,5 @@
-// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 
+// Authors: SEALS (Jessica, Melissa, Tracy, Will)
 // *****************************************************************************
 // *****************************************************************************
 // **** Grid
@@ -53,8 +53,8 @@ public class Grid {
           numIntersections - row + 1, col);
         grid[row - 1][col - 1] = intersection;
         intersection_id--;
-      }
-    } // end of for (each row and column of grid)
+      } // end of for (each col of grid)
+    } // end of for (each row of grid)
 
     // Add intersection controllers in order of processing
     for (int row = numIntersections; row >= 1; row--) {
@@ -62,8 +62,8 @@ public class Grid {
         IntersectionController controller = 
           new IntersectionController(grid[row-1][col-1]);
         intersectionControllers.add(controller);
-      }
-    }
+      } // end of for (each col of grid)
+    } 
     connectIntersections();
   } // end of Grid()
 
@@ -72,36 +72,36 @@ public class Grid {
     for (int row = 1; row <= numIntersections; row++) {
       for (int col = 1; col <= numIntersections; col ++) {
         Intersection intersection = grid[row-1][col-1];
-        Intersection[] nextIntersections = new Intersection[4];
+        Intersection[] nextIntersection = new Intersection[4];
         // Southward next intersection
         if (row + 1 <= numIntersections) {
-          nextIntersections[0] = grid[row][col - 1];
+          nextIntersection[0] = grid[row][col - 1];
         } else {
-          nextIntersections[0] = null;
+          nextIntersection[0] = null;
         }
 
         // Eastward next intersection
         if (col - 1 >= 1) {
-          nextIntersections[1] = grid[row - 1][col - 2];
+          nextIntersection[1] = grid[row - 1][col - 2];
         } else {
-          nextIntersections[1] = null;
+          nextIntersection[1] = null;
         }
 
         // Northward next intersection
         if (row - 1 >= 1) {
-          nextIntersections[2] = grid[row - 2][col - 1];
+          nextIntersection[2] = grid[row - 2][col - 1];
         } else {
-          nextIntersections[2] = null;
+          nextIntersection[2] = null;
         }
 
         // Westward next intersection
         if (col + 1 <= numIntersections) {
-          nextIntersections[3] = grid[row - 1][col];
+          nextIntersection[3] = grid[row - 1][col];
         } else {
-          nextIntersections[3] = null;
+          nextIntersection[3] = null;
         }
 
-        intersection.setNextIntersections(nextIntersections);
+        intersection.setNextIntersection(nextIntersection);
       }
     } // end of for (each row and column of grid)
   } // end of connectIntersections()

@@ -149,10 +149,10 @@ public class Intersection {
   intersection.toString() {
     String summary;
     if southQueue.isEmpty() {
-      summary.append("incoming lane having direction SOUTHWARD is empty");
+      summary.append("incoming segment having direction SOUTHWARD is empty");
     }
     else {
-      summary.append("incoming lane having direction SOUTHWARD is nonempty");
+      summary.append("incoming segment having direction SOUTHWARD is nonempty");
     }
     for car in southQueue {
       summary.append(car.toString());

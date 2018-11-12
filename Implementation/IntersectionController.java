@@ -11,7 +11,7 @@ import java.util.*;
 public class IntersectionController {
 
   private Intersection myIntersection;
-  private ArrayList<Car> cars;
+  private ArrayList<Car> approachingCar;
 
 	// Constructor
 	public IntersectionController(Intersection intersection) {
@@ -21,10 +21,10 @@ public class IntersectionController {
 	public void update() {
     // Check whether no car is traveling within the 2x2 grid of the intersection
     boolean empty = myIntersection.intersectionIsEmpty();
-    cars = myIntersection.getApproachingCars();
+    approachingCar = myIntersection.getApproachingCars();
 
     if (empty) {
-    	for (Car car : cars) {
+    	for (Car car : approachingCar) {
         // Decide which car can move into intersection based on:
         // 1. priority of the car instance's turning direction, specified in
         //  Requirements Doc
@@ -43,6 +43,53 @@ public class IntersectionController {
   
 
   private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
+    int carTurn = curCar.getTurningDirection();
+    int carDir = curCar.getDirection();
+
+    // Loop through approaching cars to check whether the current car can move
+    for (Car car : approachingCar) {
+      if (car == curCar) {
+        continue;
+      }
+      int otherCarTurn = car.getTurningDirection();
+      int otherCarDir = car.getDirection();
+      if (carTurn == 0) {
+        // Go straight
+        if (carTurn == otherCarTurn) {
+          if (carDir > otherCarDir) {
+            return false;
+          }
+        }
+      }
+      else if (carTurn == 1) {
+        // Turn right
+        if (otherCarTurn == 0) {
+          // Conflict with car going straight
+          if ( (carDir - otherCarDir == 1) || (carDir - otherCarDir == -3) ) {
+            return false;
+          }
+        }
+      }
+      else {
+        // Turn left == -1
+        if (otherCarTurn == 0) {
+          return false;
+        }
+        else if (otherCarTurn == 1){
+          // No conflict if the other car turning right in this specified
+          // direction, otherwise conflict
+          if ( (carDir - otherCarDir != 1) || (carDir - otherCarDir != -3) ) {
+            return false;
+          }
+        } else {
+            if (carDir > otherCarDir) {
+              return false;
+            }
+        }
+
+      }
+
+    }
     return true;
   } // end of canMoveBasedOnRequirementsDoc()
 

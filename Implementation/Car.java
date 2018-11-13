@@ -37,7 +37,7 @@ public class Car {
 
 
   public void setDirection (int direction) {
-    direction = direction;
+    this.direction = direction;
   } // end of setDirection()
 
 
@@ -78,13 +78,6 @@ public class Car {
     intersectionReference = nextIntersection;
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);
-      appendToSummary("  and placed into " + 
-                    TrafficTesterView.convertToSegmentDirection(direction)
-                    + " queue of intersection "
-                    + "[" + intersectionReference.getCol() + ", " +
-                    intersectionReference.getRow() + "].\n");
-    } else {
-      appendToSummary("a " + direction + "segment exiting the grid.\n");
     }
   } // end of moveToNextIntersection()
 

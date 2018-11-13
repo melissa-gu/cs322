@@ -313,7 +313,7 @@ public class Intersection {
         summary += (car.toString());
       }
     }
-    // summary +="\n";
+    summary +="\n";
 
     return summary;
   } // end of toString()

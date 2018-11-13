@@ -49,7 +49,7 @@ public class Intersection {
 
     for (int i = 0; i < 4; i++) {
       Queue<Car> segment = new LinkedList<Car>();
-      incomingSegment.set(i, segment);
+      incomingSegment.add(i, segment);
     } // end of for(i = 0; i < 4; i++)
 
     intializeIntersectionGrid();
@@ -313,7 +313,7 @@ public class Intersection {
         summary += (car.toString());
       }
     }
-    summary +="\n\n";
+    // summary +="\n";
 
     return summary;
   } // end of toString()

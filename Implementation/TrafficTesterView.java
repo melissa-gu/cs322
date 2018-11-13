@@ -86,10 +86,10 @@ public class TrafficTesterView {
     } // end for
 
     // run the simulation (one time-step for now)
-    System.out.println(simulation.toString());
+    System.out.print(simulation.toString());
     for (int i = 0; i < 1; i++) {
       simulation.update();
-      System.out.println(simulation.toString());
+      System.out.print(simulation.toString());
     } // end for
   } // main
 

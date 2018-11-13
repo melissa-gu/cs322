@@ -76,12 +76,14 @@ public class Car {
   // Moves car to another Intersection instance
   public void moveToNextIntersection(Intersection nextIntersection) {
     appendToSummary("car#" + id + " is removed from " + direction +
-    	            " queue of intersection " + intersectionReference +
-                    " and placed into ");
+    	            " queue of intersection " + " [" + 
+                  intersectionReference.getCol() + ", " +
+                  intersectionReference.getRow() + "] and placed into ");
     intersectionReference = nextIntersection;
     intersectionReference.addCarToQueue(this);
-    appendToSummary(direction + "queue of intersection " +
-                    intersectionReference.getId());
+    appendToSummary(direction + "queue of intersection [" + 
+                  intersectionReference.getCol() + ", " +
+                  intersectionReference.getRow() + "].");
   } // end of moveToNextIntersection()
 
 

@@ -30,8 +30,7 @@ public class Grid {
   private int numIntersections;
   // The 2D representations of intersections.
   private Intersection[][] grid;
-  private ArrayList<IntersectionController> intersectionControllers = 
-    new ArrayList<IntersectionController>();
+  private IntersectionController[] intersectionController;
 
 
   public Intersection getIntersection(int row, int col) {
@@ -44,26 +43,27 @@ public class Grid {
   public Grid (int numIntersections) {
     this.numIntersections = numIntersections;
     grid = new Intersection[numIntersections][numIntersections];
+    intersectionController = new IntersectionController[numIntersections];
 
     // Construct instances of intersection and populate the grid.
-    int intersection_id = numIntersections * numIntersections;
     for (int row = 1; row <= numIntersections; row++) {
       for (int col = 1; col <= numIntersections; col++) {
-        Intersection intersection = new Intersection(intersection_id,
-          numIntersections - row + 1, col);
+        Intersection intersection = new Intersection(numIntersections - row + 1, 
+          col);
         grid[row - 1][col - 1] = intersection;
-        intersection_id--;
       } // end of for (each col of grid)
     } // end of for (each row of grid)
 
     // Add intersection controllers in order of processing
+    int index = 0; // keeps track of intersectionController array index
     for (int row = numIntersections; row >= 1; row--) {
       for (int col = 1; col <= numIntersections; col++) {
         IntersectionController controller = 
           new IntersectionController(grid[row-1][col-1]);
-        intersectionControllers.add(controller);
+        intersectionController[index] = controller;
+        index++;
       } // end of for (each col of grid)
-    } 
+    }  // end of for (each row of grid)
     connectIntersections();
   } // end of Grid()
 
@@ -102,15 +102,15 @@ public class Grid {
         }
 
         intersection.setNextIntersection(nextIntersection);
-      }
-    } // end of for (each row and column of grid)
+      } // end of for (each col in grid)
+    } // end of for (each row in grid)
   } // end of connectIntersections()
 
 
   public void update() {
-    for (IntersectionController controller : intersectionControllers) {
-      controller.update();
-    } // end of for (each controller in intersectionControllers)
+    for (int i = 0; i < intersectionController.length; i++) {
+      intersectionController[i].update();
+    }// end of for (each index in intersectionController)
   } // end of update()
   
 
@@ -126,8 +126,8 @@ public class Grid {
       for (int col = 1; col <= numIntersections; col++) {
         Intersection intersection = grid[row][col - 1];
         summary += intersection.toString();
-      }
-    } // end of for (each intersection in grid)
+      } // end of for (each col in grid)
+    } // end of for (each row in grid)
 
     return summary;
   } // end of toString()

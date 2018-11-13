@@ -14,30 +14,30 @@ public class Simulation {
   private int numCarsExited;
   private Grid grid;
   private ArrayList<Car> cars;
-  private ArrayList<Car> exitedCars;
 
   public Simulation(int numIntersectionsInOneDirection) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
     grid = new Grid(numIntersectionsInOneDirection);
     cars = new ArrayList<Car>();
-    exitedCars = new ArrayList<Car>();
   } // End of constructor Simulation()
 
 
   public void update() {
     grid.update();
+    ArrayList<Car> exitedCars = new ArrayList<Car>();
     for (Car car : cars) {
       car.update();
       // If car is exiting the grid
       if (car.hasLeftGrid()) {
         car.appendToSummary("car#" + car.getId() + " has left the grid");
-        cars.remove(car);
         exitedCars.add(car);
         numCarsExited++;
         double timeToExit = car.getExitTime() - car.getEntryTime();
         sumOfAllCarTimesToExit += timeToExit;
-    } // end for (Car car: cars)
-  }
+      } // end for (Car car: cars)
+    }
+
+    cars.removeAll(exitedCars);
   } // end of update ()
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,

@@ -33,11 +33,11 @@ public class IntersectionController {
         // 3. Whether the outgoing segment is full.
         if (canMoveBasedOnRequirementsDoc(car) &&
           !myIntersection.nextSegmentIsFull(car) ) {
-            myIntersection.moveCarIntoIntersection(car);
+            myIntersection.moveCarIntoIntersectionGrid(car);
         }
       } // end of (for Car car : cars)
     } else {
-      myIntersection.updateIntersectionGrid();
+      // myIntersection.updateIntersectionGrid();
     }
   } // end of update()
   

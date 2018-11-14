@@ -14,6 +14,7 @@ public class Simulation {
   private int numCarsExited;
   private Grid grid;
   private ArrayList<Car> cars;
+  private String carsRemoved;
 
   public Simulation(int numIntersectionsInOneDirection) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
@@ -23,13 +24,14 @@ public class Simulation {
 
 
   public void update() {
+    carsRemoved = "";
     grid.update();
     ArrayList<Car> exitedCars = new ArrayList<Car>();
     for (Car car : cars) {
       car.update();
       // If car is exiting the grid
       if (car.hasLeftGrid()) {
-        car.appendToSummary("car#" + car.getId() + " has left the grid");
+        carsRemoved += "car#" + car.getId() + " has left the grid\n";
         exitedCars.add(car);
         numCarsExited++;
         double timeToExit = car.getExitTime() - car.getEntryTime();
@@ -50,7 +52,7 @@ public class Simulation {
 
 
   public String toString() {
-    return grid.toString();
+    return grid.toString() + carsRemoved;
   } // end of toString()
 
 

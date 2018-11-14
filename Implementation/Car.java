@@ -37,7 +37,7 @@ public class Car {
 
 
   public void setDirection (int direction) {
-    direction = direction;
+    this.direction = direction;
   } // end of setDirection()
 
 
@@ -66,6 +66,10 @@ public class Car {
   } // end of getId()
 
 
+  public int getNumBlocksBeforeTurning() {
+    return numBlocksBeforeTurning;
+  } // end of getNumBlocksBeforeTurning
+
   // Decrements the time remaining in a segment before Car can move 
   // into Intersection
   public void update() {
@@ -75,16 +79,10 @@ public class Car {
 
   // Moves car to another Intersection instance
   public void moveToNextIntersection(Intersection nextIntersection) {
+    numBlocksBeforeTurning--;
     intersectionReference = nextIntersection;
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);
-      appendToSummary("  and placed into " + 
-                    TrafficTesterView.convertToSegmentDirection(direction)
-                    + " queue of intersection "
-                    + "[" + intersectionReference.getCol() + ", " +
-                    intersectionReference.getRow() + "].\n");
-    } else {
-      appendToSummary("a " + direction + "segment exiting the grid.\n");
     }
   } // end of moveToNextIntersection()
 

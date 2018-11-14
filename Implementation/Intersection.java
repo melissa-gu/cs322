@@ -185,8 +185,14 @@ public class Intersection {
                     car.getDirection()) + " queue of intersection ["
                     + col + ", " + row + "]\n"));
 
-    car.setDirection(calculateNextDirection(car.getDirection(),
-        car.getTurningDirection()));
+    int direction;
+    if (car.getNumBlocksBeforeTurning() <= 0) {
+      direction = car.getTurningDirection();
+    } else {
+      direction = TrafficTesterView.NEVER_TURN;
+    }
+    car.setDirection(calculateNextDirection(car.getDirection(), direction));
+
     Intersection intersection = nextIntersection[car.getDirection()];
     if (intersection != null) {
       summary += ("   and placed into " + 
@@ -200,11 +206,9 @@ public class Intersection {
     }
     segmentSummary[segmentDirectionCode] += summary;
     car.moveToNextIntersection(intersection);
-     
-    // if (car.getTurningDirection() == 1) {
-    //   car.setDirection(calculateNextDirection(car.getDirection(),
-    //     car.getTurningDirection()));
-    // } // end of if (car.getTurningDirection() == 1)
+
+    // resetCarDirIfTurningRight(car);
+    
   } // end of moveCarIntoIntersectionGrid()
 
   public void updateSegmentSummary() {
@@ -246,13 +250,21 @@ public class Intersection {
 
 
   private void resetCarDirIfTurningLeft(Car car) {
-    if (car.getTurningDirection() == -1) {
+    if (car.getTurningDirection() == TrafficTesterView.TURN_LEFTWARD) {
       car.setDirection(calculateNextDirection(car.getDirection(),
         car.getTurningDirection()));
-      car.setTurningDirection(0);
+      car.setTurningDirection(TrafficTesterView.NEVER_TURN);
     } // end of if (car.getTurningDirection() == -1)
   } // end of resetCarDirIfTurningLeft()
 
+
+  private void resetCarDirIfTurningRight(Car car) {
+    if (car.getTurningDirection() == TrafficTesterView.TURN_RIGHTWARD) {
+      car.setDirection(calculateNextDirection(car.getDirection(),
+        car.getTurningDirection()));
+      car.setTurningDirection(TrafficTesterView.NEVER_TURN);
+    } // end of if (car.getTurningDirection() == 1)
+  } // end of resetCarDirIfTurningRight()
 
   private void updateNorthWestwardSlot(Car car) {
     intersectionGrid[0][0] = null;

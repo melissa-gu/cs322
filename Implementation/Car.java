@@ -66,6 +66,10 @@ public class Car {
   } // end of getId()
 
 
+  public int getNumBlocksBeforeTurning() {
+    return numBlocksBeforeTurning;
+  } // end of getNumBlocksBeforeTurning
+
   // Decrements the time remaining in a segment before Car can move 
   // into Intersection
   public void update() {
@@ -75,6 +79,7 @@ public class Car {
 
   // Moves car to another Intersection instance
   public void moveToNextIntersection(Intersection nextIntersection) {
+    numBlocksBeforeTurning--;
     intersectionReference = nextIntersection;
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);

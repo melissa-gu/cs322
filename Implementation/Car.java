@@ -90,13 +90,7 @@ public class Car {
   public boolean hasLeftGrid() {
     return (intersectionReference == null);
   } // end of hasLeftGrid()
-
-
-  // Appends passed in String to summary String variable of Car instance
-  public void appendToSummary(String summary) {
-    this.summary += summary;
-  } // end of appendToSummary()
-
+  
 
   // Returns String summary of Car
   public String toString() {

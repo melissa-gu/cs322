@@ -186,7 +186,7 @@ public class Intersection {
                     + col + ", " + row + "]\n"));
 
     int direction;
-    if (car.getNumBlocksBeforeTurning() == 0) {
+    if (car.getNumBlocksBeforeTurning() <= 0) {
       direction = car.getTurningDirection();
     } else {
       direction = TrafficTesterView.NEVER_TURN;

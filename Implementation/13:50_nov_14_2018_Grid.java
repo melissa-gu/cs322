@@ -43,8 +43,7 @@ public class Grid {
   public Grid (int numIntersections) {
     this.numIntersections = numIntersections;
     grid = new Intersection[numIntersections][numIntersections];
-    intersectionController = new IntersectionController[numIntersections 
-      * numIntersections];
+    intersectionController = new IntersectionController[numIntersections * numIntersections];
 
     // Construct instances of intersection and populate the grid.
     for (int row = 1; row <= numIntersections; row++) {

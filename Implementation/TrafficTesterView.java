@@ -103,8 +103,8 @@ public class TrafficTesterView {
       console.nextLine();
       console.nextLine();
       segmentDirectionCode = console.nextInt();
-      if (segmentDirectionCode != 0 | segmentDirectionCode != 1 |
-          segmentDirectionCode != 2 | segmentDirectionCode != 3) {
+      if (segmentDirectionCode != 0 && segmentDirectionCode != 1 &&
+          segmentDirectionCode != 2 && segmentDirectionCode != 3) {
         System.out.print("User input error: the segment direction code ");
         System.out.println("should be 0, 1, 2, or 3");
         System.exit(0);
@@ -120,7 +120,7 @@ public class TrafficTesterView {
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();
-      if (turnDirectionCode != 0 | turnDirectionCode != -1 | 
+      if (turnDirectionCode != 0 && turnDirectionCode != -1 && 
           turnDirectionCode != 1) {
         System.out.print("User input error: the turn direction code ");
         System.out.println("should be 0, -1, or 1");

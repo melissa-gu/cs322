@@ -42,13 +42,13 @@ public class IntersectionController {
   } // end of update()
   
 
-  private boolean canMoveBasedOnRequirementsDoc(Car car) {
-    int carTurn = car.getTurningDirection();
-    int carDir = car.getDirection();
+  private boolean canMoveBasedOnRequirementsDoc(Car curCar) {
+    int carTurn = curCar.getTurningDirection();
+    int carDir = curCar.getDirection();
 
     // Loop through approaching cars to check whether the current car can move
     for (Car otherCar : approachingCar) {
-      if (otherCar == car) {
+      if (otherCar == curCar) {
         continue;
       }
       int otherCarTurn = otherCar.getTurningDirection();
@@ -56,13 +56,11 @@ public class IntersectionController {
       if (carTurn == TrafficTesterView.NEVER_TURN) {
         // Car is going straight
         if (carTurn == otherCarTurn) {
-          // Both cars are going straight
-          // Only allow car to move if car direction and otherCar's 
-          // direction are Northward and Southward or Eastward and Westward,
-          // or the same pairs of directions but flipped.
+          // Both cars going straight
+          // Only allow car to move if car direction and other car's direction
+          // are Northward and Southward or Eastward and Westward
           // The integer representation of the directions in these valid pairs
-          // are different by a value of 2, thus the absolute value of carDir -
-          // otherCarDir needs to be 2 for both cars to move
+          // are different by a value of 2
           return Math.abs(carDir - otherCarDir) == 2;
         }
       }
@@ -70,7 +68,7 @@ public class IntersectionController {
         // Turning right
         if (otherCarTurn == TrafficTesterView.NEVER_TURN) {
           // Conflict with car going straight
-          if ((carDir - otherCarDir == 1) || (carDir - otherCarDir == -3)) {
+          if ( (carDir - otherCarDir == 1) || (carDir - otherCarDir == -3) ) {
             return false;
           }
         }
@@ -83,7 +81,7 @@ public class IntersectionController {
         else if (otherCarTurn == TrafficTesterView.TURN_RIGHTWARD){
           // No conflict if the other car turning right in this specified
           // direction, otherwise conflict
-          if ((carDir - otherCarDir != 1) || (carDir - otherCarDir != -3)) {
+          if ( (carDir - otherCarDir != 1) || (carDir - otherCarDir != -3) ) {
             return false;
           }
         } else {
@@ -97,7 +95,6 @@ public class IntersectionController {
     }
     return true;
   } // end of canMoveBasedOnRequirementsDoc()
-  
 
 }
 

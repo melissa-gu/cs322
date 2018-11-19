@@ -41,6 +41,7 @@ public class Simulation {
 
     cars.removeAll(exitedCars);
   } // end of update ()
+  
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,
                         int numBlocksBeforeTurning, int turnDirectionCode) {

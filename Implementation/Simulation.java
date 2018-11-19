@@ -31,7 +31,7 @@ public class Simulation {
       car.update();
       // If car is exiting the grid
       if (car.hasLeftGrid()) {
-        carsRemoved += "car#" + car.getId() + " has left the grid";
+        carsRemoved += "car#" + car.getId() + " has left the grid\n";
         exitedCars.add(car);
         numCarsExited++;
         double timeToExit = car.getExitTime() - car.getEntryTime();

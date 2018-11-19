@@ -350,7 +350,7 @@ public class Intersection {
          segmentDirectionCode < segmentSummary.length; segmentDirectionCode++) {
       summary += segmentSummary[segmentDirectionCode];
     }
-    summary +="\n";
+    // summary +="\n";
 
     return summary;
   } // end of toString()

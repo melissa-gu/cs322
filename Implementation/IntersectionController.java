@@ -13,18 +13,19 @@ public class IntersectionController {
   private Intersection myIntersection;
   private ArrayList<Car> approachingCar;
 
-	// Constructor
-	public IntersectionController(Intersection intersection) {
+  // Constructor
+  public IntersectionController(Intersection intersection) {
     myIntersection = intersection;
-	}
+  }
 
-	public void update() {
+
+  public void update() {
     myIntersection.updateSegmentSummary();
     // Check whether no car is traveling within the 2x2 grid of the intersection
     boolean empty = myIntersection.intersectionIsEmpty();
     approachingCar = myIntersection.getApproachingCars();
     if (true) {
-    	for (Car car : approachingCar) {
+      for (Car car : approachingCar) {
         // Decide which car can move into intersection based on:
         // 1. priority of the car instance's turning direction, specified in
         //  Requirements Doc
@@ -92,7 +93,6 @@ public class IntersectionController {
     // In all other cases, the current car has priority over the other cars.
     return true;
   } // end of canMoveBasedOnRequirementsDoc()
-  
+
 
 }
-

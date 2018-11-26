@@ -210,6 +210,7 @@ public class Intersection {
     
   } // end of moveCarIntoIntersectionGrid()
 
+
   public void updateSegmentSummary() {
     for (int segmentDirectionCode = 0; segmentDirectionCode < 4;
          segmentDirectionCode++) {
@@ -224,6 +225,7 @@ public class Intersection {
       }
     } // end of for (segmentDirectionCode in range(0,4))
   } // end of updateSegmentSummary()
+
 
   public void updateIntersectionGrid() {
     if (intersectionGrid[0][0] != null) {
@@ -264,6 +266,7 @@ public class Intersection {
       car.setTurningDirection(TrafficTesterView.NEVER_TURN);
     } // end of if (car.getTurningDirection() == 1)
   } // end of resetCarDirIfTurningRight()
+
 
   private void updateNorthWestwardSlot(Car car) {
     intersectionGrid[0][0] = null;
@@ -350,9 +353,11 @@ public class Intersection {
          segmentDirectionCode < segmentSummary.length; segmentDirectionCode++) {
       summary += segmentSummary[segmentDirectionCode];
     }
-    // summary +="\n";
 
     return summary;
   } // end of toString()
 
+
 }
+
+

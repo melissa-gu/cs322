@@ -169,7 +169,8 @@ public class TrafficTesterView {
 } // TrafficTesterView
 
  
-
+// WARNING: THIS COMMENT BLOCK IS OBSOLETE AND RELATES TO AN EARLIER VERSION
+// OF THE SOFTWARE
 ////////////////// Example of sample use of the above program //////////////////
 // except for the fact that all the following lines have been made comments,  //
 // and also the actual phrase "additional blocks to travel" in the data       //

@@ -352,8 +352,9 @@ public class Intersection {
     for (int segmentDirectionCode = 0;
          segmentDirectionCode < segmentSummary.length; segmentDirectionCode++) {
       summary += segmentSummary[segmentDirectionCode];
-    }
+    } // end of for (segmentDirectionCode = 0; ...)
 
+    summary += "\n";
     return summary;
   } // end of toString()
 

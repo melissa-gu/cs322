@@ -84,6 +84,7 @@ public class Car {
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);
     }
+    turningDirection = TrafficTesterView.NEVER_TURN;
   } // end of moveToNextIntersection()
 
 

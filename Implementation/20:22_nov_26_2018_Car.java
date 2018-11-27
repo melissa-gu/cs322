@@ -17,6 +17,7 @@ public class Car {
   private int turningDirection;
   private int numBlocksBeforeTurning;
   private String summary;
+  private int entryTime;
   private int exitTime;
 
   // Car Constructor
@@ -63,9 +64,11 @@ public class Car {
     return exitTime;
   } // end of getExitTime()
 
-  public void setExitTime(int timeStep) {
-    exitTime = timeStep;
-  } // end of setExitTime()
+
+  public double getEntryTime() {
+    return entryTime;
+  } // end of getEntryTime()
+
 
   public int getId() {
     return id;

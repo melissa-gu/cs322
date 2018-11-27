@@ -86,7 +86,8 @@ public class TrafficTesterView {
     } // end of if (numberOfCars < 0)
     System.out.println("The number of cars is: " + numberOfCars);
     Simulation simulation = new Simulation(numIntersectionsInOneDirection,
-      maxSegmentCapacity);
+                                           maxSegmentCapacity, 
+                                           timeToTraverseSegment);
     int carID;
     int row;
     int col;
@@ -159,9 +160,9 @@ public class TrafficTesterView {
         System.out.println("should be 0, -1, or 1");
         System.exit(0);
       } // end of if (turnDirectionCode != 0, -1, 1)
-      simulation.insertCar(carID, col, row, segmentDirectionCode,
-                           timeToTraverseSegment, numBlocksBeforeTurning,
-                           turnDirectionCode);
+      simulation.insertCar(carID, col, row, segmentDirectionCode, 
+                           numBlocksBeforeTurning, turnDirectionCode,
+                           timeToTraverseSegment);
       System.out.println("  is born in the segment located at col " + col +
                          " and row " + row + ", that aims " +
                          convertToSegmentDirection(segmentDirectionCode) + ",");
@@ -176,7 +177,7 @@ public class TrafficTesterView {
     for (int i = 0; i < numTimeSteps; i++) {
       System.out.println("TIME UNIT " + (i + 1) + " BEGINS");
       System.out.println();
-      simulation.update();
+      simulation.update(i);
       System.out.print(simulation.toString());
     } // end for
     System.out.println(simulation.getAverage());

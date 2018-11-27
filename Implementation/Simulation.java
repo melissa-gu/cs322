@@ -15,16 +15,18 @@ public class Simulation {
   private Grid grid;
   private ArrayList<Car> cars;
   private String carsRemoved;
+  private int timeToTraverseSegment;
 
   public Simulation(int numIntersectionsInOneDirection,
-    int maxSegmentCapacity) {
+    int maxSegmentCapacity, int timeToTraverseSegment) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
+    this.timeToTraverseSegment = timeToTraverseSegment;
     grid = new Grid(numIntersectionsInOneDirection, maxSegmentCapacity);
     cars = new ArrayList<Car>();
   } // End of constructor Simulation()
 
 
-  public void update() {
+  public void update(int timeStep) {
     carsRemoved = "";
     grid.update();
     ArrayList<Car> exitedCars = new ArrayList<Car>();
@@ -35,7 +37,8 @@ public class Simulation {
         carsRemoved += "car#" + car.getId() + " has left the grid\n";
         exitedCars.add(car);
         numCarsExited++;
-        double timeToExit = car.getExitTime() - car.getEntryTime();
+        car.setExitTime(timeStep);
+        double timeToExit = car.getExitTime();
         sumOfAllCarTimesToExit += timeToExit;
       } // end for (Car car: cars)
     }
@@ -45,10 +48,10 @@ public class Simulation {
   
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,
-                        int timeToTraverseSegment, int numBlocksBeforeTurning,
-                        int turnDirectionCode) {
+                        int numBlocksBeforeTurning, int turnDirectionCode, 
+                        int timeToTraverseSegment) {
     Intersection intersectionReference = grid.getIntersection(row, col);
-    Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,
+    Car car = new Car(carID, segmentDirectionCode, turnDirectionCode, 
       timeToTraverseSegment, numBlocksBeforeTurning, intersectionReference);
     cars.add(car);
   } // end of insertCar()

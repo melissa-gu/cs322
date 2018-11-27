@@ -170,6 +170,21 @@ public class Intersection {
       // throw error
     }
 
+    // switch (car.getDirection()) {
+    //   case TrafficTesterView.SOUTHWARD:
+    //     intersectionGrid[0][0] = car;
+    //     break;
+    //   case TrafficTesterView.EASTWARD:
+    //     intersectionGrid[1][0] = car;
+    //     break;
+    //   case TrafficTesterView.NORTHWARD:
+    //     intersectionGrid[1][1] = car;
+    //     break;
+    //   case TrafficTesterView.WESTWARD:
+    //     intersectionGrid[0][1] = car;
+    //     break;
+    // } // end of switch (car.getDirection())
+
     String summary = (("   car#" + car.getId() + " is removed from " + 
                     TrafficTesterView.convertToSegmentDirection(
                     car.getDirection()) + " queue of intersection ["
@@ -215,6 +230,120 @@ public class Intersection {
       }
     } // end of for (segmentDirectionCode in range(0,4))
   } // end of updateSegmentSummary()
+
+
+  public void updateIntersectionGrid() {
+    if (intersectionGrid[0][0] != null) {
+      Car car = intersectionGrid[0][0];
+      updateNorthWestwardSlot(car);
+    } 
+
+    if (intersectionGrid[0][1] != null) {
+      Car car = intersectionGrid[0][1];
+      updateNorthEastwardSlot(car);
+    } 
+
+    if (intersectionGrid[1][0] != null) {
+      Car car = intersectionGrid[1][0];
+      updateSouthWestwardSlot(car);
+    } 
+
+    if (intersectionGrid[1][1] != null) {
+      Car car = intersectionGrid[1][1];
+      updateSouthEastwardSlot(car);
+    } 
+  } // end of updateIntersectionGrid ()
+
+
+  private void resetCarDirIfTurningLeft(Car car) {
+    if (car.getTurningDirection() == TrafficTesterView.TURN_LEFTWARD) {
+      car.setDirection(calculateNextDirection(car.getDirection(),
+        car.getTurningDirection()));
+      car.setTurningDirection(TrafficTesterView.NEVER_TURN);
+    } // end of if (car.getTurningDirection() == -1)
+  } // end of resetCarDirIfTurningLeft()
+
+
+  private void resetCarDirIfTurningRight(Car car) {
+    if (car.getTurningDirection() == TrafficTesterView.TURN_RIGHTWARD) {
+      car.setDirection(calculateNextDirection(car.getDirection(),
+        car.getTurningDirection()));
+      car.setTurningDirection(TrafficTesterView.NEVER_TURN);
+    } // end of if (car.getTurningDirection() == 1)
+  } // end of resetCarDirIfTurningRight()
+
+
+  private void updateNorthWestwardSlot(Car car) {
+    intersectionGrid[0][0] = null;
+    switch(car.getDirection()) {
+      case TrafficTesterView.SOUTHWARD:
+        intersectionGrid[1][0] = car;
+        break;
+      case TrafficTesterView.EASTWARD:
+        intersectionGrid[0][1] = car;
+        break;
+      default:
+        Intersection intersection = nextIntersection[car.getDirection()];
+        car.moveToNextIntersection(intersection);
+        break;
+    } // end of switch(car.getDirection())
+    resetCarDirIfTurningLeft(car);
+  } // end of updateNorthWestwardSlot()
+
+
+  private void updateSouthWestwardSlot(Car car) {
+    intersectionGrid[1][0] = null;
+    switch(car.getDirection()) {
+      case TrafficTesterView.EASTWARD:
+        intersectionGrid[1][1] = car;
+        break;
+      case TrafficTesterView.NORTHWARD:
+        intersectionGrid[0][0] = car;
+        break;
+      default:
+        Intersection intersection = nextIntersection[car.getDirection()];
+        car.moveToNextIntersection(intersection);
+        break;
+    } // end of switch(car.getDirection())
+    resetCarDirIfTurningLeft(car);
+  } // end of updateSouthWestwardSlot()
+
+
+  private void updateNorthEastwardSlot(Car car) {
+    intersectionGrid[0][1] = null;
+    switch(car.getDirection()) {
+      case TrafficTesterView.SOUTHWARD:
+        intersectionGrid[1][1] = car;
+        break;
+      case TrafficTesterView.WESTWARD:
+        intersectionGrid[0][0] = car;
+        break;
+      default:
+        Intersection intersection = nextIntersection[car.getDirection()];
+        car.moveToNextIntersection(intersection);
+        break;
+    } // end of switch(car.getDirection())
+    resetCarDirIfTurningLeft(car);
+  } // end of updateNorthEastwardSlot()
+
+
+  private void updateSouthEastwardSlot(Car car) {
+    intersectionGrid[1][1] = null;
+    switch(car.getDirection()) {
+      case TrafficTesterView.NORTHWARD:
+        intersectionGrid[0][1] = car;
+        break;
+      case TrafficTesterView.WESTWARD:
+        intersectionGrid[1][0] = car;
+        break;
+      default:
+        Intersection intersection = nextIntersection[car.getDirection()];
+        car.moveToNextIntersection(intersection);
+        break;
+    } // end of switch(car.getDirection())
+    resetCarDirIfTurningLeft(car);
+  } // end of updateSouthEastwardSlot()
+
 
   public void addCarToQueue(Car car) {
     incomingSegment.get(car.getDirection()).add(car);

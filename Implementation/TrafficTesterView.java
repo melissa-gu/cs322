@@ -110,6 +110,13 @@ public class TrafficTesterView {
         System.out.println("should be greater than or equal to 1");
         System.exit(0);
       } // end of if (col <= 0)
+      else if (col > numIntersectionsInOneDirection) {
+        System.out.print("User input error: the col ");
+        System.out.println("should be less than or equal to the");
+        System.out.println("number of intersections in one direction, which is "
+          + numIntersectionsInOneDirection);
+        System.exit(0);
+      } // end of if (col > numIntersectionsInOneDirection)
       console.nextLine();
       console.nextLine();
       row = console.nextInt();
@@ -118,6 +125,13 @@ public class TrafficTesterView {
         System.out.println("should be greater than or equal to 1");
         System.exit(0);
       } // end of if (row <= 0)
+      else if (row > numIntersectionsInOneDirection) {
+        System.out.print("User input error: the row ");
+        System.out.println("should be less than or equal to the");
+        System.out.println("number of intersections in one direction, which is "
+          + numIntersectionsInOneDirection);
+        System.exit(0);
+      } // end of if (row > numIntersectionsInOneDirection)
       console.nextLine();
       console.nextLine();
       segmentDirectionCode = console.nextInt();
@@ -155,15 +169,15 @@ public class TrafficTesterView {
                          convertToTurnDirection(turnDirectionCode));
     } // end for
 
-    // run the simulation (one time-step for now)
-    // System.out.print(simulation.toString());
+    // run the simulation 
     System.out.println();
     for (int i = 0; i < numTimeSteps; i++) {
       System.out.println("TIME UNIT " + (i + 1) + " BEGINS");
       System.out.println();
       simulation.update();
-      System.out.println(simulation.toString());
+      System.out.print(simulation.toString());
     } // end for
+    System.out.println(simulation.getAverage());
   } // main
 
 

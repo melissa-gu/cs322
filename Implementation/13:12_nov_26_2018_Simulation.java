@@ -67,7 +67,7 @@ public class Simulation {
     } // end of if (numCarsExited > 0)
     else {
       result += "No cars left the grid";
-    } // end of else
+    }
     
     return result;
   } // end of getAverage()

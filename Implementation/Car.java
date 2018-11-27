@@ -12,6 +12,8 @@ public class Car {
   private int id;
   private Intersection intersectionReference;
   private int direction;
+  private int timeLeftInSegment;
+  private int timeToTraverseSegment;
   private int turningDirection;
   private int numBlocksBeforeTurning;
   private String summary;
@@ -20,9 +22,12 @@ public class Car {
 
   // Car Constructor
   public Car(int id, int direction, int turningDirection, 
-             int numBlocksBeforeTurning, Intersection intersection) {
+             int timeToTraverseSegment, int numBlocksBeforeTurning, 
+             Intersection intersection) {
     this.id = id;
     this.intersectionReference = intersection;
+    this.timeToTraverseSegment = timeToTraverseSegment;
+    this.timeLeftInSegment = timeToTraverseSegment;
     this.direction = direction;
     this.summary = "";
     this.turningDirection = turningDirection;
@@ -30,6 +35,10 @@ public class Car {
     intersectionReference.addCarToQueue(this);
   } // end of Car() constructor
 
+
+  public int getTimeLeftInSegment() {
+    return timeLeftInSegment;
+  } // end of getTimeLeftInSegment()
 
   public int getDirection() {
     return direction;
@@ -74,6 +83,7 @@ public class Car {
   // into Intersection
   public void update() {
     // the current subset does not handle time remaining in segment
+    timeLeftInSegment--; 
   } // end of update()
 
 
@@ -83,6 +93,7 @@ public class Car {
     intersectionReference = nextIntersection;
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);
+      timeLeftInSegment = timeToTraverseSegment;
     }
     turningDirection = TrafficTesterView.NEVER_TURN;
   } // end of moveToNextIntersection()

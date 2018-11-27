@@ -169,8 +169,7 @@ public class TrafficTesterView {
                          convertToTurnDirection(turnDirectionCode));
     } // end for
 
-    // run the simulation (one time-step for now)
-    // System.out.print(simulation.toString());
+    // run the simulation 
     System.out.println();
     for (int i = 0; i < numTimeSteps; i++) {
       System.out.println("TIME UNIT " + (i + 1) + " BEGINS");
@@ -178,6 +177,7 @@ public class TrafficTesterView {
       simulation.update();
       System.out.print(simulation.toString());
     } // end for
+    System.out.println(simulation.getAverage());
   } // main
 
 

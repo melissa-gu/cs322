@@ -16,9 +16,10 @@ public class Simulation {
   private ArrayList<Car> cars;
   private String carsRemoved;
 
-  public Simulation(int numIntersectionsInOneDirection) {
+  public Simulation(int numIntersectionsInOneDirection,
+    int maxSegmentCapacity) {
     this.numIntersectionsInOneDirection = numIntersectionsInOneDirection;
-    grid = new Grid(numIntersectionsInOneDirection);
+    grid = new Grid(numIntersectionsInOneDirection, maxSegmentCapacity);
     cars = new ArrayList<Car>();
   } // End of constructor Simulation()
 
@@ -44,10 +45,11 @@ public class Simulation {
   
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,
-                        int numBlocksBeforeTurning, int turnDirectionCode) {
+                        int timeToTraverseSegment, int numBlocksBeforeTurning,
+                        int turnDirectionCode) {
     Intersection intersectionReference = grid.getIntersection(row, col);
     Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,
-      numBlocksBeforeTurning, intersectionReference);
+      timeToTraverseSegment, numBlocksBeforeTurning, intersectionReference);
     cars.add(car);
   } // end of insertCar()
 

@@ -14,6 +14,9 @@ public class Intersection {
   private int row;
   private int col;
 
+  // the maximum number of Car instances each segment can accomodate.
+  private int maxSegmentCapacity;
+
   // Queues representing the four incoming segments. The int values of the
   // direction code for S, E, N, W - (0,1,2,3) respectively - correspond to the
   // indices of this arraylist of Queue.
@@ -53,9 +56,10 @@ public class Intersection {
 
 
   // Constructor
-  public Intersection(int row, int col) {
+  public Intersection(int row, int col, int maxSegmentCapacity) {
     this.row = row;
     this.col = col;
+    this.maxSegmentCapacity = maxSegmentCapacity;
 
     for (int i = 0; i < 4; i++) {
       Queue<Car> segment = new LinkedList<Car>();

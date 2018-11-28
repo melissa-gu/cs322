@@ -55,6 +55,10 @@ public class Intersection {
   } // end of setNextIntersection()
 
 
+  public Intersection getNextIntersection(int directionCode) {
+    return nextIntersection[directionCode];
+  }
+
   // Constructor
   public Intersection(int row, int col, int maxSegmentCapacity) {
     this.row = row;

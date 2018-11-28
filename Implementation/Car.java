@@ -22,11 +22,15 @@ public class Car {
   // Car Constructor
   public Car(int id, int direction, int turningDirection, 
              int timeToTraverseSegment, int numBlocksBeforeTurning, 
-             Intersection intersection) {
+             Intersection intersection, boolean outsideGrid) {
     this.id = id;
     this.intersectionReference = intersection;
     this.timeToTraverseSegment = timeToTraverseSegment;
-    this.timeLeftInSegment = timeToTraverseSegment;
+    if (outsideGrid) {
+      this.timeLeftInSegment = 0;
+    } else {
+      this.timeLeftInSegment = timeToTraverseSegment;
+    }
     this.direction = direction;
     this.summary = "";
     this.turningDirection = turningDirection;

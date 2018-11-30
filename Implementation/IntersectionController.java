@@ -42,7 +42,7 @@ public class IntersectionController {
       // myIntersection.updateIntersectionGrid();
     }
   } // end of update()
-  
+
 
   private boolean canMoveBasedOnRequirementsDoc(Car car) {
     int carTurn = car.getTurningDirection();

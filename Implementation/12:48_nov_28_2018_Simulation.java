@@ -42,8 +42,8 @@ public class Simulation {
         sumOfAllCarTimesToExit += timeToExit;
       } // end for (Car car: cars)
     }
-   
-   cars.removeAll(exitedCars);
+
+    cars.removeAll(exitedCars);
   } // end of update ()
   
 
@@ -59,11 +59,10 @@ public class Simulation {
     if (intersectionReference.getNextIntersection(oppositeDirectionCode) 
         == null) {
       outsideGrid = true;
-    } // end of if (intersectionReference.getNextIntersection()... )
+    }
     Car car = new Car(carID, segmentDirectionCode, turnDirectionCode, 
       timeToTraverseSegment, numBlocksBeforeTurning, intersectionReference,
       outsideGrid);
-    
     cars.add(car);
   } // end of insertCar()
 

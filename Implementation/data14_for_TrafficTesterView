@@ -53,6 +53,6 @@ born in the segment that is positioned at row:
 born in the segment that is oriented in direction:
 3
 additional blocks to travel prior to turning (-1 means the car will never turn):
-1
-direction the car will turn, when the car turns:
 2
+direction the car will turn, when the car turns:
+1

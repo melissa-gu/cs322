@@ -11,9 +11,9 @@ number of cars created for the test:
 car number:
 1
 born in the segment that is positioned at col:
-1
-born in the segment that is positioned at row:
 2
+born in the segment that is positioned at row:
+1
 born in the segment that is oriented in direction:
 1
 additional blocks to travel prior to turning (-1 means the car will never turn):

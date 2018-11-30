@@ -40,7 +40,6 @@ public class Simulation {
         numCarsExited++;
         car.setExitTime(timeStep);
         double timeToExit = car.getExitTime();
-        System.out.println("Car #" + car.getId() + " timeToExit: " + timeToExit);
         sumOfAllCarTimesToExit += timeToExit;
       } // end for (Car car: cars)
     }

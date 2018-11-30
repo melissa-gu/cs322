@@ -1,9 +1,9 @@
 The number of time units requested is:
 4
 The requested maximum segment capacity (in cars) is:
-2
+5
 The requested time to traverse segment is:
-2
+0
 numIntersectionsInOneDirection:
 3
 number of cars created for the test:
@@ -11,7 +11,7 @@ number of cars created for the test:
 car number:
 1
 born in the segment that is positioned at col:
-2
+9
 born in the segment that is positioned at row:
 1
 born in the segment that is oriented in direction:
@@ -68,3 +68,4 @@ additional blocks to travel prior to turning (-1 means the car will never turn):
 -1
 direction the car will turn, when the car turns:
 0
+

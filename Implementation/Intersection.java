@@ -113,8 +113,14 @@ public class Intersection {
 
 
   public boolean nextSegmentIsFull(Car car) {
+    int turnDirection;
+    if (car.getNumBlocksBeforeTurning() == 0) {
+      turnDirection = car.getTurningDirection();
+    } else {
+      turnDirection = TrafficTesterView.NEVER_TURN;
+    }
     int nextDirection = calculateNextDirection(car.getDirection(),
-      car.getTurningDirection());
+      turnDirection);
     Intersection intersection = nextIntersection[nextDirection];
     if (intersection == null) return false;
     return intersection.checkIfQueueIsFull(nextDirection);

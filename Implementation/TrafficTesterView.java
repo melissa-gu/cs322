@@ -113,14 +113,14 @@ public class TrafficTesterView {
         System.exit(0);
       } // end of catch (Exception e)
       if (carID <= 0) {
-        System.out.print("User input error: the car ID ");
+        System.out.print("User input error: the car number ");
         System.out.println("should be greater than or equal to 1");
         System.exit(0);
       } // end of if (carID <= 0)
       else if (carIDs.contains(carID)) {
-        System.out.print("User input error: the car ID ");
-        System.out.print("of " + carID + " already exists. The car ID");
-        System.out.println(" needs to be unique.");
+        System.out.print("User input error: the car number ");
+        System.out.print(carID + " already exists. The car number");
+        System.out.println(" should be unique.");
         System.exit(0);
       }
       carIDs.add(carID);

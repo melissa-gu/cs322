@@ -123,7 +123,7 @@ public class Intersection {
 
   private boolean checkIfQueueIsFull(int nextDirection) {
     return incomingSegment.get(nextDirection).size() >= maxSegmentCapacity;
-  } // end of checkIfQueueuIsFull()
+  } // end of checkIfQueueIsFull()
 
 
   private int calculateNextDirection(int carDirection, int carTurningCode) {

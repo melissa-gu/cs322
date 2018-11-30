@@ -85,6 +85,7 @@ public class Car {
   public void update() {
     // the current subset does not handle time remaining in segment
     timeLeftInSegment--; 
+    System.out.println("Car #" + id + " timeLeftInSegment " + timeLeftInSegment);
   } // end of update()
 
 
@@ -94,6 +95,9 @@ public class Car {
     intersectionReference = nextIntersection;
     if (intersectionReference != null) {
       intersectionReference.addCarToQueue(this);
+      // Because car.update() decrements timeLeftInSegment at every
+      // time step, this ensures that each car waits the full
+      // timeToTraverseSegment.
       timeLeftInSegment = timeToTraverseSegment;
     }
     turningDirection = TrafficTesterView.NEVER_TURN;

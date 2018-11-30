@@ -174,8 +174,8 @@ public class TrafficTesterView {
 
     // run the simulation 
     System.out.println();
-    for (int i = 0; i < numTimeSteps; i++) {
-      System.out.println("TIME UNIT " + (i + 1) + " BEGINS");
+    for (int i = 1; i <= numTimeSteps; i++) {
+      System.out.println("TIME UNIT " + i + " BEGINS");
       System.out.println();
       simulation.update(i);
       System.out.print(simulation.toString());

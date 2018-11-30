@@ -90,7 +90,8 @@ public class TrafficTesterView {
     Simulation simulation = new Simulation(numIntersectionsInOneDirection,
                                            maxSegmentCapacity, 
                                            timeToTraverseSegment);
-    int carID;
+    int carID = -1; // giving default value allows assignment of carID in 
+                    // try catch block, needed in case of incorrect input
     int row;
     int col;
     int segmentDirectionCode;
@@ -99,7 +100,17 @@ public class TrafficTesterView {
     for (int i = 1; i <= numberOfCars; i++) {
       console.nextLine();
       console.nextLine();
-      carID = console.nextInt();
+      try {
+        carID = console.nextInt();
+      } // end of try
+      catch (Exception e) {
+        // Exception is thrown if end of data file is reached before all
+        // car specifications have been read
+        System.out.print("User input error: the number of cars requested ");
+        System.out.print("is greater than the number of car specifications ");
+        System.out.println("provided.");
+        System.exit(0);
+      } // end of catch (Exception e)
       if (carID <= 0) {
         System.out.print("User input error: the car ID ");
         System.out.println("should be greater than or equal to 1");
@@ -153,6 +164,12 @@ public class TrafficTesterView {
         System.out.println("turning should be greater than or equal to -1");
         System.exit(0);
       } // end of if (numBlocksBeforeTurning < -1)
+      else if (numBlocksBeforeTurning >= numIntersectionsInOneDirection) {
+        System.out.print("User input error: the number of blocks before ");
+        System.out.print("turning should be less than the number of ");
+        System.out.println("intersections in one direction.");
+        System.exit(0);
+      } // end of else if (numBlocksBeforeTurning >= numIntersectionsInOne...)
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();

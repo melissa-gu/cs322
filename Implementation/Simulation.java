@@ -42,13 +42,16 @@ public class Simulation {
         sumOfAllCarTimesToExit += timeToExit;
       } // end for (Car car: cars)
     }
-   
+    // Extra space needed if one or more cars are removed
+    if(carsRemoved.length() > 0) {
+      carsRemoved += "\n";
+    }
    cars.removeAll(exitedCars);
   } // end of update ()
-  
+
 
   public void insertCar(int carID, int col, int row, int segmentDirectionCode,
-                        int numBlocksBeforeTurning, int turnDirectionCode, 
+                        int numBlocksBeforeTurning, int turnDirectionCode,
                         int timeToTraverseSegment) {
     Intersection intersectionReference = grid.getIntersection(row, col);
     // Figure out whether the new car is inside or outside the grid
@@ -56,14 +59,14 @@ public class Simulation {
     // the car is outside the grid
     int oppositeDirectionCode = (segmentDirectionCode + 2) % 4;
     boolean outsideGrid = false;
-    if (intersectionReference.getNextIntersection(oppositeDirectionCode) 
+    if (intersectionReference.getNextIntersection(oppositeDirectionCode)
         == null) {
       outsideGrid = true;
     } // end of if (intersectionReference.getNextIntersection()... )
-    Car car = new Car(carID, segmentDirectionCode, turnDirectionCode, 
+    Car car = new Car(carID, segmentDirectionCode, turnDirectionCode,
       timeToTraverseSegment, numBlocksBeforeTurning, intersectionReference,
       outsideGrid);
-    
+
     cars.add(car);
   } // end of insertCar()
 
@@ -84,7 +87,7 @@ public class Simulation {
     else {
       result += "No cars left the grid";
     } // end of else
-    
+
     return result;
   } // end of getAverage()
 

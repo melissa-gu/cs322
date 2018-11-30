@@ -119,7 +119,7 @@ public class TrafficTesterView {
       } // end of if (carID <= 0)
       else if (carIDs.contains(carID)) {
         System.out.print("User input error: the car ID ");
-        System.out.print("of " + carID + " already exists. The car ID");
+        System.out.print("of " + carID + " already exists. CarId");
         System.out.println(" needs to be unique.");
         System.exit(0);
       }

@@ -54,7 +54,6 @@ public class TrafficTesterView {
     if (maxSegmentCapacity <= 0) {
       System.out.print("User input error: the max segment capacity requested ");
       System.out.println("should be greater than 0");
-      System.exit(0);
     } // end of if (maxSegmentCapacity <= 0)
     System.out.print("The maximum segment capacity (in cars) ");
     System.out.println("is: " + maxSegmentCapacity);
@@ -64,7 +63,6 @@ public class TrafficTesterView {
     if (timeToTraverseSegment < 0) {
       System.out.print("User input error: the time to traverse segment ");
       System.out.println("requested should be at least 0");
-      System.exit(0);
     } // end of if (timeToTraverseSegment < 0)
     System.out.print("The time to traverse segment ");
     System.out.println("is: " + timeToTraverseSegment);
@@ -90,40 +88,21 @@ public class TrafficTesterView {
     Simulation simulation = new Simulation(numIntersectionsInOneDirection,
                                            maxSegmentCapacity, 
                                            timeToTraverseSegment);
-    int carID = -1; // giving default value allows assignment of carID in 
-                    // try catch block, needed in case of incorrect input
+    int carID;
     int row;
     int col;
     int segmentDirectionCode;
     int numBlocksBeforeTurning;
     int turnDirectionCode;
-    HashSet<Integer> carIDs = new HashSet<Integer>();
     for (int i = 1; i <= numberOfCars; i++) {
       console.nextLine();
       console.nextLine();
-      try {
-        carID = console.nextInt();
-      } // end of try
-      catch (Exception e) {
-        // Exception is thrown if end of data file is reached before all
-        // car specifications have been read
-        System.out.print("User input error: the number of cars requested ");
-        System.out.print("is greater than the number of car specifications ");
-        System.out.println("provided.");
-        System.exit(0);
-      } // end of catch (Exception e)
+      carID = console.nextInt();
       if (carID <= 0) {
         System.out.print("User input error: the car ID ");
         System.out.println("should be greater than or equal to 1");
         System.exit(0);
       } // end of if (carID <= 0)
-      else if (carIDs.contains(carID)) {
-        System.out.print("User input error: the car ID ");
-        System.out.print("of " + carID + " already exists. The car ID");
-        System.out.println(" needs to be unique.");
-        System.exit(0);
-      }
-      carIDs.add(carID);
       System.out.println("Car #" + carID);
       console.nextLine();
       console.nextLine();
@@ -172,12 +151,6 @@ public class TrafficTesterView {
         System.out.println("turning should be greater than or equal to -1");
         System.exit(0);
       } // end of if (numBlocksBeforeTurning < -1)
-      else if (numBlocksBeforeTurning >= numIntersectionsInOneDirection) {
-        System.out.print("User input error: the number of blocks before ");
-        System.out.print("turning should be less than the number of ");
-        System.out.println("intersections in one direction.");
-        System.exit(0);
-      } // end of else if (numBlocksBeforeTurning >= numIntersectionsInOne...)
       console.nextLine();
       console.nextLine();
       turnDirectionCode = console.nextInt();

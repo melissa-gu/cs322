@@ -1,17 +1,17 @@
 The number of time units requested is:
-12
+20
 The requested maximum segment capacity (in cars) is:
 2
 The requested time to traverse segment is:
 3
 numIntersectionsInOneDirection:
-2
+3
 number of cars created for the test:
-4
+7
 car number:
 1
 born in the segment that is positioned at col:
-1
+2
 born in the segment that is positioned at row:
 1
 born in the segment that is oriented in direction:
@@ -23,37 +23,77 @@ direction the car will turn, when the car turns:
 car number:
 2
 born in the segment that is positioned at col:
-1
+2
 born in the segment that is positioned at row:
 1
 born in the segment that is oriented in direction:
-2
+3
 additional blocks to travel prior to turning (-1 means the car will never turn):
-0
+-1
 direction the car will turn, when the car turns:
-1
+0
 car number:
 3
 born in the segment that is positioned at col:
 1
 born in the segment that is positioned at row:
-1
+2
 born in the segment that is oriented in direction:
 1
+additional blocks to travel prior to turning (-1 means the car will never turn):
+0
+direction the car will turn, when the car turns:
+-1
+car number:
+4
+born in the segment that is positioned at col:
+1
+born in the segment that is positioned at row:
+3
+born in the segment that is oriented in direction:
+1
+additional blocks to travel prior to turning (-1 means the car will never turn):
+0
+direction the car will turn, when the car turns:
+1
+car number:
+5
+born in the segment that is positioned at col:
+1
+born in the segment that is positioned at row:
+2
+born in the segment that is oriented in direction:
+3
+additional blocks to travel prior to turning (-1 means the car will never turn):
+0
+direction the car will turn, when the car turns:
+1
+car number:
+6
+born in the segment that is positioned at col:
+1
+born in the segment that is positioned at row:
+2
+born in the segment that is oriented in direction:
+2
 additional blocks to travel prior to turning (-1 means the car will never turn):
 -1
 direction the car will turn, when the car turns:
 0
 car number:
-4
+7
 born in the segment that is positioned at col:
-2
+1
 born in the segment that is positioned at row:
 2
 born in the segment that is oriented in direction:
-1
+2
 additional blocks to travel prior to turning (-1 means the car will never turn):
--1
+1
 direction the car will turn, when the car turns:
-0
+1
+
+
+
+
 

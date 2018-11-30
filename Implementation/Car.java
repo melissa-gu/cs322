@@ -100,7 +100,9 @@ public class Car {
       // timeToTraverseSegment.
       timeLeftInSegment = timeToTraverseSegment;
     }
-    turningDirection = TrafficTesterView.NEVER_TURN;
+    if (numBlocksBeforeTurning <= 0) {
+      turningDirection = TrafficTesterView.NEVER_TURN;
+    }
   } // end of moveToNextIntersection()
 
 

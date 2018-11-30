@@ -54,6 +54,7 @@ public class TrafficTesterView {
     if (maxSegmentCapacity <= 0) {
       System.out.print("User input error: the max segment capacity requested ");
       System.out.println("should be greater than 0");
+      System.exit(0);
     } // end of if (maxSegmentCapacity <= 0)
     System.out.print("The maximum segment capacity (in cars) ");
     System.out.println("is: " + maxSegmentCapacity);
@@ -63,6 +64,7 @@ public class TrafficTesterView {
     if (timeToTraverseSegment < 0) {
       System.out.print("User input error: the time to traverse segment ");
       System.out.println("requested should be at least 0");
+      System.exit(0);
     } // end of if (timeToTraverseSegment < 0)
     System.out.print("The time to traverse segment ");
     System.out.println("is: " + timeToTraverseSegment);

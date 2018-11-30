@@ -28,13 +28,11 @@ public class Simulation {
 
   public void update(int timeStep) {
     carsRemoved = "";
-    for (Car car : cars) {
-      car.update();
-    }
     
     grid.update();
     ArrayList<Car> exitedCars = new ArrayList<Car>();
     for (Car car : cars) {
+      car.update();
       // If car is exiting the grid
       if (car.hasLeftGrid()) {
         carsRemoved += "car#" + car.getId() + " has left the grid\n";

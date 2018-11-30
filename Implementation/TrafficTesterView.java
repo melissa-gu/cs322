@@ -96,6 +96,7 @@ public class TrafficTesterView {
     int segmentDirectionCode;
     int numBlocksBeforeTurning;
     int turnDirectionCode;
+    HashSet<Integer> carIDs = new HashSet<Integer>();
     for (int i = 1; i <= numberOfCars; i++) {
       console.nextLine();
       console.nextLine();
@@ -105,6 +106,13 @@ public class TrafficTesterView {
         System.out.println("should be greater than or equal to 1");
         System.exit(0);
       } // end of if (carID <= 0)
+      else if (carIDs.contains(carID)) {
+        System.out.print("User input error: the car ID ");
+        System.out.print("of " + carID + " already exists. CarId");
+        System.out.println("need to be unique.");
+        System.exit(0);
+      }
+      carIDs.add(carID);
       System.out.println("Car #" + carID);
       console.nextLine();
       console.nextLine();
